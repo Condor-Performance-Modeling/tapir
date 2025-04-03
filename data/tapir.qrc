@@ -1,0 +1,30 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+  <file>icons/aspenicon.png</file>
+  <file>icons/aspensplash.jpg</file>
+  <file>icons/aspennarrow.jpg</file>
+  <file>icons/general/aspensplashsmall.png</file>
+  <file>icons/general/editcopy.png</file>
+  <file>icons/general/editcut.png</file>
+  <file>icons/general/editpaste.png</file>
+  <file>icons/general/editredo.png</file>
+  <file>icons/general/editundo.png</file>
+  <file>icons/general/filenew.png</file>
+  <file>icons/general/fileopen.png</file>
+  <file>icons/general/fileprint.png</file>
+  <file>icons/general/filesave.png</file>
+  <file>icons/general/filesaveas.png</file>
+  <file>icons/general/formatbold.png</file>
+  <file>icons/general/formatcenter.png</file>
+  <file>icons/general/formatfill.png</file>
+  <file>icons/general/formatitalic.png</file>
+  <file>icons/general/formatleft.png</file>
+  <file>icons/general/formatright.png</file>
+  <file>icons/general/formatunderline.png</file>
+  <file>icons/general/helpcontents.png</file>
+  <file>icons/general/left.png</file>
+  <file>icons/general/processstop.png</file>
+  <file>icons/general/reload.png</file>
+  <file>icons/general/right.png</file>
+</qresource>
+</RCC>

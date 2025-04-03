@@ -1,0 +1,319 @@
+#include "tapir.h"
+#include <iostream>
+#include <QAction>
+#include <QIcon>
+using namespace std;
+// --------------------------------------------------------------
+#define ACT(actname,icon,str,who,slot) { \
+  actname = new QAction(QIcon(rpath+icon),str,this); \
+  connect(actname,SIGNAL(triggered()),who,SLOT(slot())); \
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Tapir::disableOnClose()
+{
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Tapir::enableOnOpen()
+{
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Tapir::createComboBox()
+{
+  ATR("+createComboBox");
+  ATR("-createComboBox");
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Tapir::createActions()
+{
+  ATR("+createActions");
+  createFileActions();
+  createEditActions();
+  createFormatActions();
+  createSortActions();
+  createToolsActions();
+  createHelpActions();
+
+  createCntxActions();
+  connectCntxActions();
+
+  disableElements();
+  ATR("-createActions");
+}
+// --------------------------------------------------------------
+// some of these point to slots in inseditor
+// --------------------------------------------------------------
+void Tapir::createFileActions(void)
+{
+  aKeyPressEsc = new QAction(this);
+  aKeyPressEsc->setShortcut(QKeySequence(Qt::Key_Escape));
+  connect(aKeyPressEsc, SIGNAL(triggered()), this, SLOT(sEditSelectNone()));
+
+  ACT(aFileNew,"filenew.png","&New",this,sFileNew);
+  aFileNew->setShortcut(tr("Ctrl+N"));
+
+  ACT(aFileOpen,"fileopen.png","&Open...",this,sFileOpen);
+  aFileOpen->setShortcut(QKeySequence::Open);
+
+  ACT(aFileClose,"","&Close",this,sFileClose);
+  aFileClose->setShortcut(QKeySequence::Close);
+  
+  ACT(aFileSave,"filesave.png","&Save",this,sFileSave);
+  aFileSave->setShortcut(QKeySequence::Save);
+
+  ACT(aFileSaveAs,"filesaveas.png","Save as...",this,sFileSaveAs);
+
+  ACT(aFileSaveSession,"","Save Session",this,sFileSaveSession);
+  ACT(aFileRestoreSession,"","Restore Session",this,sFileRestoreSession);
+
+  ACT(aFileExit,"","&Quit",this,sFileExit);
+  aFileExit->setShortcut(Qt::CTRL + Qt::Key_Q);
+}
+// ------------------------------------------------------------------
+// ------------------------------------------------------------------
+void Tapir::createEditActions()
+{
+  ACT(aEditUndo,"edit_undo.png","Undo",this,sEditUndo);
+  aEditUndo->setShortcut(Qt::CTRL + Qt::Key_Z);
+
+  ACT(aEditRedo,"edit_redo.png","Redo",this,sEditRedo);
+  aEditRedo->setShortcut(Qt::CTRL + Qt::Key_Y);
+
+  ACT(aEditCut,"editcut.png","Cut",this,sEditCut);
+  aEditCut->setShortcut(Qt::CTRL + Qt::Key_X);
+
+  ACT(aEditCopy,"editcopy.png","Copy",this,sEditCopy);
+  aEditCopy->setShortcut(Qt::CTRL + Qt::Key_C);
+
+  ACT(aEditPaste,"editpaste.png","Paste",this,sEditPaste);
+  aEditPaste->setShortcut(Qt::CTRL + Qt::Key_V);
+
+  ACT(aEditClear,"process_stop.png","Clear",this,sEditClear);
+
+  ACT(aEditDelete,"","Delete",this,sEditRedo);
+  aEditDelete->setShortcut(QKeySequence::Delete);
+
+  ACT(aEditFind,"","Find",this,sEditRedo);
+  aEditFind->setShortcut(Qt::CTRL + Qt::Key_F);
+
+  ACT(aEditReplace,"","Replace",this,sEditReplace);
+  aEditReplace->setShortcut(Qt::CTRL + Qt::Key_R);
+
+  ACT(aEditGoTo,"","Go to cell...",this,sEditGoTo);
+  ACT(aEditSelectAll,"","SelectAll",this,sEditSelectAll);
+  ACT(aEditSelectNone,"","Deselect",this,sEditSelectNone);
+
+}
+// ------------------------------------------------------------------
+// ------------------------------------------------------------------
+void Tapir::createFormatActions()
+{
+  ACT(aFormatCells,"","Cells",this,sFormatCells);
+
+  ACT(aFormatRowHeight, "","Row: height",this,sFormatRowHeight);
+  ACT(aFormatRowAutoFit,"","Row: autofit",this,sFormatRowAutoFit);
+  ACT(aFormatRowHide,   "","Row: hide",this,sFormatRowHide);
+  ACT(aFormatRowUnhide, "","Row: show hidden",this,sFormatRowUnhide);
+
+  ACT(aFormatColWidth,  "","Col: width",this,sFormatColWidth);
+  ACT(aFormatColAutoFit,"","Col: autofit",this,sFormatColAutoFit);
+  ACT(aFormatColHide,   "","Col: hide",this,sFormatColHide);
+  ACT(aFormatColUnhide, "","Col: show hidden",this,sFormatColUnhide);
+
+  ACT(aFormatSheetRename,"","Sheet: rename",this,sFormatSheetRename);
+  ACT(aFormatSheetHide,  "","Sheet: hide",this,sFormatSheetHide);
+  ACT(aFormatSheetUnhide,"","Sheet: show hidden",this,sFormatSheetUnhide);
+}
+// ------------------------------------------------------------------
+// ------------------------------------------------------------------
+void Tapir::createSortActions()
+{
+}
+// ------------------------------------------------------------------
+// ------------------------------------------------------------------
+void Tapir::createToolsActions()
+{
+  ACT(aToolsGenerateRtl,     "", "Generate Rtl", this, sToolsGenerateRtl);
+  ACT(aToolsCompileRtl,      "", "Compile Rtl",  this, sToolsCompileRtl);
+  ACT(aToolsInsPlaceholder1, "", "Placeholder1", this, sPlaceholder1);
+  ACT(aToolsInsPlaceholder2, "", "Placeholder2", this, sPlaceholder2);
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Tapir::createHelpActions()
+{
+  ACT(aHelpHelp,"","Tapir Help...",this,sHelpHelp);
+  ACT(aHelpAbout,"","About", this,sHelpAbout);
+  ACT(aHelpDebug,"","Debug Button",this,sHelpDebug);
+  ACT(aDebug,"intel16x16.png","Debug",this,sDebugSlot);
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Tapir::createCntxActions(void)
+{
+  //spreadsheet
+  ACT(aSpreadCntxCut,"","Cut",this,sEditCut);
+  ACT(aSpreadCntxCopy,"","Copy",this,sEditCopy);
+  ACT(aSpreadCntxPaste,"","Paste",this,sEditPaste);
+  ACT(aSpreadCntxClear,"","Clear",this,sEditClear);
+  ACT(aSpreadCntxSetBitType,"","Set bit type",this,sSpreadCntxSetBitType);
+
+  //tabs
+  ACT(aTabCntxRename,"","Rename Sheet",this,sTabCntxRename);
+  ACT(aTabCntxMove,  "","Move Sheet",  this,sTabCntxMove);
+  ACT(aTabCntxCopy,  "","Copy Sheet",  this,sTabCntxCopy);
+  ACT(aTabCntxPaste, "","Paste Sheet", this,sTabCntxPaste);
+  ACT(aTabCntxClear, "","Clear Sheet", this,sTabCntxClear);
+  ACT(aTabCntxDelete,"","Delete Sheet",this,sTabCntxDelete);
+
+  //col header
+  ACT(aColHdrCntxCut,"","Cut",this,sColHdrCntxCut);
+  ACT(aColHdrCntxCopy,"","Copy",this,sColHdrCntxCopy);
+  ACT(aColHdrCntxPaste,"","Paste",this,sColHdrCntxPaste);
+  ACT(aColHdrCntxInsert,"","Insert",this,sColHdrCntxInsert);
+  ACT(aColHdrCntxDelete,"","Delete",this,sColHdrCntxDelete);
+  ACT(aColHdrCntxClear,"","Clear",this,sColHdrCntxClear);
+  ACT(aColHdrCntxFormatCells,"","Format Cells",this,sColHdrCntxFormatCells);
+  ACT(aColHdrCntxWidth,"","Width",this,sColHdrCntxWidth);
+  ACT(aColHdrCntxHide,"","Hide",this,sColHdrCntxHide);
+  ACT(aColHdrCntxUnhide,"","Unhide",this,sColHdrCntxUnhide);
+
+  //row
+  ACT(aRowHdrCntxCut,"","Cut",this,sRowHdrCntxCut);
+  ACT(aRowHdrCntxCopy,"","Copy",this,sRowHdrCntxCopy);
+  ACT(aRowHdrCntxPaste,"","Paste",this,sRowHdrCntxPaste);
+  ACT(aRowHdrCntxInsert,"","Insert",this,sRowHdrCntxInsert);
+  ACT(aRowHdrCntxDelete,"","Delete",this,sRowHdrCntxDelete);
+  ACT(aRowHdrCntxClear,"","Clear",this,sRowHdrCntxClear);
+  ACT(aRowHdrCntxFormatCells,"","Format Cells",this,sRowHdrCntxFormatCells);
+  ACT(aRowHdrCntxWidth,"","Width",this,sRowHdrCntxWidth);
+  ACT(aRowHdrCntxHide,"","Hide",this,sRowHdrCntxHide);
+  ACT(aRowHdrCntxUnhide,"","Unhide",this,sRowHdrCntxUnhide);
+
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Tapir::connectCntxActions(void)
+{
+////    connect(mdlTabs, SIGNAL(currentChanged(int)),
+////            this, SLOT(updateActiveSheetTab(int)));
+////
+////  mdlTabs->addAction(aSheetTabCntxCopy);
+////  mdlTabs->addAction(aSheetTabCntxPaste);
+////  mdlTabs->addAction(aSheetTabCntxMove);
+////  mdlTabs->addAction(aSheetTabCntxClear);
+////  mdlTabs->addAction(aSheetTabCntxDelete);
+////
+////  mdlTabs->addAction(aSheetTabCntxRename);
+////  mdlTabs->setContextMenuPolicy(Qt::ActionsContextMenu);
+////
+////  QAction *aSep0 = new QAction(this);
+////  aSep0->setSeparator(true);
+////
+////  unsigned int i;
+////  for(i=0;i<mdlTabMap.size();i++)
+////  {
+////    //The context menu for the table entries
+////    mdlTabMap[i]->addAction(aTableCntxCut);
+////    mdlTabMap[i]->addAction(aTableCntxCopy);
+////    mdlTabMap[i]->addAction(aTableCntxPaste);
+////    mdlTabMap[i]->addAction(aTableCntxClear);
+////    mdlTabMap[i]->addAction(aSep0);
+////    mdlTabMap[i]->addAction(aTableCntxSetBitType);
+////    mdlTabMap[i]->setContextMenuPolicy(Qt::ActionsContextMenu);
+////
+////    //The context menu for the Column header 
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrCut);
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrCut);
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrCopy);
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrPaste);
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrClear);
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrSeparator0);
+////
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrInsert);
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrDelete);
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrSeparator1);
+////
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrFormatCells);
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrWidth);
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrHide);
+////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrUnhide);
+////    mdlTabMap[i]->horizontalHeader()->setContextMenuPolicy(
+////						Qt::ActionsContextMenu);
+////
+////    //The context menu for the Row header 
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrCut);
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrCopy);
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrPaste);
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrClear);
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrSeparator0);
+////
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrInsert);
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrDelete);
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrSeparator1);
+////
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrFormatCells);
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrHeight);
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrHide);
+////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrUnhide);
+////    mdlTabMap[i]->verticalHeader()->setContextMenuPolicy(
+////						Qt::ActionsContextMenu);
+////  }
+}
+// --------------------------------------------------------------
+//  
+// --------------------------------------------------------------
+void Tapir::connectTableSignals(Spreadsheet *tbl)
+{
+  connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
+         this,SLOT(sUpdateStatus(QTableWidgetItem*)));
+  connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
+         this,SLOT(sUpdatePanels(QTableWidgetItem*)));
+  connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
+         this,SLOT(sUpdateLineEdit(QTableWidgetItem*)));
+  connect(tbl,SIGNAL(itemChanged(QTableWidgetItem*)),
+         this,SLOT(sUpdateLineEdit(QTableWidgetItem*)));
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Tapir::disableElements(void)
+{ 
+  ATR("+disableElements");
+//  aToolsNewSys->setEnabled(false);
+//  aToolsCheckEnc->setEnabled(false);
+//  aToolsGenModel->setEnabled(false);
+//  aToolsGenRtl->setEnabled(false);
+//  aToolsAddUnit->setEnabled(false);
+//  aToolsDelUnit->setEnabled(false);
+//  aToolsDupUnit->setEnabled(false);
+//  aToolsBinFill->setEnabled(false);
+//
+//  aToolsInsInstruction->setEnabled(false);
+//  aToolsInsIWordBit->setEnabled(false);
+//  aToolsInsOperand->setEnabled(false);
+//  aToolsInsComment->setEnabled(false);
+  ATR("-disableElements");
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Tapir::setDisableState()
+{
+  aFileSave->setDisabled(true);
+  aFileSaveAs->setDisabled(true);
+  aFileOpen->setDisabled(true);
+  aFileSaveSession->setDisabled(true);
+  aFileRestoreSession->setDisabled(true);
+  aEditUndo->setDisabled(true);
+  aEditRedo->setDisabled(true);
+  aEditCut->setDisabled(true);
+  aEditCopy->setDisabled(true);
+  aEditPaste->setDisabled(true);
+  aEditClear->setDisabled(true);
+  aEditDelete->setDisabled(true);
+  aEditFind->setDisabled(true);
+  aEditReplace->setDisabled(true);
+}
+#undef ACT

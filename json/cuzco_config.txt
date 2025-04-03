@@ -1,0 +1,102 @@
+          "CDR_L1D_SUPPORT" : {
+            "equiv"     : "NDS_DCACHE_SUPPORT",
+            "desc"      : "L1D cache is present",
+            "range"     : [],
+            "states"    : ["unchecked","checked"],
+            "widget"    : "check_box",
+            "default"   : "checked",
+            "units"     : "",
+            "fixed"     : "yes",
+            "hidden"    : "no",
+            "disabled"  : "yes",
+            "requires"  : [],
+            "define_vh" : "",
+            "generate"  : ""
+          },
+
+  equiv           param
+  NDS_DCACHE_WAY,CDR_L1D_WAY  L1D associativity  4  4  {1,2,4,8}  no  no  DCACHE_WAY  dcache_associativity  Fully associative (for modeling the upper bound)  {1,2,4,8}  {1,2,4,8,full}  
+  NDS_DCACHE_LRU  CDR_L1D_REPLACE_POLICY  L1D replacement protocol  PLRU  PLRU  {PLRU,Random}  no  no  no parameter  dcache_repl_policy  PLRU with flavors, the pure PLRU, and dynamic stat based modifications to the LRU selection (least_freq_used, or last_minus_one_used)  {PLRU,Random}  {PLRU,PLRU_Minus_One,PLRU_LFU_Random}  
+  NDS_CACHE_LINE_SIZE  CDR_L1D_LINE_SIZE  L1D line size, bytes  64  64  {32,64}  no  no  DCACHE_LINE_SIZE  dcache_line_size  {32,64}  {32,64}  
+  no parameter  CDR_L1D_BANKS  L1D banks per cache line  8  8  {8,16}  no  yes  DDAT_BANKS  lsu.num_banks/dcache_associativity  {8,16}  {4,8,16,32}  
+  NDS_DCACHE_FIRST_WORD_FIRST  CDR_L1D_CRITICAL_WORD  L1D line fill policy  CriticalWord  CriticalWord  {CriticalWord,Flat}  no  no  no parameter  parameter?  Critical word vs Flat means the L1D-L2 interface can be 64B vs smaller  {CriticalWord,Flat}  {CriticalWord,Flat}  
+  NDS_DCACHE_MSHR_DEPTH  CDR_L1D_MSHR_DEPTH  L1D max outstanding misses, mrq=aiq  64  ???  {8,16,24,32,48,64}  ???  ???  ???  aiq_size  8-64: Need to cover small and large system sizes  {8,16,24,32,48,64}  {8,16,24,32,48,64,96,128}  
+  NDS_MSHR_FILL_FIFO_DEPTH  CDR_L1D_MSHR_FILL_FIFO_DEPTH  L1D DMQ size equals MRQ size to avoid deadlock  64  ???  {8,16,24,32,48,64}  ???  ???  ???  dmq_size  This is same as MRQ(?)  {8,16,24,32,48,64}  {8,16,24,32,48,64,96,128}  
+  L1D max mrq requests, mrq_size=aiq_size  64  ???  {8,16,24,32,48,64}  ???  ???  ???  mrq_size  8-64: Need to cover small and large system sizes  {8,16,24,32,48,64}  {8,16,24,32,48,64,96,128}  
+  no parameter  CDR_L1D_READ_MISS_POLICY  L1D read miss policy  NoAllocate  Allocate  {Allocate,NoAllocate}  no  no  no parameter  parameter?  (DMQ presence and policy on when to write to cache needed):   {Allocate,NoAllocate}  {Allocate,NoAllocate}  
+  no parameter  CDR_L1D_WRITE_MISS_POLICY  L1D write miss policy  NoAllocate  Allocate  {Allocate,NoAllocate}  no  no  no parameter  parameter?  Same as above  {Allocate,NoAllocate}  {Allocate,NoAllocate}  
+  no parameter  CDR_L1D_WRITE_HIT_POLICY  L1D write hit policy  WriteBack  WriteBack  {WriteBack,WriteThrough}  no  no  no parameter  parameter?  This will quickly become a lower priority after initial rounds  {WriteBack,WriteThrough}  {WriteBack,WriteThrough}  
+  NDS_DCACHE_PREFETCH_SUPPORT  CDR_L1D_PREFETCH_SCHEME  L1D prefetch implementation  NextLine  None  {None,Stride,NextLine}  no  no  no parameter  parameter?  More complex prefetch engine/scheme present/not present (say history/BTB based)-Last options relate to next line as well  {None,Stride,NextLine,??}  {None,Stride,NextLine,BTB/History based}  
+  various  (there will be prefetcher specific parameters)  Yes  
+  NDS_DCACHE_ECC_TYPE  CDR_L1D_ECC_SCHEME  L1D ECC implementation  SECDED  SECDED  yes  yes  fixed  fixed  
+  
+  NDS_ICACHE_SUPPORT  CDR_L1I_SUPPORT  L1I cache is present  TRUE  TRUE  n/a  yes  no  fixed  fixed  
+  NDS_ICACHE_SIZE  CDR_L1I_SIZE  L1I size, bytes  64KB  64KB  {32KB,64KB,128KB}  no  no  ICACHE_SIZE  icache_size_kb  {32.KB,64KB,96KB,128KB}  {32KB,64KB,128KB,256KB,512KB,1M, infinite}  
+  NDS_ICACHE_WAY  CDR_L1D_WAY  L1I associativity  4  4  {1,2,4,8}  no  no  ICACHE_WAY  icache_associativity  {1,2,4,8}  {1,2,4,8,full}  
+  NDS_ICACHE_LRU  CDR_L1I_REPLACE_POLICY  L1I replacement protocol  PLRU  PLRU  {PLRU,Random}  no  no  no parameter  parameter?  {PLRU,Random}  {PLRU,PLRU_Minus_One,PLRU_LFU_Random}  
+  no parameter  CDR_L1I_LINE_SIZE  L1I line size, bytes  64  64  {32,64}  no  no  ICACHE_LINE_SIZE  icache_line_size  
+  no parameter  CDR_L1I_BANKS  L1I banks  4  4  {4,8}  no  yes  IDAT_BANKS  parameter?  {8,16}  {4,8,16}  
+  NDS_ICACHE_FIRST_WORD_FIRST  CDR_L1I_CRITICAL_WORD  L1I line fill policy  CriticalWord  CriticalWord  {CriticalWord,Flat}  no  no  no parameter  parameter?  Critical word vs Flat means the L1I-L2 interface can be 64B vs smaller  {CriticalWord,Flat}  {CriticalWord,Flat}  
+  NDS_ICACHE_MSHR_DEPTH  CDR_L1I_MSHR_DEPTH  L1I max outstanding misses  8  8  {8,16}  ???  ???  ???  parameter?  4--16: Assuming we do not need too many here except in runahead case.  {8,16}  {8,16,24,32}  
+  NDS_MSHR_FILL_FIFO_DEPTH  CDR_L1I_MSHR_FILL_FIFO_DEPTH  ???  8  8  {8,16}  ???  ???  no parameter  parameter?  {8,16}  {8,16,24,32}  
+  no parameter  CDR_L1I_READ_MISS_POLICY  L1I read miss policy  NoAllocate  Allocate  {Allocate,NoAllocate}  yes  no  no parameter  parameter?  Allocate,NoAllocate works here too: Unlike L1D, a prefetch buffer can hold line till next miss or mispredict or flush  {Allocate,NoAllocate}  {Allocate,NoAllocate}  
+  no parameter  CDR_L1I_PREFETCH_SCHEME  L1I prefetch implementation  NextLine  None  {None,Stride,NextLine,BTB}  no  no  no parameter  parameter?  BPU based prefetch  {None,Stride,NextLine,??}  {None,Stride,NextLine,BTB, RunAhead}  
+  various  (there will be prefetcher specific parameters)  Yes (BPU one is an example)  
+  NDS_ICACHE_ECC_TYPE  CDR_L1I_ECC_SCHEME  L1I ECC implementation  SECDED  SECDED  yes  yes  fixed  fixed  Miss on ECC is a simpler. No data loss problem unlike L1D  
+  no parameter  CDR_L1I_QUEUE_SIZE_BYTES  I$ buffer size  256  256 (CAM default)  {64,128,256,512,1024}  no  yes  no parameter??  fetch.icache_queue_size_bytes  I've maked it hidden, customers can not change it but perf should, also this is a derived parameter scaled on slice count  
+  
+  no parameter  CDR_L2_SUPPORT  L2 cache is present  TRUE  TRUE  n/a  yes  no  no parameter  parameter?  
+  NDS_L2C_CACHE_SIZE_KB  CDR_L2_SIZE  L2 size, bytes  2M  ?  {256K, 512K, 1M, 2M, 4M,8M}  no  no  L2CACHESIZE  l2cache.cache_size_kb  256K, 512K, 1M, 2M, 4M, 8M (this L2 size, not cache line size)  {256K, 512K, 1M, 2M, 4M}  {256K, 512K, 1M, 2M, 4M,8M, 16M, infinite}  
+  NDS_L2C_WAY  CDR_L2_WAY  L2 associativity  16  4  {1,2,4,8,16}  no  no  L2WAYS  l2cache.cache_associativity  and 16? Upper limits  {1,2,4,8,16}  {1,2,4,8,16,32}  
+  no parameter  CDR_L2_REPLACE_POLICY  L2 replacement protocol  PLRU  PLRU  {PLRU,Random}  no  no  no parameter  l2cache.cache_repl_policy  {PLRU,Random}  {PLRU,Random,PLRU_FRU}  
+  NDS_L2_DATA_WIDTH  CDR_L2_LINE_SIZE  L2 line size, bytes  64  64  {32,64}  no  no  ???  l2cache.cache_line_size  {32,64,128}  {32,64,128}  
+  NDS_L2C_BANKS  CDR_L2_BANKS  L2 banks  8  8  {8,16,32}  no  no  L2BANKS  l2.num_banks  {8,16,32}  {8,16,32,64}  
+  NDS_L2C_DATA_RAM_AW  CDR_L2_ROWS_PER_BANK  L2 data array rows per bank  1  2  {1,2}  yes  yes  no parameter  l2.num_rows_per_bank  Need to check,current Cuzco default may be 2.  {1,2}  {1,2,4}  
+  no parameter  CDR_L2_CRITICAL_WORD  L2 line fill policy  CriticalWord  CriticalWord  {CriticalWord,Flat}  no  no  no parameter  parameter?  {CriticalWord,Flat}  {CriticalWord,Flat}  
+  no parameter  CDR_L2_MSHR_DEPTH  L2 max outstanding misses for all rows and banks  64  ???  {32,64,128}  ???  ???  ???  l2.miss_pending_buffer_size  (Per bank per row) 4, 8, 12, 16: small to large systems  {32,64,128}  {32,64,128,256}  
+  no parameter  CDR_L2_MSHR_FILL_FIFO_DEPTH  ???  32  ???  {4,8,16,32}  ???  ???  no parameter  l2.biu_resp_queue_size  {4,8,16}  {4,8,16,32}  
+  no parameter  CDR_L2_READ_MISS_POLICY  L2 read miss policy  NoAllocate  Allocate  {Allocate,NoAllocate}  no  no  no parameter  parameter?  {Allocate,NoAllocate}	{Allocate,NoAllocate}	
+	no parameter	CDR_L2_WRITE_MISS_POLICY	L2 write miss policy	NoAllocate	Allocate	{Allocate,NoAllocate}	no	no		no parameter		parameter?		{Allocate,NoAllocate}	{Allocate,NoAllocate}	
+	no parameter	CDR_L2_WRITE_HIT_POLICY	L2 write hit policy	WriteBack	WriteBack	{WriteBack,WriteThrough}	no	no		no parameter		parameter?		{WriteBack,WriteThrough}	{WriteBack,WriteThrough}	
+	no parameter	CDR_L2_PREFETCH_SCHEME	L2 prefetch implementation	NextLine	None	{None,Stride,NextLine}	no	no		no parameter		parameter?	Core initiated L2 prefetch	{None,Stride,NextLine,CorePF}	{None,Stride,NextLine,CorePF,Next3Lines}	
+	various	(there will be prefetcher specific parameters)			 	 	 	 	 	 						
+	NDS_L2C_ECC_TYPE	CDR_L2_ECC_SCHEME	L2 ECC implementation	SECDED	SECDED	n/a	yes	yes		fixed		fixed				
+	no parameter	CDR_L2_LSU_RD_REQ_QUEUE_SIZE	lsu to l2 request buffer size, loads	8	8	{8,16,32,64}	no	no?		parameter ??		l2.lsu_read_req_queue_size				
+	no parameter	CDR_L2_LSU_WR_REQ_QUEUE_SIZE	lsu to l2 request buffer size, stores	8	8	{8,16,32,64}	no	no?		parameter ??		l2.lsu_write_req_queue_size				
+	no parameter	CDR_L2_LSU_RD_RESP_QUEUE_SIZE	l2 to lsu response queue size, loads	64	16	{8,16,32,64}	no	no?		parameter ??		l2.lsu_read_resp_queue_size				
+	no parameter	CDR_L2_L1C_RD_REQ_QUEUE_SIZE	I$ to l2 request buffer size	8	16	{8,16,32,64}	no	no?		parameter ??		l2.icache_req_queue_size				
+	no parameter	CDR_L1C_LSU_RD_RESP_QUEUE_SIZE	l2 to I$ response queue size	32	16	{8,16,32,64}	no	no?		parameter ??		l2.icache_resp_queue_size				
+	no parameter	CDR_L2_BIU_REQ_QUEUE_SIZE	Is this snoop? Add snoop response	64	64	{32,64,128}	no	no?		parameter ??		l2.biu_req_queue_size				
+	no parameter	CDR_L2_BIU_RESP_QUEUE_SIZE	Response (Q in L2) back from L3	32								l2.biu_resp_queue_size				
+	no parameter	CDR_L3_L2_RESP_QUEUE_SIZE	Response (Q in L3) from L3 to L2	32	64	{32,64,128}	no	no?		parameter ??		l3.rw_resp_queue_size				
+	no parameter	CDR_L2_BIU_PIPE_REQ_QUEUE_SIZE	Resp from BIU to banks in L2	8	8	n/a	yes	yes		parameter ??		l2.biu_pipe_req_queue_size				
+	no parameter	CDR_L2_MISS_PENDING_BUFFER_SIZE	L2 MSHR per row per bank	4	4	n/a	no	yes		parameter ??		l2.miss_pending_buffer_size				
+	no parameter	CDR_L1_PIPE_READ_REQ_QUEUE_SIZE	Read req from I$ or D$	8	8	{4,8,16,32}	no	yes		parameter ??		l2.l1_pipe_read_req_queue_size				
+	no parameter	CDR_L1_PIPE_WRITE_REQ_QUEUE_SIZE	Write req from D$	8	8	{4,8,16,32}	no	yes		parameter ??		l2.l1_pipe_write_req_queue_size				
+	 	 	 		 	 	 	 	 	 	 	 	 			
+	NDS_DTLB_ENTRIES	CDR_L1D_TLB_ENTRIES	L1D TLB size, entries	32	16	{8,16,32}	no	no		DTLB_SIZE		dmmu.tlb_num_entries		{8,16,32}	{8,16,32,64}	
+	no parameter	CDR_L1D_TLB_PAGE_SIZE	L1D TLB page size, bytes	4096	4096	{4K,8K,16K}	no	no		TLB_PAGE		dmmu.tlb_page_size_kb	1M, 1G, 1T: Handling of Large pages with 4-16K pages needed in design for large systems	{4K,8K,16K}	{4K,8K,16K,1M,1T}	
+	no parameter	CDR_L1D_TLB_WAY	L1D TLB associativity	32	1	{1,2,4}	no	no		no parameter		dmmu.tlb_associativity		{1,2,4}	{1,2,4,full}	
+	no parameter	CDR_L1D_TLB_ECC_SCHEME	L1D TLB ECC implementation	SECDED	none	{none,SECDED}	no	no		no parameter		parameter?		{none,SECDED}	{none,SECDED}	
+	 	 	 		 	 	 	 	 	 	 	 	 			
+	NDS_ITLB_ENTRIES	CDR_L1I_TLB_ENTRIES	L1I TLB size, entries	32	16	{8,16,32}	no	no		ITLB_SIZE		immu.tlb_num_entries		{8,16,32}	{8,16,32,64}	
+	no parameter	CDR_L1I_TLB_PAGE_SIZE	L1I TLB page size, bytes	4096	4096	{4K,8K,16K}	no	no		TLB_PAGE?		immu.tlb_page_size_kb		{4K,8K,16K}	{4K,8K,16K,1M,1G,1T}	
+	no parameter	CDR_L1I_TLB_WAY	L1I TLB associativity	32	1	{1,2,4}	no	no		no parameter		immu.tlb_associativity		{1,2,4}	{1,2,4,full}	
+	no parameter	CDR_L1I_TLB_ECC_SCHEME	L1I TLB ECC implementation	SECDED	none	{none,SECDED}	no	no		no parameter		parameter?		{none,SECDED}	{none,SECDED}	
+	 	 	 		 	 	 	 	 	 	 	 	 			
+	NDS_L2TLB_DEPTH	CDR_L2D_TLB_ENTRIES	L2D TLB size, entries	1024	1024	{1K,2K,4K}	no	no		L2DTLB_NUM_ENTRIES		dl2mmu.tlb_num_entries ?		{1K,2K,4K}	{8,16,32,64}	
+	no parameter	CDR_L2D_TLB_PAGE_SIZE	L2D TLB page size, bytes	4096	4096	{1K,2K,4K,8K}	no	no		TLB_PAGE?		dl2mmu.tlb_page_size_kb	(Why 1K?) 1M, 1G, 1T: Handling of Large pages needed in design for large systems	{2K,4K,16K,1M}	{4K,8K,16K,1M,1G,1T}	
+	no parameter	CDR_L2D_TLB_WAY	L2D TLB associativity	4	4	{2,4,8}	no	no		L2TLB_WAY?		dl2mmu.tlb_associativity		{1,2,4}	{1,2,4,8}	
+	NDS_L2DTLB_ECC_TYPE	CDR_L2D_TLB_ECC_SCHEME	L2D TLB ECC implementation	SECDEC	none	{none,SECDED}	no	no		no parameter		parameter?		{none,SECDED}	{none,SECDED}	
+	 	 	 		 	 	 	 	 	 	 	 	 			
+	NDS_L2TLB_DEPTH ??	CDR_L2I_TLB_ENTRIES	L2I TLB size, entries	1024	1024	{1K,2K,4K}	no	no		L2ITLB_NUM_ENTRIES		il2mmu.tlb_num_entries ?		{1K,2K,4K}	{8,16,32,64}	
+	no parameter	CDR_L2I_TLB_PAGE_SIZE	L2I TLB page size, bytes	4096	4096	{1K,2K,4K,8K}	no	no		TLB_PAGE?		il2mmu.tlb_page_size_kb?		{2K,4K,16K,1M}	{4K,8K,16K,1M,1G,1T}	
+	no parameter	CDR_L2I_TLB_WAY	L2I TLB associativity	4	4	{2,4,8}	no	no		L2TLB_WAY?		il2mmu.tlb_associativity?		{1,2,4}	{1,2,4,8}	
+	NDS_L2ITLB_ECC_TYPE	CDR_L2I_TLB_ECC_SCHEME	L2I TLB ECC implementation	SECDED	none	{none,SECDED}	no	no		no parameter		parameter?		{none,SECDED}	{none,SECDED}	
+	 	 	 		 	 	 	 	 	 	 	 	 			
+	NDS_PMA_ENTRIES	CDR_PMA_ENTRIES	PMA registers	16	16	{16,32}	???	???		no parameter		parameter?	(Ty) start with 16 regions	{16,32}	{16,32}	
+	NDS_PMA_GRANULARITY	CDR_PMA_GRANULARITY	PMA region size	16	16	{4,8,16,32,64}	???	???		no parameter		parameter?	At least 16 regions	{4,8,16,32,64}	{4,8,16,32,64}	
+	NDS_MMU_SCHEME	CDR_MMU_SCHEME	???		???	???	???	???		no parameter		parameter?	(Ty)  what would "schemes" be?	???	???	
+	NDS_NUM_PRIVILEGE_LEVELS	CDR_NUM_PRIVILEGE_LEVELS	???	4	4	n/a	yes	no		no parameter		parameter?	4: M, U, S, H	4	4	
+	NDS_PERFORMANCE_MONITOR	CDR_PERFORMANCE_MONITOR	???	Zihpm	Zihpm	n/a	yes	no		no parameter		parameter?	(Ty) no clue what this could be... skip? (SN) Skip for now. R-V Stats Zihpm+Andes later	Zihpm	Zihpm	
+
