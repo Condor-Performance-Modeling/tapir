@@ -39,8 +39,6 @@ void Tapir::createActions()
 
   createCntxActions();
   connectCntxActions();
-
-  disableElements();
   ATR("-createActions");
 }
 // --------------------------------------------------------------
@@ -198,70 +196,6 @@ void Tapir::createCntxActions(void)
 // --------------------------------------------------------------
 void Tapir::connectCntxActions(void)
 {
-////    connect(mdlTabs, SIGNAL(currentChanged(int)),
-////            this, SLOT(updateActiveSheetTab(int)));
-////
-////  mdlTabs->addAction(aSheetTabCntxCopy);
-////  mdlTabs->addAction(aSheetTabCntxPaste);
-////  mdlTabs->addAction(aSheetTabCntxMove);
-////  mdlTabs->addAction(aSheetTabCntxClear);
-////  mdlTabs->addAction(aSheetTabCntxDelete);
-////
-////  mdlTabs->addAction(aSheetTabCntxRename);
-////  mdlTabs->setContextMenuPolicy(Qt::ActionsContextMenu);
-////
-////  QAction *aSep0 = new QAction(this);
-////  aSep0->setSeparator(true);
-////
-////  unsigned int i;
-////  for(i=0;i<mdlTabMap.size();i++)
-////  {
-////    //The context menu for the table entries
-////    mdlTabMap[i]->addAction(aTableCntxCut);
-////    mdlTabMap[i]->addAction(aTableCntxCopy);
-////    mdlTabMap[i]->addAction(aTableCntxPaste);
-////    mdlTabMap[i]->addAction(aTableCntxClear);
-////    mdlTabMap[i]->addAction(aSep0);
-////    mdlTabMap[i]->addAction(aTableCntxSetBitType);
-////    mdlTabMap[i]->setContextMenuPolicy(Qt::ActionsContextMenu);
-////
-////    //The context menu for the Column header 
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrCut);
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrCut);
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrCopy);
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrPaste);
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrClear);
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrSeparator0);
-////
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrInsert);
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrDelete);
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrSeparator1);
-////
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrFormatCells);
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrWidth);
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrHide);
-////    mdlTabMap[i]->horizontalHeader()->addAction(aTableColHdrUnhide);
-////    mdlTabMap[i]->horizontalHeader()->setContextMenuPolicy(
-////						Qt::ActionsContextMenu);
-////
-////    //The context menu for the Row header 
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrCut);
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrCopy);
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrPaste);
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrClear);
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrSeparator0);
-////
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrInsert);
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrDelete);
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrSeparator1);
-////
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrFormatCells);
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrHeight);
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrHide);
-////    mdlTabMap[i]->verticalHeader()->addAction(aTableRowHdrUnhide);
-////    mdlTabMap[i]->verticalHeader()->setContextMenuPolicy(
-////						Qt::ActionsContextMenu);
-////  }
 }
 // --------------------------------------------------------------
 //  
@@ -282,28 +216,9 @@ void Tapir::connectTableSignals(Spreadsheet *tbl)
 void Tapir::disableElements(void)
 { 
   ATR("+disableElements");
-//  aToolsNewSys->setEnabled(false);
-//  aToolsCheckEnc->setEnabled(false);
-//  aToolsGenModel->setEnabled(false);
-//  aToolsGenRtl->setEnabled(false);
-//  aToolsAddUnit->setEnabled(false);
-//  aToolsDelUnit->setEnabled(false);
-//  aToolsDupUnit->setEnabled(false);
-//  aToolsBinFill->setEnabled(false);
-//
-//  aToolsInsInstruction->setEnabled(false);
-//  aToolsInsIWordBit->setEnabled(false);
-//  aToolsInsOperand->setEnabled(false);
-//  aToolsInsComment->setEnabled(false);
-  ATR("-disableElements");
-}
-// --------------------------------------------------------------
-// --------------------------------------------------------------
-void Tapir::setDisableState()
-{
   aFileSave->setDisabled(true);
   aFileSaveAs->setDisabled(true);
-  aFileOpen->setDisabled(true);
+//  aFileOpen->setDisabled(true);
   aFileSaveSession->setDisabled(true);
   aFileRestoreSession->setDisabled(true);
   aEditUndo->setDisabled(true);
@@ -315,5 +230,6 @@ void Tapir::setDisableState()
   aEditDelete->setDisabled(true);
   aEditFind->setDisabled(true);
   aEditReplace->setDisabled(true);
+  ATR("-disableElements");
 }
 #undef ACT

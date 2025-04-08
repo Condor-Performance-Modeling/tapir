@@ -1,7 +1,7 @@
 {
   "categories": [
     {
-      "cat_name": NaN,
+      "cat_name": "Caches",
       "parameters": [
         {
           "CDR_L1D_SUPPORT": {
@@ -195,7 +195,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-1": {
             "equiv": "no parameter",
             "desc": "L1D max mrq requests, mrq_size=aiq_size",
             "range": [
@@ -336,7 +336,7 @@
           }
         },
         {
-          "CDR_L1D_WAY": {
+          "CDR_L1I_WAY": {
             "equiv": "NDS_ICACHE_WAY",
             "desc": "L1I associativity",
             "range": [
@@ -1648,27 +1648,6 @@
           }
         },
         {
-          "CDR_BTB_WAY": {
-            "equiv": "no parameter",
-            "desc": "BTB page associativity",
-            "range": [
-              "2",
-              "4",
-              "8"
-            ],
-            "states": [],
-            "widget": "n/a",
-            "default": "4",
-            "units": "",
-            "fixed": "no",
-            "hidden": "no",
-            "disabled": "???",
-            "requires": [],
-            "define_vh": "BTB_PAGE_WAY",
-            "generate": ""
-          }
-        },
-        {
           "CDR_GHT_SIZE": {
             "equiv": "no parameter",
             "desc": "Branch history table size, entries",
@@ -1822,7 +1801,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-2": {
             "equiv": "no parameter",
             "desc": "Loop buffer params ?",
             "range": [
@@ -2923,7 +2902,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-3": {
             "equiv": "NDS_RVP_SUPPORT",
             "desc": "RISC-V P-extension DSP/SIMD ISA",
             "range": [],
@@ -3064,7 +3043,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-4": {
             "equiv": "NDS_VECTOR_PACKED_FP16_SUPPORT",
             "desc": "Andes Vector Packed FP16 Extension",
             "range": [
@@ -3084,7 +3063,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-5": {
             "equiv": "NDS_VECTOR_SINT_SUPPORT",
             "desc": "Andes Vector Small INT Handling Extension Support",
             "range": [
@@ -3104,7 +3083,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-6": {
             "equiv": "NDS_VECTOR_VDOT_SUPPORT",
             "desc": "Andes Vector Dot-Product Extension",
             "range": [
@@ -3124,7 +3103,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-7": {
             "equiv": "NDS_ISA_V5_PERFORMANCE",
             "desc": "Andes V5M Performance Extension",
             "range": [
@@ -3462,7 +3441,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-8": {
             "equiv": "no parameter",
             "desc": "???",
             "range": [],
@@ -3479,7 +3458,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-9": {
             "equiv": "no parameter",
             "desc": "???",
             "range": [],
@@ -3496,7 +3475,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-10": {
             "equiv": "no parameter",
             "desc": "???",
             "range": [],
@@ -3513,7 +3492,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-11": {
             "equiv": "no parameter",
             "desc": "???",
             "range": [],
@@ -3530,7 +3509,7 @@
           }
         },
         {
-          "TBD": {
+          "TBD-12": {
             "equiv": "no parameter",
             "desc": "???",
             "range": [],
@@ -3697,29 +3676,6 @@
             "disabled": "???",
             "requires": [],
             "define_vh": "READ_PORTS",
-            "generate": ""
-          }
-        },
-        {
-          "CDR_PRF_SIZE": {
-            "equiv": "no parameter",
-            "desc": "PRF size, entries (integer, fp each)",
-            "range": [
-              "128",
-              "160",
-              "192",
-              "224",
-              "256"
-            ],
-            "states": [],
-            "widget": "n/a",
-            "default": "256",
-            "units": "",
-            "fixed": "no",
-            "hidden": "no",
-            "disabled": "???",
-            "requires": [],
-            "define_vh": "PRF_ENTRY",
             "generate": ""
           }
         },
@@ -4285,7 +4241,7 @@
       "cat_name": "Debug/Trace",
       "parameters": [
         {
-          "TBD": {
+          "TBD-13": {
             "equiv": "NDS_PC_GPR_PROBING_SUPPORT_ALT",
             "desc": "",
             "range": [],

@@ -114,7 +114,6 @@ public:
 
   void clearStructures();
   void clearInterface();
-  bool populate();
   void clear(bool);
 
   void createActions(void);
@@ -139,6 +138,8 @@ public:
   void createTabCntxMenus();
   void createSheetCntxMenu(Spreadsheet*);
 
+  void createEmptySpreadsheet();
+
   void createComboBox(void);
 
   QTabWidget *createParamTabSet();
@@ -159,6 +160,9 @@ public:
   void copyColWidth(Spreadsheet*,uint32_t,uint32_t);
 
   void setDisableState();
+
+  bool populate();
+  QString jsonArrayToString(const QJsonValue&);
 
 protected:
   void closeEvent(QCloseEvent *e);
@@ -311,10 +315,11 @@ private:
   QComboBox   *categoryCombo;
   QWidget     *centralWidget;
   QGridLayout *centralLayout;
+  QTabWidget  *centralTabs;
 
   Msg msg;
 
-private: //initialized in C'tor
+private:
 
   int ac;
   char **av;
@@ -330,9 +335,11 @@ private: //initialized in C'tor
   int cfgTabIndex;
 
   QStringList hdrLabels;
+  QStringList tmptabs;
 
   bool fileOverwrite;
 
+//statics
 private:
 
   static const QString rpath;
@@ -341,8 +348,9 @@ private:
 
   static const QTabWidget::TabPosition defaultTabPos;
 
-  static const QStringList cfgTabNames;
-  static const QStringList paramCategoryTabNames;
+//  static const QStringList cfgTabNames;
+//  static const QStringList paramCategoryTabNames;
+  static const QStringList paramSheetColNames;
 
   static const QColor headingBgClr;
   static const QColor headingFgClr;

@@ -2,6 +2,12 @@
 #include "spreadsheet.h"
 #include "items.h"
 #include <QtGui>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QFile>
+#include <QTableWidgetItem>
+
 using namespace std;
 
 #define qfs(s) QString::fromStdString(s)
@@ -29,7 +35,10 @@ Tapir::Tapir(int _ac,char **_av)
 
   ATR("+ctor A");
   centralLayout = new QGridLayout;
-//  centralLayout->addWidget(paramTabs,0,0,1,1);
+
+  centralWidget = new QWidget(this);
+  centralLayout->addWidget(centralWidget,0,0,1,1);
+
   centralLayout->addWidget(statusBar,1,0,1,1);
 
   ATR("+ctor B");
@@ -41,8 +50,11 @@ Tapir::Tapir(int _ac,char **_av)
 
   msg.prefix = "Tapir";
 
-  setDisableState();
-  
+  disableElements();
+
+  fileName = "/data/users/jeffnye/condor/tapir/json/dev.json";
+  populate();
+ 
   ATR("-ctor");
 }
 // --------------------------------------------------------------
@@ -51,7 +63,6 @@ bool Tapir::maybeSave()
 {
   if (docsAreClean()) return true;
 
-//  if (getCurrentMdlFile().startsWith(QLatin1String(":/"))) return true;
   QMessageBox::StandardButton ret;
   ret = QMessageBox::warning(this, "Application",
         "The document has been modified.\n"
@@ -102,52 +113,111 @@ bool Tapir::writeFile(QString)
   setClean(true);
   return true;
 }
-// -------------------------------------------------------------------
-// Create a spreadsheet object for each 
-// -------------------------------------------------------------------
-bool Tapir::populate(void)
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+bool Tapir::populate()
 {
-  ATR("+populate()");
+    ATR("+populate()");
 
-//  Q_ASSERT(paramCategoryTabNames.size() == paramSheets.size());
-//  Spreadsheet* sheet = new Spreadsheet();
-//
-//  for (const QString& name : tabNames) {
-//      tabWidget->addTab(sheet, name);
-//  }
-//
-////  categoryTabs->insertTab(SysMachTab,paramCategoryTabNames.value(0);
-//
-////  categoryTabs->setCurrentIndex(ICacheTab);
-//
-////  for(auto cat : ) {
-////    categoryTabs->insertTab(SysMachTab,machsTabs.value(0),
-////
-//
-////  if(!addSystemMdlInfo()) {
-////    disableOnClose();
-////    return criticalDialog("Could not read MDL",
-////                          "Could not read System MDL info");
-////  }
-////
-////  int procNum = 0;
-////  for(auto mach : bldr->sys.machines) {
-////    if(!addMachineMdlInfo(procNum,mach.second)) {
-////      disableOnClose();
-////      return criticalDialog("Could not read MDL",
-////                            "Could not read MDL info for machine "
-////                            +QString::fromStdString(mach.second.name));
-////    }
-////    ++procNum;
-////  }
-////
-////  //then set the current visible machine to the first one
-////  categoryTabs->insertTab(SysMachTab,machsTabs.value(0),
-////                     sysTabNames[SysMachTab]);
-////  sysTabs->setCurrentIndex(SysInfoTab);
+    QFile file(fileName);
 
-  return true;
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning("Failed to open JSON: %s", qUtf8Printable(file.fileName()));
+        return false;
+    }
+
+    QByteArray data = file.readAll();
+    file.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    if (!doc.isObject()) return false;
+
+    QJsonObject rootObj = doc.object();
+    QJsonArray categories = rootObj["categories"].toArray();
+
+    centralTabs = new QTabWidget(centralWidget);
+
+    for (const QJsonValue &catVal : categories) {
+        QJsonObject catObj = catVal.toObject();
+        QString catName = catObj["cat_name"].toString();
+        QJsonArray params = catObj["parameters"].toArray();
+
+        Spreadsheet *sheet = new Spreadsheet(params.size(),
+                                             paramSheetColNames.size(),
+                                             paramSheetColNames, centralTabs);
+
+        QSet<QString> seenNames;
+        int row = 0;
+
+        for (const QJsonValue &paramVal : params) {
+            QJsonObject paramObj = paramVal.toObject();
+
+            // Each parameter should be a single-key object: { "name": { ...fields... } }
+            if (paramObj.size() != 1) {
+                qWarning("Parameter object in category '%s' does not have exactly one key",
+                         qUtf8Printable(catName));
+                continue;
+            }
+
+            auto it = paramObj.constBegin();
+            QString paramName = it.key();
+            QJsonObject attr = it.value().toObject();
+
+            if (seenNames.contains(paramName)) {
+                qWarning("Duplicate parameter name '%s' found in category '%s'",
+                         qUtf8Printable(paramName), qUtf8Printable(catName));
+            } else {
+                seenNames.insert(paramName);
+            }
+
+            QStringList rowData;
+            rowData << paramName;
+            rowData << attr.value("equiv").toString();
+            rowData << attr.value("desc").toString();
+            rowData << attr.value("default").toString();
+            rowData << jsonArrayToString(attr.value("range"));
+            rowData << jsonArrayToString(attr.value("states"));
+            rowData << attr.value("widget").toString();
+            rowData << attr.value("units").toString();
+            rowData << attr.value("fixed").toString();
+            rowData << attr.value("hidden").toString();
+            rowData << attr.value("disabled").toString();
+            rowData << jsonArrayToString(attr.value("requires"));
+            rowData << attr.value("define_vh").toString();
+            rowData << attr.value("generate").toString();
+
+            for (int col = 0; col < rowData.size(); ++col)
+                sheet->setItem(row, col, new QTableWidgetItem(rowData[col]));
+
+            ++row;
+        }
+
+        sheet->resizeColumnsToContents();
+        centralTabs->addTab(sheet, catName);
+    }
+
+    // Clear existing layout
+    QLayoutItem *item;
+    while ((item = centralLayout->takeAt(0)) != nullptr) {
+        if (item->widget()) item->widget()->deleteLater();
+        delete item;
+    }
+
+    centralLayout->addWidget(centralTabs);
+    return true;
 }
+
+// -------------------------------------------------------------------
+// Helper function: convert a QJsonValue (array) to a comma-separated string
+// -------------------------------------------------------------------
+QString Tapir::jsonArrayToString(const QJsonValue &val)
+{
+    QStringList list;
+    for (const QJsonValue &v : val.toArray())
+        list << v.toString();
+    return list.join(", ");
+}
+
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 void Tapir::clearStructures()
