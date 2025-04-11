@@ -132,7 +132,11 @@ void Tapir::createFormatActions()
 void Tapir::createViewActions()
 {
   ATR("+createViewActions");
-  ACT(aViewD3Chart,"","Show D3 Chart",this,sViewD3Chart);
+  ACT(aViewD3Chart,"","D3 Chart",this,sViewD3Chart);
+//  ACT(aViewRadarChart,"","Radar Chart",this,sViewRadarChart);
+
+  ACT(aViewReloadD3ChartData,"","Reload Chart Data",
+      this,sViewReloadD3ChartData);
 
   ACT(aViewHandleColState,"","Show Hidden Cols",this,sViewHandleColState);
   aViewHandleColState->setCheckable(true);
@@ -269,6 +273,8 @@ void Tapir::disableElements(void)
   aFormatSheetRename->setDisabled(true);
   aFormatSheetHide->setDisabled(true);
   aFormatSheetUnhide->setDisabled(true);
+
+//  aViewRadarChart->setDisabled(true);
 
   aToolsGenerateRtl->setDisabled(true);
   aToolsCompileRtl->setDisabled(true);

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Radar vs Ternary Chart</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body { display: flex; font-family: sans-serif; }
+    svg { background: #f9f9f9; margin: 10px; }
+    .axis-label { font-size: 12px; text-anchor: middle; }
+  </style>
+</head>
+<body>
+
+<!-- Radar Chart -->
+<svg id="radar" width="300" height="300"></svg>
+
+<!-- Ternary Chart -->
+<svg id="ternary" width="300" height="300"></svg>
+
+<script>
+const data = {
+  id: "N36",
+  score: 0.1948,
+  raw: {
+    ipc: 6.174,
+    area: 5.31,
+    power: 5.97
+  },
+  ternary: {
+    ipc: 0.3537,
+    area: 0.3042,
+    power: 0.3420
+  }
+};
+
+// === Radar Chart ===
+const radarSvg = d3.select("#radar"),
+      rW = +radarSvg.attr("width"),
+      rH = +radarSvg.attr("height"),
+      rCenter = { x: rW / 2, y: rH / 2 },
+      rRadius = 100;
+
+const radarAxes = ["ipc", "area", "power"];
+const radarScale = d3.scaleLinear()
+    .domain([0, d3.max(Object.values(data.raw))])
+    .range([0, rRadius]);
+
+const angleSlice = 2 * Math.PI / radarAxes.length;
+
+const radarLine = d3.lineRadial()
+    .radius(d => radarScale(d.value))
+    .angle((d, i) => i * angleSlice);
+
+const radarData = radarAxes.map(key => ({ axis: key, value: data.raw[key] }));
+
+radarSvg.append("g")
+  .attr("transform", `translate(${rCenter.x},${rCenter.y})`)
+  .append("path")
+  .datum(radarData)
+  .attr("fill", "steelblue")
+  .attr("fill-opacity", 0.5)
+  .attr("stroke", "#333")
+  .attr("d", radarLine);
+
+radarAxes.forEach((axis, i) => {
+  const angle = i * angleSlice - Math.PI / 2;
+  const x = rCenter.x + Math.cos(angle) * (rRadius + 20);
+  const y = rCenter.y + Math.sin(angle) * (rRadius + 20);
+  radarSvg.append("text")
+    .attr("x", x)
+    .attr("y", y)
+    .attr("class", "axis-label")
+    .text(axis.toUpperCase());
+});
+
+// === Ternary Chart ===
+const tSvg = d3.select("#ternary"),
+      tW = +tSvg.attr("width"),
+      tH = +tSvg.attr("height");
+
+const ternaryPoints = [
+  { name: "IPC", x: tW/2, y: 20 },
+  { name: "AREA", x: 40, y: tH - 40 },
+  { name: "POWER", x: tW - 40, y: tH - 40 }
+];
+
+tSvg.append("polygon")
+  .attr("points", ternaryPoints.map(d => `${d.x},${d.y}`).join(" "))
+  .attr("fill", "#eee")
+  .attr("stroke", "#333");
+
+ternaryPoints.forEach(d =>
+  tSvg.append("text")
+    .attr("x", d.x)
+    .attr("y", d.y - 8)
+    .attr("text-anchor", "middle")
+    .attr("font-size", 12)
+    .text(d.name)
+);
+
+// Ternary projection function
+function ternaryToXY(a, b, c) {
+  const sum = a + b + c;
+  a = a / sum;
+  b = b / sum;
+  c = c / sum;
+
+  const x = ternaryPoints[1].x * a + ternaryPoints[2].x * b + ternaryPoints[0].x * c;
+  const y = ternaryPoints[1].y * a + ternaryPoints[2].y * b + ternaryPoints[0].y * c;
+  return [x, y];
+}
+
+const [tx, ty] = ternaryToXY(data.ternary.area, data.ternary.power, data.ternary.ipc);
+
+tSvg.append("circle")
+  .attr("cx", tx)
+  .attr("cy", ty)
+  .attr("r", 6)
+  .attr("fill", "crimson")
+  .attr("stroke", "#222");
+</script>
+</body>
+</html>
+

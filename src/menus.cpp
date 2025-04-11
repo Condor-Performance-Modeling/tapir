@@ -91,6 +91,8 @@ void Tapir::createViewMenu()
   mView = menuBar()->addMenu(tr("View"));
 
   mView->addAction(aViewD3Chart);
+//  mView->addAction(aViewRadarChart);
+  mView->addAction(aViewReloadD3ChartData);
 
   mView->addSeparator();
   mView->addAction(aViewHandleColState);

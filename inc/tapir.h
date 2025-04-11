@@ -231,8 +231,11 @@ private slots:
   void sFormatSheetUnhide() {}
 
   void sViewD3Chart();
+//  void sViewRadarChart();
+
   void sViewHandleColState();
   void sViewHandleRowState();
+  void sViewReloadD3ChartData();
 
   void sToolsGenerateRtl();
   void sToolsCompileRtl();
@@ -311,7 +314,8 @@ private:
           *aFormatColHide,*aFormatColUnhide,
           *aFormatSheetRename,*aFormatSheetHide,*aFormatSheetUnhide;
 
-  QAction *aViewHandleColState,*aViewHandleRowState, *aViewD3Chart;
+  QAction *aViewHandleColState,*aViewHandleRowState, *aViewD3Chart,
+          *aViewReloadD3ChartData,*aViewRadarChart;
 
   QAction *aHelpHelp,*aHelpAbout,*aHelpDebug,*aDebug;
 
@@ -340,7 +344,10 @@ private:
   QGridLayout *centralLayout;
   QTabWidget  *centralTabs;
 
-  QPointer<QMainWindow> d3Window;
+//  QPointer<QMainWindow> d3Window;
+
+  QWebEngineView* d3ChartView = nullptr;
+  QWidget*        d3ChartWindow = nullptr;
 
   Msg msg;
 

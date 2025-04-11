@@ -1,0 +1,756 @@
+{
+  "nodes": [
+    {
+      "id": "N0",
+      "ipc": 3.01,
+      "area": 3.01,
+      "power": 4.01,
+      "score": 0.2494
+    },
+    {
+      "id": "N1",
+      "ipc": 1.173,
+      "area": 1.37,
+      "power": 1.17,
+      "score": 0.7318
+    },
+    {
+      "id": "N2",
+      "ipc": 2.957,
+      "area": 2.84,
+      "power": 3.83,
+      "score": 0.2719
+    },
+    {
+      "id": "N3",
+      "ipc": 6.991,
+      "area": 6.09,
+      "power": 9.68,
+      "score": 0.1186
+    },
+    {
+      "id": "N4",
+      "ipc": 8.309,
+      "area": 9.72,
+      "power": 11.37,
+      "score": 0.0752
+    },
+    {
+      "id": "N5",
+      "ipc": 2.31,
+      "area": 2.35,
+      "power": 1.78,
+      "score": 0.5522
+    },
+    {
+      "id": "N6",
+      "ipc": 3.551,
+      "area": 3.52,
+      "power": 3.66,
+      "score": 0.2756
+    },
+    {
+      "id": "N7",
+      "ipc": 0.703,
+      "area": 0.83,
+      "power": 0.96,
+      "score": 0.8823
+    },
+    {
+      "id": "N8",
+      "ipc": 8.962,
+      "area": 8.47,
+      "power": 11.2,
+      "score": 0.0945
+    },
+    {
+      "id": "N9",
+      "ipc": 1.674,
+      "area": 1.47,
+      "power": 2.31,
+      "score": 0.493
+    },
+    {
+      "id": "N10",
+      "ipc": 5.897,
+      "area": 6.49,
+      "power": 6.55,
+      "score": 0.1387
+    },
+    {
+      "id": "N11",
+      "ipc": 6.697,
+      "area": 7.95,
+      "power": 5.38,
+      "score": 0.1566
+    },
+    {
+      "id": "N12",
+      "ipc": 0.741,
+      "area": 0.66,
+      "power": 1.09,
+      "score": 1.03
+    },
+    {
+      "id": "N13",
+      "ipc": 1.064,
+      "area": 0.96,
+      "power": 0.93,
+      "score": 1.1917
+    },
+    {
+      "id": "N14",
+      "ipc": 7.575,
+      "area": 7.91,
+      "power": 8.82,
+      "score": 0.1086
+    },
+    {
+      "id": "N15",
+      "ipc": 0.729,
+      "area": 0.68,
+      "power": 1.07,
+      "score": 1.0019
+    },
+    {
+      "id": "N16",
+      "ipc": 4.431,
+      "area": 4.76,
+      "power": 6.43,
+      "score": 0.1448
+    },
+    {
+      "id": "N17",
+      "ipc": 1.563,
+      "area": 1.85,
+      "power": 1.25,
+      "score": 0.6759
+    },
+    {
+      "id": "N18",
+      "ipc": 1.764,
+      "area": 1.63,
+      "power": 2.52,
+      "score": 0.4294
+    },
+    {
+      "id": "N19",
+      "ipc": 8.731,
+      "area": 8.86,
+      "power": 9.68,
+      "score": 0.1018
+    },
+    {
+      "id": "N20",
+      "ipc": 4.502,
+      "area": 5.25,
+      "power": 3.6,
+      "score": 0.2382
+    },
+    {
+      "id": "N21",
+      "ipc": 1.243,
+      "area": 1.02,
+      "power": 1.5,
+      "score": 0.8124
+    },
+    {
+      "id": "N22",
+      "ipc": 7.043,
+      "area": 7.44,
+      "power": 7.73,
+      "score": 0.1225
+    },
+    {
+      "id": "N23",
+      "ipc": 7.79,
+      "area": 7.79,
+      "power": 11.19,
+      "score": 0.0894
+    },
+    {
+      "id": "N24",
+      "ipc": 1.007,
+      "area": 0.87,
+      "power": 0.72,
+      "score": 1.6076
+    },
+    {
+      "id": "N25",
+      "ipc": 6.874,
+      "area": 5.56,
+      "power": 9.4,
+      "score": 0.1315
+    },
+    {
+      "id": "N26",
+      "ipc": 8.424,
+      "area": 7.0,
+      "power": 10.96,
+      "score": 0.1098
+    },
+    {
+      "id": "N27",
+      "ipc": 6.394,
+      "area": 6.33,
+      "power": 6.64,
+      "score": 0.1521
+    },
+    {
+      "id": "N28",
+      "ipc": 8.262,
+      "area": 8.83,
+      "power": 10.21,
+      "score": 0.0916
+    },
+    {
+      "id": "N29",
+      "ipc": 1.999,
+      "area": 1.76,
+      "power": 2.75,
+      "score": 0.413
+    },
+    {
+      "id": "N30",
+      "ipc": 5.264,
+      "area": 5.81,
+      "power": 6.65,
+      "score": 0.1362
+    },
+    {
+      "id": "N31",
+      "ipc": 0.816,
+      "area": 0.88,
+      "power": 0.98,
+      "score": 0.9462
+    },
+    {
+      "id": "N32",
+      "ipc": 9.631,
+      "area": 8.76,
+      "power": 8.56,
+      "score": 0.1284
+    },
+    {
+      "id": "N33",
+      "ipc": 2.199,
+      "area": 2.41,
+      "power": 3.22,
+      "score": 0.2834
+    },
+    {
+      "id": "N34",
+      "ipc": 5.357,
+      "area": 4.78,
+      "power": 4.42,
+      "score": 0.2536
+    },
+    {
+      "id": "N35",
+      "ipc": 2.176,
+      "area": 1.96,
+      "power": 2.27,
+      "score": 0.4891
+    },
+    {
+      "id": "N36",
+      "ipc": 4.874,
+      "area": 5.6,
+      "power": 4.89,
+      "score": 0.178
+    },
+    {
+      "id": "N37",
+      "ipc": 3.764,
+      "area": 4.03,
+      "power": 4.03,
+      "score": 0.2318
+    },
+    {
+      "id": "N38",
+      "ipc": 2.947,
+      "area": 3.49,
+      "power": 3.76,
+      "score": 0.2246
+    },
+    {
+      "id": "N39",
+      "ipc": 5.317,
+      "area": 4.83,
+      "power": 7.68,
+      "score": 0.1433
+    },
+    {
+      "id": "N40",
+      "ipc": 4.094,
+      "area": 4.91,
+      "power": 3.55,
+      "score": 0.2349
+    },
+    {
+      "id": "N41",
+      "ipc": 2.15,
+      "area": 1.96,
+      "power": 2.4,
+      "score": 0.4571
+    },
+    {
+      "id": "N42",
+      "ipc": 3.702,
+      "area": 4.06,
+      "power": 3.06,
+      "score": 0.298
+    },
+    {
+      "id": "N43",
+      "ipc": 8.283,
+      "area": 7.65,
+      "power": 12.39,
+      "score": 0.0874
+    },
+    {
+      "id": "N44",
+      "ipc": 1.545,
+      "area": 1.24,
+      "power": 1.79,
+      "score": 0.6961
+    },
+    {
+      "id": "N45",
+      "ipc": 4.553,
+      "area": 5.19,
+      "power": 5.25,
+      "score": 0.1671
+    },
+    {
+      "id": "N46",
+      "ipc": 4.541,
+      "area": 5.19,
+      "power": 5.68,
+      "score": 0.154
+    },
+    {
+      "id": "N47",
+      "ipc": 7.901,
+      "area": 8.3,
+      "power": 9.59,
+      "score": 0.0993
+    },
+    {
+      "id": "N48",
+      "ipc": 7.782,
+      "area": 6.9,
+      "power": 11.34,
+      "score": 0.0995
+    },
+    {
+      "id": "N49",
+      "ipc": 1.432,
+      "area": 1.68,
+      "power": 1.31,
+      "score": 0.6507
+    }
+  ],
+  "links": [
+    {
+      "source": "N8",
+      "target": "N24"
+    },
+    {
+      "source": "N12",
+      "target": "N38"
+    },
+    {
+      "source": "N12",
+      "target": "N42"
+    },
+    {
+      "source": "N43",
+      "target": "N17"
+    },
+    {
+      "source": "N2",
+      "target": "N37"
+    },
+    {
+      "source": "N8",
+      "target": "N24"
+    },
+    {
+      "source": "N25",
+      "target": "N8"
+    },
+    {
+      "source": "N5",
+      "target": "N7"
+    },
+    {
+      "source": "N5",
+      "target": "N34"
+    },
+    {
+      "source": "N39",
+      "target": "N12"
+    },
+    {
+      "source": "N39",
+      "target": "N45"
+    },
+    {
+      "source": "N39",
+      "target": "N41"
+    },
+    {
+      "source": "N17",
+      "target": "N7"
+    },
+    {
+      "source": "N27",
+      "target": "N24"
+    },
+    {
+      "source": "N1",
+      "target": "N7"
+    },
+    {
+      "source": "N11",
+      "target": "N46"
+    },
+    {
+      "source": "N38",
+      "target": "N2"
+    },
+    {
+      "source": "N31",
+      "target": "N27"
+    },
+    {
+      "source": "N33",
+      "target": "N39"
+    },
+    {
+      "source": "N37",
+      "target": "N6"
+    },
+    {
+      "source": "N5",
+      "target": "N12"
+    },
+    {
+      "source": "N15",
+      "target": "N46"
+    },
+    {
+      "source": "N18",
+      "target": "N20"
+    },
+    {
+      "source": "N4",
+      "target": "N7"
+    },
+    {
+      "source": "N44",
+      "target": "N39"
+    },
+    {
+      "source": "N22",
+      "target": "N14"
+    },
+    {
+      "source": "N38",
+      "target": "N28"
+    },
+    {
+      "source": "N26",
+      "target": "N19"
+    },
+    {
+      "source": "N16",
+      "target": "N12"
+    },
+    {
+      "source": "N17",
+      "target": "N44"
+    },
+    {
+      "source": "N21",
+      "target": "N10"
+    },
+    {
+      "source": "N14",
+      "target": "N5"
+    },
+    {
+      "source": "N17",
+      "target": "N25"
+    },
+    {
+      "source": "N8",
+      "target": "N24"
+    },
+    {
+      "source": "N33",
+      "target": "N46"
+    },
+    {
+      "source": "N18",
+      "target": "N16"
+    },
+    {
+      "source": "N46",
+      "target": "N13"
+    },
+    {
+      "source": "N2",
+      "target": "N14"
+    },
+    {
+      "source": "N24",
+      "target": "N15"
+    },
+    {
+      "source": "N39",
+      "target": "N12"
+    },
+    {
+      "source": "N15",
+      "target": "N16"
+    },
+    {
+      "source": "N45",
+      "target": "N41"
+    },
+    {
+      "source": "N8",
+      "target": "N32"
+    },
+    {
+      "source": "N13",
+      "target": "N49"
+    },
+    {
+      "source": "N3",
+      "target": "N11"
+    },
+    {
+      "source": "N32",
+      "target": "N28"
+    },
+    {
+      "source": "N21",
+      "target": "N5"
+    },
+    {
+      "source": "N27",
+      "target": "N8"
+    },
+    {
+      "source": "N30",
+      "target": "N19"
+    },
+    {
+      "source": "N0",
+      "target": "N30"
+    },
+    {
+      "source": "N46",
+      "target": "N18"
+    },
+    {
+      "source": "N33",
+      "target": "N2"
+    },
+    {
+      "source": "N38",
+      "target": "N36"
+    },
+    {
+      "source": "N2",
+      "target": "N32"
+    },
+    {
+      "source": "N45",
+      "target": "N44"
+    },
+    {
+      "source": "N41",
+      "target": "N2"
+    },
+    {
+      "source": "N35",
+      "target": "N46"
+    },
+    {
+      "source": "N42",
+      "target": "N12"
+    },
+    {
+      "source": "N14",
+      "target": "N44"
+    },
+    {
+      "source": "N8",
+      "target": "N17"
+    },
+    {
+      "source": "N25",
+      "target": "N40"
+    },
+    {
+      "source": "N41",
+      "target": "N9"
+    },
+    {
+      "source": "N8",
+      "target": "N13"
+    },
+    {
+      "source": "N11",
+      "target": "N4"
+    },
+    {
+      "source": "N34",
+      "target": "N14"
+    },
+    {
+      "source": "N43",
+      "target": "N4"
+    },
+    {
+      "source": "N44",
+      "target": "N23"
+    },
+    {
+      "source": "N27",
+      "target": "N29"
+    },
+    {
+      "source": "N46",
+      "target": "N23"
+    },
+    {
+      "source": "N10",
+      "target": "N7"
+    },
+    {
+      "source": "N30",
+      "target": "N29"
+    },
+    {
+      "source": "N25",
+      "target": "N34"
+    },
+    {
+      "source": "N20",
+      "target": "N7"
+    },
+    {
+      "source": "N21",
+      "target": "N32"
+    },
+    {
+      "source": "N34",
+      "target": "N31"
+    },
+    {
+      "source": "N47",
+      "target": "N49"
+    },
+    {
+      "source": "N11",
+      "target": "N44"
+    },
+    {
+      "source": "N16",
+      "target": "N20"
+    },
+    {
+      "source": "N40",
+      "target": "N23"
+    },
+    {
+      "source": "N35",
+      "target": "N8"
+    },
+    {
+      "source": "N48",
+      "target": "N41"
+    },
+    {
+      "source": "N9",
+      "target": "N38"
+    },
+    {
+      "source": "N30",
+      "target": "N0"
+    },
+    {
+      "source": "N25",
+      "target": "N8"
+    },
+    {
+      "source": "N13",
+      "target": "N3"
+    },
+    {
+      "source": "N30",
+      "target": "N40"
+    },
+    {
+      "source": "N43",
+      "target": "N15"
+    },
+    {
+      "source": "N6",
+      "target": "N26"
+    },
+    {
+      "source": "N21",
+      "target": "N2"
+    },
+    {
+      "source": "N36",
+      "target": "N22"
+    },
+    {
+      "source": "N28",
+      "target": "N24"
+    },
+    {
+      "source": "N14",
+      "target": "N49"
+    },
+    {
+      "source": "N28",
+      "target": "N22"
+    },
+    {
+      "source": "N35",
+      "target": "N4"
+    },
+    {
+      "source": "N38",
+      "target": "N33"
+    },
+    {
+      "source": "N6",
+      "target": "N40"
+    },
+    {
+      "source": "N11",
+      "target": "N18"
+    },
+    {
+      "source": "N18",
+      "target": "N22"
+    },
+    {
+      "source": "N13",
+      "target": "N4"
+    },
+    {
+      "source": "N20",
+      "target": "N35"
+    }
+  ]
+}

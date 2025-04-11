@@ -232,42 +232,107 @@ bool Tapir::saveJsonFile(const QString &fn)
 // =============================================================
 // VIEW
 // =============================================================
-void Tapir::sViewD3Chart() {
+void Tapir::sViewReloadD3ChartData()
+{
+  QString htmlPath = ":/data/dynamic/index.html";
+  QString dataPath = QCoreApplication::applicationDirPath() 
+                   + "/../dynamic/data.json";
 
-    QString htmlPath = ":/data/dynamic/index.html";
-    QString dataPath = ":/data/dynamic/data.json";
+  QFile htmlFile(htmlPath);
+  QFile jsonFile(dataPath);
 
-    QFile htmlFile(htmlPath);
-    QFile jsonFile(dataPath);
+  if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+      qWarning("Failed to open HTML file: %s", qPrintable(htmlPath));
+      return;
+  }
 
-    if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qWarning("Failed to open HTML file: %s", qPrintable(htmlPath));
-        return;
+  if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+      qWarning("Failed to open JSON file: %s", qPrintable(dataPath));
+      return;
+  }
+
+  QString html = QString::fromUtf8(htmlFile.readAll());
+  QString json = QString::fromUtf8(jsonFile.readAll());
+
+  htmlFile.close();
+  jsonFile.close();
+
+  html.replace("%DATA%", json);
+
+  if (d3ChartView) {
+    d3ChartView->setHtml(html, QUrl("qrc:/"));
+    if (d3ChartWindow) {
+      d3ChartWindow->show();
+      d3ChartWindow->raise();
+      d3ChartWindow->activateWindow();
     }
-    if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qWarning("Failed to open JSON file: %s", qPrintable(dataPath));
-        return;
-    }
-
-    QString html = QString::fromUtf8(htmlFile.readAll());
-    QString json = QString::fromUtf8(jsonFile.readAll());
-
-    htmlFile.close();
-    jsonFile.close();
-
-    // Inject the JSON into the HTML
-    html.replace("%DATA%", json);  // insert directly into JS variable
-
-    QWebEngineView *view = new QWebEngineView;
-    view->setHtml(html, QUrl("qrc:/")); // base URL doesn't matter here
-
-    QWidget *window = new QWidget;
-    window->setWindowTitle("D3 Chart (Injected JSON)");
-    QVBoxLayout *layout = new QVBoxLayout(window);
-    layout->addWidget(view);
-    window->resize(1000, 700);
-    window->show();
+  }
 }
+
+// -------------------------------------------------------------------
+// -------------------------------------------------------------------
+void Tapir::sViewD3Chart()
+{
+
+  if (!d3ChartWindow) {
+    d3ChartWindow = new QWidget;
+    d3ChartWindow->setWindowTitle("D3 Chart (Injected JSON)");
+    d3ChartWindow->setAttribute(Qt::WA_DeleteOnClose);
+
+    d3ChartView = new QWebEngineView;
+    QVBoxLayout* layout = new QVBoxLayout(d3ChartWindow);
+    layout->addWidget(d3ChartView);
+
+    d3ChartWindow->resize(1000, 700);
+  }
+
+  sViewReloadD3ChartData();
+
+  d3ChartWindow->show();
+  d3ChartWindow->raise();
+  d3ChartWindow->activateWindow();
+}
+// -------------------------------------------------------------------
+// -------------------------------------------------------------------
+//void Tapir::sViewRadarChart() {
+//    QString htmlPath = ":/data/dynamic/index.html";
+//    QString dataPath = QCoreApplication::applicationDirPath()
+//                     + "/../dynamic/data.json";
+//
+//    QFile htmlFile(htmlPath);
+//    QFile jsonFile(dataPath);
+//
+//    if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+//        qWarning("Failed to open HTML file: %s", qPrintable(htmlPath));
+//        return;
+//    }
+//
+//    if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+//        qWarning("Failed to open JSON file: %s", qPrintable(dataPath));
+//        return;
+//    }
+//
+//    QString html = QString::fromUtf8(htmlFile.readAll());
+//    QString json = QString::fromUtf8(jsonFile.readAll());
+//
+//    htmlFile.close();
+//    jsonFile.close();
+//
+//    // Replace placeholder with JSON
+//    html.replace("%DATA%", json);
+//
+//    // Create and show WebEngine view
+//    QWebEngineView *view = new QWebEngineView;
+//    view->setHtml(html, QUrl("qrc:/"));
+//
+//    QWidget *window = new QWidget;
+//    window->setWindowTitle("Radar & Ternary Chart");
+//    QVBoxLayout *layout = new QVBoxLayout(window);
+//    layout->addWidget(view);
+//    window->resize(700, 400);
+//    window->show();
+//}
+
 // -------------------------------------------------------------------
 // -------------------------------------------------------------------
 void Tapir::sViewHandleColState()
