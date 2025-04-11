@@ -42,6 +42,7 @@ void Tapir::createStatusBar(void)
 {
   ATR("+createStatusBar");
   statusBar = new QStatusBar();
+  setStatusBar(statusBar);
 
   lLocation = new QLabel(" W999 ");
   lLocation->setAlignment(Qt::AlignHCenter);

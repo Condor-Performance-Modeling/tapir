@@ -1,5 +1,4 @@
-#ifndef _IDENTIFIERH_
-#define _IDENTIFIERH_
+#pragma once
 #include <string>
 class IdentBase
 {
@@ -23,5 +22,3 @@ public:
   virtual IdentBase *clone () { return new Identifier (*this); }
   virtual std::string value () { return m_str; }
 };
-#endif
-

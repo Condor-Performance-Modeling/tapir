@@ -1,4 +1,5 @@
-         QT += core gui
+         QT += core gui webenginewidgets
+#         QT += core gui opengl webenginewidgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
     TEMPLATE = app
@@ -33,11 +34,11 @@ HEADERS += \
 SOURCES += \
   src/actions.cpp \
   src/const.cpp  \
-  src/helper.cpp  \
   src/items.cpp \
   src/main.cpp \
   src/menus.cpp \
   src/msg.cpp \
+  src/populate.cpp \
   src/slots.cpp \
   src/spreadsheet.cpp \
   src/tapir.cpp \

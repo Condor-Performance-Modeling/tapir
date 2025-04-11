@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IPC vs Power (Pareto Front)</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .dot {
+      stroke: #000;
+      stroke-width: 0.5px;
+    }
+
+    .pareto-line {
+      fill: none;
+      stroke: red;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+<body>
+<svg></svg>
+<script>
+(function waitForData() {
+  if (!window.geojsonData) {
+    return setTimeout(waitForData, 50);
+  }
+
+  const data = window.geojsonData;
+console.log("Loaded data length:", data.length);
+
+console.log("geojsonData loaded:", window.geojsonData.length, "points");
+
+  const svg = d3.select("svg");
+  const width = 800;
+  const height = 600;
+  const margin = { top: 20, right: 30, bottom: 40, left: 50 };
+  const plotWidth = width - margin.left - margin.right;
+  const plotHeight = height - margin.top - margin.bottom;
+
+  const g = svg
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear()
+    .domain(d3.extent(data, d => d.ipc)).nice()
+    .range([0, plotWidth]);
+
+  const y = d3.scaleLinear()
+    .domain(d3.extent(data, d => d.power)).nice()
+    .range([plotHeight, 0]);
+
+  const color = d3.scaleSequential(d3.interpolatePlasma)
+    .domain(d3.extent(data, d => d.area));
+
+  // Axes
+  g.append("g")
+    .attr("transform", `translate(0,${plotHeight})`)
+    .call(d3.axisBottom(x))
+    .append("text")
+    .attr("x", plotWidth / 2)
+    .attr("y", 35)
+    .attr("fill", "black")
+    .attr("text-anchor", "middle")
+    .text("IPC");
+
+  g.append("g")
+    .call(d3.axisLeft(y))
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -plotHeight / 2)
+    .attr("y", -40)
+    .attr("fill", "black")
+    .attr("text-anchor", "middle")
+    .text("Power");
+
+  // Dots
+  g.selectAll(".dot")
+    .data(data)
+    .enter()
+    .append("circle")
+    .attr("class", "dot")
+    .attr("r", 3)
+    .attr("cx", d => x(d.ipc))
+    .attr("cy", d => y(d.power))
+    .attr("fill", d => color(d.area));
+
+  // Pareto front: maximize IPC, minimize Power
+  const paretoFront = data
+    .slice()
+    .sort((a, b) => b.ipc - a.ipc)
+    .filter((d, i, arr) => i === 0 || d.power < arr[i - 1].power);
+
+  g.append("path")
+    .datum(paretoFront)
+    .attr("class", "pareto-line")
+    .attr("d", d3.line()
+      .x(d => x(d.ipc))
+      .y(d => y(d.power))
+    );
+})();
+</script>
+</body>
+</html>
+

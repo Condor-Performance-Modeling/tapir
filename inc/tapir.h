@@ -3,20 +3,25 @@
 #include "tapir.h"
 #include "spreadsheet.h"
 
-#include <QMainWindow>
-#include <QLabel>
 #include <QComboBox>
 #include <QGridLayout>
+#include <QJsonDocument>
 #include <QLabel>
-#include <QLabel>
+#include <QMainWindow>
+#include <QPointer>
+#include <QWebEngineView>
 
+//QT_BEGIN_NAMESPACE
+//class QWebEngineView;
+//QT_END_NAMESPACE
 
 #include <iostream>
 #include <map>
 #include <string>
 #include <vector>
+#include <cstdint>
 
-#define EN_TR 1
+#define EN_TR 0
 
 #if EN_TR == 1
 #define ATR(s) std::cout<<s<<std::endl;
@@ -73,34 +78,10 @@ public:
     LAST_SYS_TAB
   };
 
-
-//  enum CfgSheetNums {
-//    CfgClusterTab,
-//    CfgMmuTab,
-//    CfgBusTab,
-//    CfgRstDbgTab,
-//    CfgPMemTab,
-//    CfgIntegrationTab,
-//    CfgPlatformTab,
-//    CfgDseTab,
-//    LAST_CFG_TAB
-//  };
-//
-//  enum DseCatagories {
-//    MachInfoTab,
-//    MachISATab,
-//    MachEncodeTableTab,
-//    MachEncodeFormatsTab,
-//    MachPipelinesTab,
-//    MachRegFilesTab,
-//    MachDefinesTab,
-//    MachStructureTab,
-//    MachSupportTab,
-//    MachOpcodesTab,
-//    MachEncodeRulesTab,
-//    MachFuncUnitsTab,
-//    LAST_MACH_TAB
-//  };
+  enum SheetItemState {
+    HideHidden,
+    ShowHidden
+  };
 
   bool docsAreClean()   { return clean; }
   void setClean(bool b) { clean = b;    }
@@ -112,25 +93,35 @@ public:
   bool readFile(QString);  
   bool writeFile(QString);  
 
+  void clearApplication();
   void clearStructures();
   void clearInterface();
+  void clearCentralWidget();
   void clear(bool);
 
   void createActions(void);
   void createFileActions(void);
   void createEditActions(void);
   void createFormatActions(void);
-  void createSortActions(void);
+  void createViewActions(void);
   void createToolsActions(void);
+
+  void createSortActions(void);
   void createHelpActions(void);
 
   void createCntxActions(void);
   void connectCntxActions(void);
+  void connectSheetCntxActions(Spreadsheet*) {}
 
   void connectTableSignals(Spreadsheet*);
 
   void createMenuBarMenus();
-  void createDefaultTabs(void);
+  void createFileMenu();
+  void createEditMenu();
+  void createFormatMenu();
+  void createViewMenu();
+  void createToolsMenu();
+  void createHelpMenu();
 
   void createToolBars(void);
   void createStatusBar(void);
@@ -141,8 +132,6 @@ public:
   void createEmptySpreadsheet();
 
   void createComboBox(void);
-
-  QTabWidget *createParamTabSet();
 
   bool criticalDialog(const QString&,const QString&);
   void overWriteButtonBox();
@@ -161,8 +150,25 @@ public:
 
   void setDisableState();
 
-  bool populate();
+  // ------------------------------------------------
+  void spreadsheetModified();
+  void readSettings();
+  void writeSettings();
+  bool okToContinue();
+  void setCurrentFile(const QString &fileName);
+  void updateRecentFileActions();
+  QString strippedName(const QString &fullFileName);
+
+  // ------------------------------------------------
+  // Helper functions
+  // ------------------------------------------------
+  bool populate(QJsonDocument&);
   QString jsonArrayToString(const QJsonValue&);
+  void assignRowData(QStringList&,const QJsonObject&);
+  void insertButtonGroup(Spreadsheet*,int,int,bool,
+                         const QString&,const QString&);
+  void insertCheckBox(Spreadsheet *sheet,int,int,const QString&);
+  QJsonDocument generateJson();
 
 protected:
   void closeEvent(QCloseEvent *e);
@@ -180,16 +186,21 @@ signals:
 private slots:
   void sFileNew(void);
   void sFileOpen(void);
-  void sFileClose(void);
 
-  bool sFileSave(void)   { return true; }
-  bool sFileSaveAs(void) { return true; }
+  bool sFileSave(void);
+  bool sFileSaveAs(void);
+
+  void sFileReload(void);
+
+  void sFileClose(void);
 
   bool sFileSaveSession(void);
   bool sFileRestoreSession(void);
   void sFileExit() { if (maybeSave()) close(); }
 
   void openRecentFile();
+  bool openJsonFile(const QString&);
+  bool saveJsonFile(const QString&);
 
   void sEditUndo(){}
   void sEditRedo(){}
@@ -198,7 +209,7 @@ private slots:
   void sEditPaste() {}
   void sEditClear() {}
   void sEditDelete() {}
-  void sEditFind();
+  void sEditFind() {}
 
   void sEditReplace() {}
   void sEditGoTo() {}
@@ -218,6 +229,10 @@ private slots:
   void sFormatSheetRename() {}
   void sFormatSheetHide() {}
   void sFormatSheetUnhide() {}
+
+  void sViewD3Chart();
+  void sViewHandleColState();
+  void sViewHandleRowState();
 
   void sToolsGenerateRtl();
   void sToolsCompileRtl();
@@ -268,16 +283,18 @@ private slots:
   void sDisableSigs(void) {}
   void sEnableSigs(void) {}
 
+  void sPlaceholder1() {}
+  void sPlaceholder2() {}
   void sComboBoxIndexChanged(int);
-  bool okToContinue() { return true; } //FIXME
   // ----------------------------------------------------------------
-
 private:
+  QAction *aKeyPressEsc,
 
-  QAction *aKeyPressEsc,*aFileNew,*aFileOpen,*aFileClose,*aFileSave,
-          *aFileSaveAs,*aFileExportDocs,*aEditUndo,
+          *aFileNew,*aFileOpen,*aFileReload,*aFileSave,*aFileSaveAs,
           *aFileSaveSession, *aFileRestoreSession,
-          *aEditRedo,*aEditCut,*aEditCopy,*aEditPaste,*aEditClear,
+          *aFileClose,
+
+          *aEditUndo,*aEditRedo,*aEditCut,*aEditCopy,*aEditPaste,*aEditClear,
           *aEditDelete,*aEditFind,*aEditReplace,*aEditGoTo,*aEditSelectAll,
           *aEditSelectNone,*aFileExit,*aFilePreview,
           *aFilePrint,*aFileExportPdf;
@@ -286,14 +303,20 @@ private:
           *aToolsPlaceholder1,*aToolsPlaceholder2,
           *aToolsInsPlaceholder1,*aToolsInsPlaceholder2;
 
-  QAction *aFormatCells,*aFormatRowHeight,*aFormatRowAutoFit,
-          *aFormatRowHide,*aFormatRowUnhide,*aFormatColWidth,
-          *aFormatColAutoFit,*aFormatColHide,*aFormatColUnhide,
+  QAction //*aFormatCells,
+
+          *aFormatRowHeight,*aFormatRowAutoFit,
+          *aFormatRowHide,*aFormatRowUnhide,
+          *aFormatColWidth,*aFormatColAutoFit,
+          *aFormatColHide,*aFormatColUnhide,
           *aFormatSheetRename,*aFormatSheetHide,*aFormatSheetUnhide;
+
+  QAction *aViewHandleColState,*aViewHandleRowState, *aViewD3Chart;
 
   QAction *aHelpHelp,*aHelpAbout,*aHelpDebug,*aDebug;
 
-  QMenu *mFile,*mEdit,*mHelp,*mInsert,*mFormat,*mTools,*mSort;
+  QMenu *mFile,*mEdit,*mFormat,*mView,*mTools,*mHelp;
+  QMenu *mInsert;//,*mSort;
 
   QAction *aSpreadCntxCut,*aSpreadCntxCopy,*aSpreadCntxPaste,
           *aSpreadCntxClear,*aSpreadCntxSetBitType,*aTabCntxRename,
@@ -317,6 +340,8 @@ private:
   QGridLayout *centralLayout;
   QTabWidget  *centralTabs;
 
+  QPointer<QMainWindow> d3Window;
+
   Msg msg;
 
 private:
@@ -324,23 +349,24 @@ private:
   int ac;
   char **av;
 
-  QString fileName;
+  QString currentFileName;
 
   bool clean;
-  bool ieditIsOpen;
+  bool fileOverwrite;
 
   QTabWidget *paramTabs;
   QMap<uint32_t,QTabWidget*> paramTabMap;
 
-  int cfgTabIndex;
+  QStringList recentFiles;
 
-  QStringList hdrLabels;
-  QStringList tmptabs;
+  bool showAllCols{false};
+  bool showHiddenRows{false};
+  bool showHiddenRowsAsDisabled{false};
+  bool showFixedRows{false};
+  bool showFixedRowsAsDisabled{false};
 
-  bool fileOverwrite;
-
-//statics
 private:
+  static const uint32_t MaxRecentFiles;
 
   static const QString rpath;
   static const bool DEFAULT_TABS;
@@ -348,12 +374,14 @@ private:
 
   static const QTabWidget::TabPosition defaultTabPos;
 
-//  static const QStringList cfgTabNames;
-//  static const QStringList paramCategoryTabNames;
   static const QStringList paramSheetColNames;
+  static const QStringList badCellValues;
+  static const QStringList hiddenCols;
 
   static const QColor headingBgClr;
   static const QColor headingFgClr;
 
   static const QString unitComboStyle;
+  static const uint32_t defaultColState;
+  static const uint32_t defaultRowState;
 };

@@ -1,0 +1,433 @@
+{
+  "categories": [
+    {
+      "cat_name": "A",
+      "parameters": [
+        {
+          "AA": {
+            "equiv": "NDS_DCACHE_SUPPORT",
+            "desc": "L1D cache is present",
+            "value": "yes",
+            "range": ["no","yes"],
+            "widget": "cb",
+            "units": "",
+            "fixed": "yes",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        },
+        {
+          "AB": {
+            "equiv": "NDS_DCACHE_SIZE",
+            "desc": "L1D size, bytes",
+            "value": "64KB",
+            "range": [ "32KB", "64KB", "128KB" ],
+            "widget": "ebg",
+            "units": "",
+            "fixed": "no",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "DCACHE_SIZE",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        }
+      ]
+    },
+    {
+      "cat_name": "B",
+      "parameters": [
+        {
+          "BA": {
+            "equiv": "NDS_BRANCH_PREDICTION",
+            "desc": "Branch predictor is present",
+            "range": [
+              "no",
+              "yes"
+            ],
+            "widget": "cb",
+            "value": "yes",
+            "units": "",
+            "fixed": "yes",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "no parameter",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        },
+        {
+          "BB": {
+            "equiv": "no equiv",
+            "desc": "Branch predictor implementation",
+            "range": [
+              "BTB+GHT",
+              "TAGE",
+              "SC",
+              "LP",
+              "ITTAGE",
+              "Perceptron"
+            ],
+            "widget": "nbg",
+            "value": "0:1,1:1,2:1,3:1,4:0,5:0",
+            "value": "BTB+GHT+BB+TAGE+SC+L+ITTAGE",
+            "units": "",
+            "fixed": "no",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "no parameter",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        },
+        {
+          "BC": {
+            "equiv": "NDS_BTB_SIZE",
+            "desc": "BTB size, entries",
+            "range": [
+              "4K",
+              "8K",
+              "16K"
+            ],
+            "widget": "n/a",
+            "value": "8192",
+            "units": "",
+            "fixed": "no",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "BTB_SIZE",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        }
+      ]
+    },
+    {
+      "cat_name": "C",
+      "parameters": [
+        {
+          "CA": {
+            "equiv": "NDS_DCACHE_PREFETCH_SUPPORT",
+            "desc": "L1D prefetcher type",
+            "range": [
+              "none",
+              "stride",
+              "nextline"
+            ],
+            "widget": "n/a",
+            "value": "nextline",
+            "units": "-",
+            "fixed": "no",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "no parameter",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        },
+        {
+          "CB": {
+            "equiv": "no equiv",
+            "desc": "L1I prefetcher type",
+            "range": [
+              "none",
+              "stride",
+              "nextline",
+              "btb"
+            ],
+            "widget": "n/a",
+            "value": "nextline",
+            "units": "-",
+            "fixed": "no",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "no parameter",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        },
+        {
+          "CC": {
+            "equiv": "no equiv",
+            "desc": "L2 prefetcher type",
+            "range": [
+              "none",
+              "stride",
+              "nextline"
+            ],
+            "widget": "n/a",
+            "value": "nextline",
+            "units": "-",
+            "fixed": "no",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "no parameter",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        }
+      ]
+    },
+    {
+      "cat_name": "D",
+      "parameters": [
+        {
+          "DA": {
+            "equiv": "NDS_ISA_BASE",
+            "desc": "RISC-V ISA base instruction set",
+            "range": [
+              "yes",
+              "no"
+            ],
+            "widget": "n/a",
+            "value": "RV64I",
+            "units": "",
+            "fixed": "yes",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "no parameter",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        }
+      ]
+    },
+    {
+      "cat_name": "E",
+      "parameters": [
+        {
+          "EA": {
+            "equiv": "NDS_ACE_SUPPORT",
+            "desc": "Andes Custom Extension (ACE)--AndeStar",
+            "range": [
+              "yes",
+              "no"
+            ],
+            "widget": "n/a",
+            "value": "yes",
+            "units": "",
+            "fixed": "no?",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "no parameter",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        }
+      ]
+    },
+    {
+      "cat_name": "F",
+      "parameters": [
+        {
+          "FA": {
+            "equiv": "NDS_BIU_ADDR_WIDTH",
+            "desc": "BIU address width, bits",
+            "range": [],
+            "widget": "n/a",
+            "value": "64",
+            "units": "",
+            "fixed": "yes",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "no parameter",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        },
+        {
+          "FB": {
+            "equiv": "NDS_BIU_DATA_WIDTH",
+            "desc": "BIU data width, bits",
+            "range": [
+              "256",
+              "512",
+              "1024"
+            ],
+            "widget": "n/a",
+            "value": "512",
+            "units": "",
+            "fixed": "no",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "no parameter",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        }
+      ]
+    },
+    {
+      "cat_name": "G",
+      "parameters": [
+        {
+          "GA": {
+            "equiv": "no parameter",
+            "desc": "instructions to fetch",
+            "range": [
+              "2xSlice",
+              "4xSlice",
+              "8xSlice",
+              "16xSlice"
+            ],
+            "widget": "n/a",
+            "value": "8",
+            "units": "",
+            "fixed": "no",
+            "hidden": "yes",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "parameter ??",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "xyz",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        }
+      ]
+    }
+  ]
+}

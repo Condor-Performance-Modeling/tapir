@@ -4,6 +4,7 @@
 int main(int ac, char**av)
 {
   Q_INIT_RESOURCE(tapir);
+  QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
   QApplication qtapp(ac,av);
 
   Tapir  gui(ac,av);

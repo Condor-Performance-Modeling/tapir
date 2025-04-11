@@ -10,14 +10,10 @@ using namespace std;
 }
 // --------------------------------------------------------------
 // --------------------------------------------------------------
-void Tapir::disableOnClose()
-{
-}
+void Tapir::disableOnClose() { }
 // --------------------------------------------------------------
 // --------------------------------------------------------------
-void Tapir::enableOnOpen()
-{
-}
+void Tapir::enableOnOpen() { }
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 void Tapir::createComboBox()
@@ -33,17 +29,19 @@ void Tapir::createActions()
   createFileActions();
   createEditActions();
   createFormatActions();
-  createSortActions();
+  createViewActions();
   createToolsActions();
+
+  createSortActions();
   createHelpActions();
 
   createCntxActions();
   connectCntxActions();
   ATR("-createActions");
 }
-// --------------------------------------------------------------
-// some of these point to slots in inseditor
-// --------------------------------------------------------------
+// ==============================================================
+// FILE
+// ==============================================================
 void Tapir::createFileActions(void)
 {
   aKeyPressEsc = new QAction(this);
@@ -55,6 +53,8 @@ void Tapir::createFileActions(void)
 
   ACT(aFileOpen,"fileopen.png","&Open...",this,sFileOpen);
   aFileOpen->setShortcut(QKeySequence::Open);
+
+  ACT(aFileReload,"","Reload",this,sFileReload);
 
   ACT(aFileClose,"","&Close",this,sFileClose);
   aFileClose->setShortcut(QKeySequence::Close);
@@ -70,8 +70,9 @@ void Tapir::createFileActions(void)
   ACT(aFileExit,"","&Quit",this,sFileExit);
   aFileExit->setShortcut(Qt::CTRL + Qt::Key_Q);
 }
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
+// ==============================================================
+// EDIT
+// ==============================================================
 void Tapir::createEditActions()
 {
   ACT(aEditUndo,"edit_undo.png","Undo",this,sEditUndo);
@@ -105,12 +106,11 @@ void Tapir::createEditActions()
   ACT(aEditSelectNone,"","Deselect",this,sEditSelectNone);
 
 }
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
+// ==============================================================
+// FORMAT
+// ==============================================================
 void Tapir::createFormatActions()
 {
-  ACT(aFormatCells,"","Cells",this,sFormatCells);
-
   ACT(aFormatRowHeight, "","Row: height",this,sFormatRowHeight);
   ACT(aFormatRowAutoFit,"","Row: autofit",this,sFormatRowAutoFit);
   ACT(aFormatRowHide,   "","Row: hide",this,sFormatRowHide);
@@ -124,14 +124,36 @@ void Tapir::createFormatActions()
   ACT(aFormatSheetRename,"","Sheet: rename",this,sFormatSheetRename);
   ACT(aFormatSheetHide,  "","Sheet: hide",this,sFormatSheetHide);
   ACT(aFormatSheetUnhide,"","Sheet: show hidden",this,sFormatSheetUnhide);
+
 }
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
+// ==============================================================
+// VIEW
+// ==============================================================
+void Tapir::createViewActions()
+{
+  ATR("+createViewActions");
+  ACT(aViewD3Chart,"","Show D3 Chart",this,sViewD3Chart);
+
+  ACT(aViewHandleColState,"","Show Hidden Cols",this,sViewHandleColState);
+  aViewHandleColState->setCheckable(true);
+  aViewHandleColState->setChecked(defaultColState == HideHidden);
+  aViewHandleColState->setIcon(QIcon::fromTheme("emblem-checked"));
+
+  ACT(aViewHandleRowState,"","Show Hidden Rows",this,sViewHandleRowState);
+  aViewHandleRowState->setCheckable(true);
+  aViewHandleRowState->setChecked(defaultRowState == HideHidden);
+  aViewHandleRowState->setIcon(QIcon::fromTheme("emblem-checked"));
+  ATR("-createViewActions");
+}
+// ==============================================================
+// SORT
+// ==============================================================
 void Tapir::createSortActions()
 {
 }
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
+// ==============================================================
+// TOOLS
+// ==============================================================
 void Tapir::createToolsActions()
 {
   ACT(aToolsGenerateRtl,     "", "Generate Rtl", this, sToolsGenerateRtl);
@@ -139,17 +161,19 @@ void Tapir::createToolsActions()
   ACT(aToolsInsPlaceholder1, "", "Placeholder1", this, sPlaceholder1);
   ACT(aToolsInsPlaceholder2, "", "Placeholder2", this, sPlaceholder2);
 }
-// --------------------------------------------------------------
-// --------------------------------------------------------------
+// ==============================================================
+// HELP
+// ==============================================================
 void Tapir::createHelpActions()
 {
   ACT(aHelpHelp,"","Tapir Help...",this,sHelpHelp);
   ACT(aHelpAbout,"","About", this,sHelpAbout);
   ACT(aHelpDebug,"","Debug Button",this,sHelpDebug);
-  ACT(aDebug,"intel16x16.png","Debug",this,sDebugSlot);
+  ACT(aDebug,"","Debug",this,sDebugSlot);
 }
-// --------------------------------------------------------------
-// --------------------------------------------------------------
+// ==============================================================
+// CONTEXT MENU
+// ==============================================================
 void Tapir::createCntxActions(void)
 {
   //spreadsheet
@@ -190,16 +214,15 @@ void Tapir::createCntxActions(void)
   ACT(aRowHdrCntxWidth,"","Width",this,sRowHdrCntxWidth);
   ACT(aRowHdrCntxHide,"","Hide",this,sRowHdrCntxHide);
   ACT(aRowHdrCntxUnhide,"","Unhide",this,sRowHdrCntxUnhide);
-
 }
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 void Tapir::connectCntxActions(void)
 {
 }
-// --------------------------------------------------------------
-//  
-// --------------------------------------------------------------
+// ==============================================================
+// SPREADSHEET
+// ==============================================================
 void Tapir::connectTableSignals(Spreadsheet *tbl)
 {
   connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
@@ -211,16 +234,17 @@ void Tapir::connectTableSignals(Spreadsheet *tbl)
   connect(tbl,SIGNAL(itemChanged(QTableWidgetItem*)),
          this,SLOT(sUpdateLineEdit(QTableWidgetItem*)));
 }
-// --------------------------------------------------------------
-// --------------------------------------------------------------
+// ==============================================================
+// MISC
+// ==============================================================
 void Tapir::disableElements(void)
 { 
   ATR("+disableElements");
   aFileSave->setDisabled(true);
-  aFileSaveAs->setDisabled(true);
-//  aFileOpen->setDisabled(true);
+
   aFileSaveSession->setDisabled(true);
   aFileRestoreSession->setDisabled(true);
+
   aEditUndo->setDisabled(true);
   aEditRedo->setDisabled(true);
   aEditCut->setDisabled(true);
@@ -230,6 +254,31 @@ void Tapir::disableElements(void)
   aEditDelete->setDisabled(true);
   aEditFind->setDisabled(true);
   aEditReplace->setDisabled(true);
+  aEditGoTo->setDisabled(true);
+  aEditSelectAll->setDisabled(true);
+  aEditSelectNone->setDisabled(true);
+
+  aFormatRowHeight->setDisabled(true);
+  aFormatRowAutoFit->setDisabled(true);
+  aFormatRowHide->setDisabled(true);
+  aFormatRowUnhide->setDisabled(true);
+  aFormatColWidth->setDisabled(true);
+  aFormatColAutoFit->setDisabled(true);
+  aFormatColHide->setDisabled(true);
+  aFormatColUnhide->setDisabled(true);
+  aFormatSheetRename->setDisabled(true);
+  aFormatSheetHide->setDisabled(true);
+  aFormatSheetUnhide->setDisabled(true);
+
+  aToolsGenerateRtl->setDisabled(true);
+  aToolsCompileRtl->setDisabled(true);
+  aToolsInsPlaceholder1->setDisabled(true);
+  aToolsInsPlaceholder2->setDisabled(true);
+
+  aHelpHelp->setDisabled(true);
+  aHelpAbout->setDisabled(true);
+  aHelpDebug->setDisabled(true);
+  aDebug->setDisabled(true);
   ATR("-disableElements");
 }
 #undef ACT

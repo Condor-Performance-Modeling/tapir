@@ -8,11 +8,26 @@ using namespace std;
 void Tapir::createMenuBarMenus()
 {
   ATR("+createMenuBarMenus");
-
+  createFileMenu();
+  createEditMenu();
+  createFormatMenu();
+  createViewMenu();
+  createToolsMenu();
+  createHelpMenu();
+  ATR("-createMenuBarMenus");
+}
+// ==============================================================
+// FILE
+// ==============================================================
+void Tapir::createFileMenu()
+{
   mFile = menuBar()->addMenu(tr("File"));
 
   mFile->addAction(aFileNew);
   mFile->addAction(aFileOpen);
+  mFile->addAction(aFileReload);
+  mFile->addSeparator();
+  mFile->addAction(aFileClose);
   mFile->addSeparator();
   mFile->addAction(aFileSave);
   mFile->addAction(aFileSaveAs);
@@ -20,8 +35,14 @@ void Tapir::createMenuBarMenus()
   mFile->addAction(aFileSaveSession);
   mFile->addAction(aFileRestoreSession);
   mFile->addSeparator();
+  mFile->addSeparator();
   mFile->addAction(aFileExit);
-
+}
+// ==============================================================
+// EDIT
+// ==============================================================
+void Tapir::createEditMenu()
+{
   mEdit = menuBar()->addMenu(tr("Edit"));
   mEdit->addAction(aEditUndo);
   mEdit->addAction(aEditRedo);
@@ -38,10 +59,13 @@ void Tapir::createMenuBarMenus()
   mEdit->addSeparator();
   mEdit->addAction(aEditSelectAll);
   mEdit->addAction(aEditSelectNone);
-
+}
+// ==============================================================
+// FORMAT
+// ==============================================================
+void Tapir::createFormatMenu()
+{
   mFormat = menuBar()->addMenu(tr("Format"));
-  mFormat->addAction(aFormatCells);
-  mFormat->addSeparator();
   mFormat->addAction(aFormatRowHeight);
   mFormat->addAction(aFormatRowAutoFit);
   mFormat->addAction(aFormatRowHide);
@@ -49,13 +73,42 @@ void Tapir::createMenuBarMenus()
   mFormat->addSeparator();
   mFormat->addAction(aFormatColWidth);
   mFormat->addAction(aFormatColAutoFit);
+
+  mFormat->addSeparator();
+  //This set is duplicated in View as a convienence
   mFormat->addAction(aFormatColHide);
   mFormat->addAction(aFormatColUnhide);
   mFormat->addSeparator();
   mFormat->addAction(aFormatSheetRename);
   mFormat->addAction(aFormatSheetHide);
   mFormat->addAction(aFormatSheetUnhide);
+}
+// ==============================================================
+// VIEW
+// ==============================================================
+void Tapir::createViewMenu()
+{
+  mView = menuBar()->addMenu(tr("View"));
 
+  mView->addAction(aViewD3Chart);
+
+  mView->addSeparator();
+  mView->addAction(aViewHandleColState);
+  mView->addAction(aViewHandleRowState);
+
+  mView->addSeparator();
+  mView->addAction(aFormatColHide);
+  mView->addAction(aFormatColUnhide);
+  mView->addSeparator();
+  mView->addAction(aFormatSheetRename);
+  mView->addAction(aFormatSheetHide);
+  mView->addAction(aFormatSheetUnhide);
+}
+// ==============================================================
+// TOOLS
+// ==============================================================
+void Tapir::createToolsMenu()
+{
   mTools = menuBar()->addMenu(tr("Tools"));
   mTools->addAction(aToolsGenerateRtl);
   mTools->addAction(aToolsCompileRtl);
@@ -64,10 +117,21 @@ void Tapir::createMenuBarMenus()
   mInsert = mTools->addMenu(tr("Insert"));
   mInsert->addAction(aToolsInsPlaceholder1);
   mInsert->addAction(aToolsInsPlaceholder2);
-
-  mHelp = menuBar()->addMenu(tr("Help"));
-  ATR("-createMenuBarMenus");
 }
+// ==============================================================
+// HELP
+// ==============================================================
+void Tapir::createHelpMenu()
+{
+  mHelp = menuBar()->addMenu(tr("Help"));
+  mHelp->addAction(aHelpHelp);
+  mHelp->addAction(aHelpAbout);
+  mHelp->addAction(aHelpDebug);
+  mHelp->addAction(aDebug);
+}
+// ==============================================================
+// MISC
+// ==============================================================
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 void Tapir::createSheetCntxMenu(Spreadsheet *sheet)

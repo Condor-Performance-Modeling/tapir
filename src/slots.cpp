@@ -1,8 +1,24 @@
 #include "tapir.h"
 #include "items.h"
 #include "spreadsheet.h"
-#include <QtCore>
-#include <QtGui>
+#include "pareto3dglwidget.h"
+#include "scatterglwidget.h"
+
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QByteArray>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QVector3D>
+#include <QWidget>
+#include <QHBoxLayout>
+#include <QMessageBox>
+#include <QList>
+#include <QWebEngineView>
+#include <QWebEngineSettings>
+
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -44,17 +60,9 @@ void Tapir::sComboBoxIndexChanged(int)
 // =============================================================
 void Tapir::sFileNew()
 {
-  sFileClose(); //fileClose clears the structures, this is
-               //all that needed for new()
-}
-// ------------------------------------------------------
-// ------------------------------------------------------
-void Tapir::sFileClose()
-{
-  if (maybeSave()) { //if modified give chance to save
-    clearStructures();
-    disableOnClose();
-  }
+  ATR("+sFileNew")
+  ATR(" sFileNew not implemented")
+  ATR("-sFileNew")
 }
 // ------------------------------------------------------
 // ------------------------------------------------------
@@ -65,19 +73,74 @@ void Tapir::sFileOpen()
   if(maybeSave()) {
 
     QString fn = QFileDialog::getOpenFileName(this, tr("Open mdl..."),
-                   QString(), tr("MDL (*.json);;All Files (*)"));
+                   QString(), tr("Cfg files (*.json);;All Files (*)"));
 
-    //if file name is empty user hit cancel or escape
+    //if file name is empty, user hit cancel or escape
     if (!fn.isEmpty()) {
-
-      if(readFile(fn)) { enableOnOpen(); }
-      else             { ATR("-sFileOpen read failed"); }
-
+      openJsonFile(fn);
     } else {
       ATR("-sFileOpen cancel");
     }
   }
   ATR("-sFileOpen");
+}
+// ------------------------------------------------------
+// ------------------------------------------------------
+bool Tapir::sFileSave()
+{
+  ATR("+Tapir:sFileSave")
+  if (currentFileName.isEmpty()) {
+    // fallback to Save As
+    ATR("-Tapir:sFileSave")
+    return sFileSaveAs();
+  }
+
+  ATR("-Tapir:sFileSave")
+  return saveJsonFile(currentFileName);
+}
+// ------------------------------------------------------
+// ------------------------------------------------------
+bool Tapir::sFileSaveAs(void)
+{
+  ATR("+Tapir:sFileSaveAs")
+  QString newFileName = QFileDialog::getSaveFileName(
+      this,
+      tr("Save As"),
+      currentFileName.isEmpty() ? QDir::homePath() : currentFileName,
+      tr("JSON Files (*.json);;All Files (*)"));
+
+  //not an error user changed their mind
+  if (newFileName.isEmpty()) {
+    ATR("-Tapir:sFileSaveAs")
+    return true;
+  }
+
+  if (saveJsonFile(newFileName)) {
+    currentFileName = newFileName;
+    ATR("-Tapir:sFileSaveAs")
+    return true;
+  }
+
+  ATR("-Tapir:sFileSaveAs")
+  return false;
+}
+
+// ------------------------------------------------------
+// ------------------------------------------------------
+void Tapir::sFileReload()
+{
+  ATR("+FileReload")
+  openJsonFile(currentFileName);
+  ATR("-FileReload")
+}
+// ------------------------------------------------------
+// ------------------------------------------------------
+void Tapir::sFileClose()
+{
+//  if (maybeSave()) { //if modified give chance to save
+    clearApplication();
+    disableOnClose();
+//  }
 }
 // ------------------------------------------------------
 // ------------------------------------------------------
@@ -104,36 +167,138 @@ void Tapir::closeEvent(QCloseEvent *e)
 // --------------------------------------------------------------
 void Tapir::openRecentFile()
 {
-    if (okToContinue()) {
-        QAction *action = qobject_cast<QAction *>(sender());
-        if (action)
-            readFile(action->data().toString());
-    }
+//  if (okToContinue()) {
+//    QAction *action = qobject_cast<QAction *>(sender());
+//    if (action) readFile(action->data().toString());
+//  }
 }
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+bool Tapir::openJsonFile(const QString &fn)
+{
+  QFile file(fn);
+  if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning("Failed to open JSON: %s", qUtf8Printable(file.fileName()));
+    return false;
+    //FIXME: add error dialog
+  }
 
+  QByteArray data = file.readAll();
+  file.close();
+
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  if (!doc.isObject()) {
+    qWarning("Failed to parse JSON: %s", qUtf8Printable(file.fileName()));
+    //FIXME: add error dialog
+    return false;
+  }
+
+  currentFileName = fn;
+  clearApplication();
+  return populate(doc);
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+bool Tapir::saveJsonFile(const QString &fn)
+{
+  ATR("+Tapir:saveJsonFile")
+  QFile file(fn);
+  if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    QMessageBox::warning(this, tr("Save Error"),
+                         tr("Cannot write to file %1:\n%2.")
+                             .arg(QDir::toNativeSeparators(fn),
+                                  file.errorString()));
+    ATR("-Tapir:saveJsonFile")
+    return false;
+  }
+
+  QJsonDocument doc = generateJson();  // <-- Replace with your actual generator
+  file.write(doc.toJson(QJsonDocument::Indented));
+  file.close();
+
+  statusBar->showMessage(tr("Saved to %1").arg(fn), 3000);
+
+  setClean(true);
+
+  ATR("-Tapir:saveJsonFile")
+  return true;
+}
 // =============================================================
 // EDIT
 // =============================================================
-void Tapir::sEditFind()
-{
-//    if (!findDialog) {
-//        findDialog = new FindDialog(this);
-//        connect(findDialog, SIGNAL(findNext(const QString &,
-//                                            Qt::CaseSensitivity)),
-//                spreadsheet, SLOT(findNext(const QString &,
-//                                           Qt::CaseSensitivity)));
-//        connect(findDialog, SIGNAL(findPrevious(const QString &,
-//                                                Qt::CaseSensitivity)),
-//                spreadsheet, SLOT(findPrevious(const QString &,
-//                                               Qt::CaseSensitivity)));
-//    }
-//
-//    findDialog->show();
-//    findDialog->raise();
-//    findDialog->activateWindow();
+// n/a
+// =============================================================
+// FORMAT
+// =============================================================
+// n/a
+// =============================================================
+// VIEW
+// =============================================================
+void Tapir::sViewD3Chart() {
+//    QString htmlPath = "/data/users/jeffnye/condor/tapir/charts/c6/index.html";
+//    QString dataPath = "/data/users/jeffnye/condor/tapir/charts/c6/data.json";
+    QString htmlPath = ":/data/dynamic/index.html";
+    QString dataPath = ":/data/dynamic/data.json";
+
+    QFile htmlFile(htmlPath);
+    QFile jsonFile(dataPath);
+
+    if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning("Failed to open HTML file: %s", qPrintable(htmlPath));
+        return;
+    }
+    if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning("Failed to open JSON file: %s", qPrintable(dataPath));
+        return;
+    }
+
+    QString html = QString::fromUtf8(htmlFile.readAll());
+    QString json = QString::fromUtf8(jsonFile.readAll());
+
+    htmlFile.close();
+    jsonFile.close();
+
+    // Inject the JSON into the HTML
+    html.replace("%DATA%", json);  // insert directly into JS variable
+
+    QWebEngineView *view = new QWebEngineView;
+    view->setHtml(html, QUrl("qrc:/")); // base URL doesn't matter here
+
+    QWidget *window = new QWidget;
+    window->setWindowTitle("D3 Chart (Injected JSON)");
+    QVBoxLayout *layout = new QVBoxLayout(window);
+    layout->addWidget(view);
+    window->resize(1000, 700);
+    window->show();
 }
-// --------------------------------------------------------------
-// --------------------------------------------------------------
+// -------------------------------------------------------------------
+// -------------------------------------------------------------------
+void Tapir::sViewHandleColState()
+{
+  bool show = aViewHandleColState->isChecked();
+
+  for (int i = 0; i < centralTabs->count(); ++i) {
+    Spreadsheet *sheet = qobject_cast<Spreadsheet *>(centralTabs->widget(i));
+    if (!sheet) continue;
+
+    for (int col = 0; col < paramSheetColNames.size(); ++col) {
+      const QString &colName = paramSheetColNames[col];
+
+      if (show) { //Show all
+        sheet->setColumnHidden(col, false);
+      } else if (hiddenCols.contains(colName)) { //Hide if in list
+        sheet->setColumnHidden(col, true);
+      } else { //Else show
+        sheet->setColumnHidden(col, false);
+      }
+    }
+  }
+}
+// -------------------------------------------------------------------
+// -------------------------------------------------------------------
+void Tapir::sViewHandleRowState()
+{
+}
 
 // ======================================================
 // TOOLS
@@ -156,3 +321,6 @@ void Tapir::sToolsCompileRtl()
 // HELP
 // ======================================================
 void Tapir::sHelpDebug() { }
+// ======================================================
+// MISC
+// ======================================================
