@@ -1,8 +1,6 @@
 #include "tapir.h"
 #include "items.h"
 #include "spreadsheet.h"
-#include "pareto3dglwidget.h"
-#include "scatterglwidget.h"
 
 #include <QDir>
 #include <QFile>
@@ -235,8 +233,7 @@ bool Tapir::saveJsonFile(const QString &fn)
 // VIEW
 // =============================================================
 void Tapir::sViewD3Chart() {
-//    QString htmlPath = "/data/users/jeffnye/condor/tapir/charts/c6/index.html";
-//    QString dataPath = "/data/users/jeffnye/condor/tapir/charts/c6/data.json";
+
     QString htmlPath = ":/data/dynamic/index.html";
     QString dataPath = ":/data/dynamic/data.json";
 
