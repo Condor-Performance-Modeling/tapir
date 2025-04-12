@@ -1,7 +1,5 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/data">
-  <file alias="dynamic/index.html">../dynamic/index.html</file>
-  <file alias="dynamic/data.json">../dynamic/data.json</file>
   <file alias="dev.json">../json/dev.json</file>
   <file>icons/aspenicon.png</file>
   <file>icons/aspensplash.jpg</file>

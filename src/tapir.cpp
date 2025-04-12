@@ -47,12 +47,31 @@ Tapir::Tapir(int _ac,char **_av)
 
   disableElements();
 
+  //FIXME: hook this to a signal/slot
+  chartDebug = false;
+  if(chartDebug) {
+    enableDevTools();
+  }
+
   //Debug
   QString fn = ":/data/dev.json";
   openJsonFile(fn);
-  sViewD3Chart();
+  sDataTernaryChart();
+  sDataPlotChart();
+  sDataForceChart();
  
   ATR("-ctor");
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Tapir::enableDevTools()
+{ 
+  if (!devToolsView) { 
+    devToolsView = new QWebEngineView;
+    devToolsView->setWindowTitle("DevTools");
+    devToolsView->resize(800, 600);
+    devToolsView->show();
+  }
 }
 // --------------------------------------------------------------
 // --------------------------------------------------------------

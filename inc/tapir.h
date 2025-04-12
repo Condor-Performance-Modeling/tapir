@@ -11,10 +11,6 @@
 #include <QPointer>
 #include <QWebEngineView>
 
-//QT_BEGIN_NAMESPACE
-//class QWebEngineView;
-//QT_END_NAMESPACE
-
 #include <iostream>
 #include <map>
 #include <string>
@@ -104,6 +100,7 @@ public:
   void createEditActions(void);
   void createFormatActions(void);
   void createViewActions(void);
+  void createDataActions(void);
   void createToolsActions(void);
 
   void createSortActions(void);
@@ -120,6 +117,7 @@ public:
   void createEditMenu();
   void createFormatMenu();
   void createViewMenu();
+  void createDataMenu();
   void createToolsMenu();
   void createHelpMenu();
 
@@ -169,6 +167,8 @@ public:
                          const QString&,const QString&);
   void insertCheckBox(Spreadsheet *sheet,int,int,const QString&);
   QJsonDocument generateJson();
+  void reloadChartData(QString&);
+  void enableDevTools();
 
 protected:
   void closeEvent(QCloseEvent *e);
@@ -230,12 +230,16 @@ private slots:
   void sFormatSheetHide() {}
   void sFormatSheetUnhide() {}
 
-  void sViewD3Chart();
-//  void sViewRadarChart();
-
   void sViewHandleColState();
   void sViewHandleRowState();
-  void sViewReloadD3ChartData();
+
+  void sDataForceChart();
+  void sDataTernaryChart();
+  void sDataPlotChart();
+
+  void sDataReloadForceData();
+  void sDataReloadTernaryData();
+  void sDataReloadPlotData();
 
   void sToolsGenerateRtl();
   void sToolsCompileRtl();
@@ -302,24 +306,27 @@ private:
           *aEditSelectNone,*aFileExit,*aFilePreview,
           *aFilePrint,*aFileExportPdf;
 
-  QAction *aToolsGenerateRtl,*aToolsCompileRtl,
-          *aToolsPlaceholder1,*aToolsPlaceholder2,
-          *aToolsInsPlaceholder1,*aToolsInsPlaceholder2;
+  QAction *aToolsGenerateRtl,     *aToolsCompileRtl,
+          *aToolsPlaceholder1,    *aToolsPlaceholder2,
+          *aToolsInsPlaceholder1, *aToolsInsPlaceholder2;
 
-  QAction //*aFormatCells,
+  QAction *aFormatRowHeight,  *aFormatRowAutoFit,
+          *aFormatRowHide,    *aFormatRowUnhide,
+          *aFormatColWidth,   *aFormatColAutoFit,
+          *aFormatColHide,    *aFormatColUnhide,
+          *aFormatSheetRename,*aFormatSheetHide,
+          *aFormatSheetUnhide;
 
-          *aFormatRowHeight,*aFormatRowAutoFit,
-          *aFormatRowHide,*aFormatRowUnhide,
-          *aFormatColWidth,*aFormatColAutoFit,
-          *aFormatColHide,*aFormatColUnhide,
-          *aFormatSheetRename,*aFormatSheetHide,*aFormatSheetUnhide;
+  QAction *aViewHandleColState,*aViewHandleRowState;
 
-  QAction *aViewHandleColState,*aViewHandleRowState, *aViewD3Chart,
-          *aViewReloadD3ChartData,*aViewRadarChart;
+  QAction *aDataForceChart, *aDataTernaryChart, *aDataPlotChart;
+
+  QAction *aDataReloadForceData,*aDataReloadTernaryData,*aDataReloadPlotData;
 
   QAction *aHelpHelp,*aHelpAbout,*aHelpDebug,*aDebug;
 
-  QMenu *mFile,*mEdit,*mFormat,*mView,*mTools,*mHelp;
+  QMenu *mFile,*mEdit,*mFormat,*mView,*mData,*mTools,*mHelp;
+
   QMenu *mInsert;//,*mSort;
 
   QAction *aSpreadCntxCut,*aSpreadCntxCopy,*aSpreadCntxPaste,
@@ -346,8 +353,16 @@ private:
 
 //  QPointer<QMainWindow> d3Window;
 
-  QWebEngineView* d3ChartView = nullptr;
-  QWidget*        d3ChartWindow = nullptr;
+  QWebEngineView *d3ForceChartView = nullptr,
+                 *d3TernaryChartView = nullptr,
+                 *d3PlotChartView = nullptr;
+
+  QWidget *d3ForceChartWindow = nullptr,
+          *d3TernaryChartWindow = nullptr,
+          *d3PlotChartWindow = nullptr;
+
+  QWebEngineView* devToolsView = nullptr;
+  bool chartDebug{false};
 
   Msg msg;
 

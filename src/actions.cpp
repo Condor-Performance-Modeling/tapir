@@ -30,6 +30,7 @@ void Tapir::createActions()
   createEditActions();
   createFormatActions();
   createViewActions();
+  createDataActions();
   createToolsActions();
 
   createSortActions();
@@ -132,11 +133,6 @@ void Tapir::createFormatActions()
 void Tapir::createViewActions()
 {
   ATR("+createViewActions");
-  ACT(aViewD3Chart,"","D3 Chart",this,sViewD3Chart);
-//  ACT(aViewRadarChart,"","Radar Chart",this,sViewRadarChart);
-
-  ACT(aViewReloadD3ChartData,"","Reload Chart Data",
-      this,sViewReloadD3ChartData);
 
   ACT(aViewHandleColState,"","Show Hidden Cols",this,sViewHandleColState);
   aViewHandleColState->setCheckable(true);
@@ -148,6 +144,29 @@ void Tapir::createViewActions()
   aViewHandleRowState->setChecked(defaultRowState == HideHidden);
   aViewHandleRowState->setIcon(QIcon::fromTheme("emblem-checked"));
   ATR("-createViewActions");
+}
+// ==============================================================
+// DATA
+// ==============================================================
+void Tapir::createDataActions()
+{
+  ATR("+createDataActions");
+
+  ACT(aDataForceChart,"","Force",   this,sDataForceChart);
+  ACT(aDataTernaryChart,"","Ternary",   this,sDataTernaryChart);
+  ACT(aDataPlotChart, "","2D Plots",this,sDataPlotChart);
+
+//  actname = new QAction(QIcon(rpath+icon),str,this);
+  ACT(aDataReloadForceData,  "","Reload Force Data",
+      this,sDataReloadForceData);
+
+  ACT(aDataReloadTernaryData,"","Reload Ternary Data",
+      this,sDataReloadTernaryData);
+
+  ACT(aDataReloadPlotData,"","2D Plots",
+      this,sDataReloadPlotData);
+
+  ATR("-createDataActions");
 }
 // ==============================================================
 // SORT
@@ -273,8 +292,6 @@ void Tapir::disableElements(void)
   aFormatSheetRename->setDisabled(true);
   aFormatSheetHide->setDisabled(true);
   aFormatSheetUnhide->setDisabled(true);
-
-//  aViewRadarChart->setDisabled(true);
 
   aToolsGenerateRtl->setDisabled(true);
   aToolsCompileRtl->setDisabled(true);

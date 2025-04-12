@@ -34,6 +34,7 @@ HEADERS += \
 SOURCES += \
   src/actions.cpp \
   src/const.cpp  \
+  src/charts.cpp  \
   src/items.cpp \
   src/main.cpp \
   src/menus.cpp \

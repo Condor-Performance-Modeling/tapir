@@ -12,6 +12,7 @@ void Tapir::createMenuBarMenus()
   createEditMenu();
   createFormatMenu();
   createViewMenu();
+  createDataMenu();
   createToolsMenu();
   createHelpMenu();
   ATR("-createMenuBarMenus");
@@ -89,11 +90,6 @@ void Tapir::createFormatMenu()
 void Tapir::createViewMenu()
 {
   mView = menuBar()->addMenu(tr("View"));
-
-  mView->addAction(aViewD3Chart);
-//  mView->addAction(aViewRadarChart);
-  mView->addAction(aViewReloadD3ChartData);
-
   mView->addSeparator();
   mView->addAction(aViewHandleColState);
   mView->addAction(aViewHandleRowState);
@@ -105,6 +101,23 @@ void Tapir::createViewMenu()
   mView->addAction(aFormatSheetRename);
   mView->addAction(aFormatSheetHide);
   mView->addAction(aFormatSheetUnhide);
+}
+// ==============================================================
+// DATA
+// ==============================================================
+void Tapir::createDataMenu()
+{
+  mData = menuBar()->addMenu(tr("Data"));
+
+  mData->addAction(aDataForceChart);
+  mData->addAction(aDataTernaryChart);
+  mData->addAction(aDataPlotChart);
+
+  QMenu *mReload = mData->addMenu(tr("Reload Data"));
+
+  mReload->addAction(aDataReloadForceData);
+  mReload->addAction(aDataReloadTernaryData);
+  mReload->addAction(aDataReloadPlotData);
 }
 // ==============================================================
 // TOOLS

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>3D Scatter Plot</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+<script>
+  console.log("==== JavaScript is executing ===="); // ✅ Confirm JS is active
+
+  try {
+    const data = %DATA%; // ✅ Qt should replace this
+    console.log("✅ Data injected successfully:", data);
+    console.log("Data nodes:", data.nodes);
+
+    const maxIpc = Math.max(...data.nodes.map(d => d.ipc));
+    const maxArea = Math.max(...data.nodes.map(d => d.area));
+    const maxPower = Math.max(...data.nodes.map(d => d.power));
+    console.log("maxIpc:", maxIpc, "maxArea:", maxArea, "maxPower:", maxPower);
+
+    // continue with rendering scene...
+  } catch (e) {
+    console.error("❌ ERROR: Could not parse or inject data:", e);
+  }
+</script>
+
+<!-- rest of your rendering code can follow below this if the data is confirmed good -->
+
+</body>
+</html>
+
