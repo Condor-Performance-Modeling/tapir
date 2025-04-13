@@ -14,7 +14,7 @@ using namespace std;
 
 #define RLD(VIEW,WINDOW) \
   if (VIEW) { \
-    VIEW->setHtml(html, QUrl("file:///")); \
+    VIEW->setHtml(html, baseUrl); \
     if (WINDOW) { \
       WINDOW->show(); \
       WINDOW->raise(); \
@@ -123,21 +123,23 @@ void Tapir::reloadChartData(QString &_dir)
 {
   QString htmlPath = QCoreApplication::applicationDirPath()
                    + "/../dynamic/"+_dir+"/index.html";
-
   QString dataPath = QCoreApplication::applicationDirPath() 
                    + "/../dynamic/"+_dir+"/data.json";
+  QString fontPath = QCoreApplication::applicationDirPath()
+                   + "/../dynamic/plot/helvetiker_regular.typeface.json";
 
   QFile htmlFile(htmlPath);
   QFile jsonFile(dataPath);
+  QFile fontFile(fontPath);
 
   if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-      qWarning("Failed to open HTML file: %s", qPrintable(htmlPath));
-      return;
+    qWarning("Failed to open HTML file: %s", qPrintable(htmlPath));
+    return;
   }
 
   if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-      qWarning("Failed to open JSON file: %s", qPrintable(dataPath));
-      return;
+    qWarning("Failed to open JSON file: %s", qPrintable(dataPath));
+    return;
   }
 
   QString html = QString::fromUtf8(htmlFile.readAll());
@@ -146,25 +148,44 @@ void Tapir::reloadChartData(QString &_dir)
   htmlFile.close();
   jsonFile.close();
 
-  if(chartDebug) {
-    if (!html.contains("%DATA%")) {
-      qWarning("HTML does not contain DATA placeholder "
-               "— no data will be injected.");
+  QString fontJson;
+
+  if(_dir == "plot") {
+    if (fontFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+      fontJson = QString::fromUtf8(fontFile.readAll());
+      fontFile.close();
     } else {
-      qDebug("Found DATA placeholder, injecting data.");
+      qWarning("Failed to read font JSON");
+      fontJson = "{}";
     }
-  } 
+  }
 
-  html.replace("%DATA%", json);
+  if (!html.contains("%DATA%")) {
+    qWarning("HTML does not contain DATA placeholder — "
+             "no data will be injected.");
+  } else {
+    html.replace("%DATA%", json);
+    if(chartDebug) qDebug("Found DATA placeholder, injecting data.");
+  }
 
-  if(_dir == "force") {
+  QUrl baseUrl = (_dir == "plot")
+      ? QUrl::fromLocalFile(QCoreApplication::applicationDirPath()
+                            + "/../dynamic/plot/")
+      : QUrl("file:///")
+  ;
+
+  QByteArray encoded = fontJson.toUtf8().toBase64();
+  html.replace("%FONTJSON%", QString::fromUtf8(encoded));
+
+  if(_dir == "force" && d3ForceChartView) {
     RLD(d3ForceChartView,d3ForceChartWindow);
-  } else if(_dir == "ternary") {
+  } else if(_dir == "ternary" && d3ForceChartView) {
     RLD(d3TernaryChartView,d3TernaryChartWindow);
-  } else if(_dir == "plot") {
+  } else if(_dir == "plot" && d3PlotChartView) {
     RLD(d3PlotChartView,d3PlotChartWindow);
   } else {
-    qDebug("Unknown _dir value");
+    qDebug("Unknown or uninitialized chart view for _dir = %s", 
+           qPrintable(_dir));
   }
 }
 #undef RLD

@@ -93,14 +93,20 @@ def generate_graph(n=100, loop_ipc=False, loop_power=False,
     create_ordered_links("power", reverse=False, loop=loop_power, label="power")
     create_ordered_links("area", reverse=False, loop=loop_area, label="area")
 
-    # Add this near the end of generate_graph(), before returning:
     min_ipc, max_ipc = min(ipc_vals), max(ipc_vals)
     for node in nodes:
-        ipc_scaled = (node["ipc"] - min_ipc) / (max_ipc - min_ipc) if max_ipc > min_ipc else 0
-        area_scaled = (node["area"] - min_area) / (max_area - min_area) if max_area > min_area else 0
-        power_scaled = (node["power"] - min_power) / (max_power - min_power) if max_power > min_power else 0
+
+        ipc_scaled = (node["ipc"] - min_ipc) / (max_ipc - min_ipc) \
+                     if max_ipc > min_ipc else 0
+
+        area_scaled = (node["area"] - min_area) / (max_area - min_area) \
+                     if max_area > min_area else 0
+
+        power_scaled = (node["power"] - min_power) / (max_power - min_power) \
+                     if max_power > min_power else 0
     
-        total = ipc_scaled + area_scaled + power_scaled + 1e-9  # avoid div-by-zero
+        total = ipc_scaled + area_scaled + power_scaled + 1e-9
+
         node["ternary"] = {
             "ipc": round(ipc_scaled / total, 4),
             "area": round(area_scaled / total, 4),
@@ -109,98 +115,9 @@ def generate_graph(n=100, loop_ipc=False, loop_power=False,
 
     return {"nodes": nodes, "links": links}
 
-# Example usage
 with open("chart_data.json", "w") as f:
-    json.dump(generate_graph(250, loop_ipc=True, loop_power=True, loop_area=True, scale_factor=1.5), f, indent=2)
+    json.dump(generate_graph(100, loop_ipc=True,
+                                  loop_power=True,
+                                  loop_area=True,
+                                  scale_factor=1.5), f, indent=2)
 
-
-
-#import json
-#import random
-#
-#def generate_graph(n=100, loop_ipc=False, loop_power=False, loop_area=False):
-#    nodes = []
-#    links = []
-#
-#    # Generate random nodes
-#    for i in range(n):
-#        node_id = f"N{i}"
-#        ipc   = round(random.uniform(0.1, 10.0), 3)
-#
-#        area  = round(ipc * random.uniform(0.8, 1.2), 2)
-#        power = round(ipc * random.uniform(0.7, 1.5), 2)
-#        score = round(ipc - (area * power + 1e-5), 4)
-#
-#        nodes.append({
-#            "id": node_id,
-#            "ipc": ipc,
-#            "area": area,
-#            "power": power,
-#            "score": score
-#        })
-#
-#    # Helper function to create links by sorted key
-#    def create_ordered_links(key, reverse=False, loop=False, label=None):
-#        sorted_nodes = sorted(nodes, key=lambda x: x[key], reverse=reverse)
-#        for i in range(len(sorted_nodes) - 1):
-#            links.append({
-#                "source": sorted_nodes[i]["id"],
-#                "target": sorted_nodes[i + 1]["id"],
-#                "label": label
-#            })
-#        if loop:
-#            links.append({
-#                "source": sorted_nodes[-1]["id"],
-#                "target": sorted_nodes[0]["id"],
-#                "label": label
-#            })
-#
-#    # Link by highest IPC to next
-#    create_ordered_links("ipc", reverse=True, loop=loop_ipc, label="ipc")
-#
-#    # Link by lowest power to next
-#    create_ordered_links("power", reverse=False, loop=loop_power, label="power")
-#
-#    # Link by lowest area to next
-#    create_ordered_links("area", reverse=False, loop=loop_area, label="area")
-#
-#    return {"nodes": nodes, "links": links}
-#
-## Write to file
-#with open("force_data.json", "w") as f:
-#    json.dump(generate_graph(100, loop_ipc=True, 
-#                                  loop_power=True,
-#                                  loop_area=True), f, indent=2)
-#
-#
-##import json
-##import random
-##
-##def generate_graph(n=100):
-##    nodes = []
-##    links = []
-##
-##    for i in range(n):
-##        node_id = f"N{i}"
-##        ipc = round(random.uniform(0.1, 10.0), 3)
-##        area = round(ipc * random.uniform(0.8, 1.2), 2)
-##        power = round(ipc * random.uniform(0.7, 1.5), 2)
-##        score = round(ipc / (area * power + 1e-5), 4)
-##
-##        nodes.append({
-##            "id": node_id,
-##            "ipc": ipc,
-##            "area": area,
-##            "power": power,
-##            "score": score
-##        })
-##
-##    for _ in range(n * 2):
-##        src, tgt = random.sample(nodes, 2)
-##        links.append({"source": src["id"], "target": tgt["id"]})
-##
-##    return {"nodes": nodes, "links": links}
-##
-##with open("force_data.json", "w") as f:
-##    json.dump(generate_graph(100), f, indent=2)
-##

@@ -4,16 +4,8 @@
   <meta charset="utf-8">
   <title>3D Scatter Plot</title>
   <style>
-    html, body, canvas {
-      margin: 0;
-      overflow: hidden;
-      cursor: pointer !important;
-    }
-
-    canvas {
-      display: block;
-    }
-
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
     #tooltip {
       position: absolute;
       background: rgba(0,0,0,0.75);
@@ -26,7 +18,7 @@
     }
   </style>
 
-  <!-- Required Three.js and helper scripts -->
+  <!-- All necessary scripts, fully specified -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/build/three.min.js"></script>
   <script src="https://unpkg.com/three@0.145.0/examples/js/controls/OrbitControls.js"></script>
   <script src="https://unpkg.com/three@0.145.0/examples/js/loaders/FontLoader.js"></script>
@@ -56,17 +48,17 @@ try {
   const size = 12;
   const divisions = 12;
   const gridXZ = new THREE.GridHelper(size, divisions);
-  gridXZ.position.set(size / 2, 0, size / 2);
+  gridXZ.position.set(size/2, 0, size/2);
   scene.add(gridXZ);
 
   const gridXY = new THREE.GridHelper(size, divisions);
   gridXY.rotation.x = Math.PI / 2;
-  gridXY.position.set(size / 2, size / 2, 0);
+  gridXY.position.set(size/2, size/2, 0);
   scene.add(gridXY);
 
   const gridYZ = new THREE.GridHelper(size, divisions);
   gridYZ.rotation.z = Math.PI / 2;
-  gridYZ.position.set(0, size / 2, size / 2);
+  gridYZ.position.set(0, size/2, size/2);
   scene.add(gridYZ);
 
   const tooltip = document.getElementById('tooltip');
@@ -124,10 +116,10 @@ try {
 
   const pi_d2 = Math.PI / 2;
 
-  // x, y, z, rx, ry, rz
-  addLabel("IPC",   10.5, 0.5,  0.0,  0,      0,     0);
-  addLabel("Area",   0.0, 10.5, 2.0,  0, pi_d2,     0);
-  addLabel("Power",  0.5, 0.5, 11.5, -pi_d2, pi_d2, pi_d2);
+  //                 x     y     z   rx      ry    rz
+  addLabel("IPC",  10.5,  0.5,  0.0, 0,      0,     0);
+  addLabel("Area",  0.0, 10.5,  2.0, 0,      pi_d2, 0);
+  addLabel("Power", 0.5,  0.5, 11.5, -pi_d2, pi_d2, pi_d2);
 
   function animate() {
     requestAnimationFrame(animate);
@@ -151,9 +143,11 @@ try {
       }
       tooltip.style.left = mouseX + 10 + 'px';
       tooltip.style.top = mouseY + 10 + 'px';
+      document.body.style.cursor = 'pointer';
     } else {
       INTERSECTED = null;
       tooltip.style.display = 'none';
+      document.body.style.cursor = 'crosshair';
     }
 
     renderer.render(scene, camera);
@@ -161,7 +155,7 @@ try {
 
   animate();
 } catch (e) {
-  console.error("ERROR: Could not parse or inject data:", e);
+  console.error("❌ ERROR: Could not parse or inject data:", e);
 }
 </script>
 </body>

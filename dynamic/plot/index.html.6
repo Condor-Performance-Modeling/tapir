@@ -4,16 +4,8 @@
   <meta charset="utf-8">
   <title>3D Scatter Plot</title>
   <style>
-    html, body, canvas {
-      margin: 0;
-      overflow: hidden;
-      cursor: pointer !important;
-    }
-
-    canvas {
-      display: block;
-    }
-
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; cursor: crosshair; }
     #tooltip {
       position: absolute;
       background: rgba(0,0,0,0.75);
@@ -25,12 +17,10 @@
       border-radius: 4px;
     }
   </style>
-
-  <!-- Required Three.js and helper scripts -->
+  <!-- Compatible scripts for Qt5 -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/build/three.min.js"></script>
   <script src="https://unpkg.com/three@0.145.0/examples/js/controls/OrbitControls.js"></script>
   <script src="https://unpkg.com/three@0.145.0/examples/js/loaders/FontLoader.js"></script>
-  <script src="https://unpkg.com/three@0.145.0/examples/js/geometries/TextGeometry.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js"></script>
 </head>
 <body>
@@ -38,7 +28,7 @@
 <script>
 try {
   const data = %DATA%;
-  const fontData = JSON.parse(atob(`%FONTJSON%`));
+  console.log("Data injected:", data);
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xe0e0e0);
@@ -53,22 +43,26 @@ try {
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.update();
 
+  // Grids on all 3 planes
   const size = 12;
+  const size_d2 = size / 2;
   const divisions = 12;
+
   const gridXZ = new THREE.GridHelper(size, divisions);
-  gridXZ.position.set(size / 2, 0, size / 2);
+  gridXZ.position.set(size_d2, 0, size_d2);
   scene.add(gridXZ);
 
   const gridXY = new THREE.GridHelper(size, divisions);
   gridXY.rotation.x = Math.PI / 2;
-  gridXY.position.set(size / 2, size / 2, 0);
+  gridXY.position.set(size_d2, size_d2, 0);
   scene.add(gridXY);
 
   const gridYZ = new THREE.GridHelper(size, divisions);
   gridYZ.rotation.z = Math.PI / 2;
-  gridYZ.position.set(0, size / 2, size / 2);
+  gridYZ.position.set(0, size_d2, size_d2);
   scene.add(gridYZ);
 
+  // Tooltip setup
   const tooltip = document.getElementById('tooltip');
   let mouseX = 0, mouseY = 0;
   const raycaster = new THREE.Raycaster();
@@ -82,9 +76,11 @@ try {
     mouseY = event.clientY;
   });
 
+  // Scale ranges
   const maxIpc = Math.max(...data.nodes.map(d => d.ipc));
   const maxArea = Math.max(...data.nodes.map(d => d.area));
   const maxPower = Math.max(...data.nodes.map(d => d.power));
+
   const scoreRange = d3.extent(data.nodes.map(d => d.score));
   const colorScale = d3.scaleSequential(d3.interpolateViridis).domain(scoreRange);
 
@@ -107,9 +103,20 @@ try {
 
   scene.add(pointGroup);
 
-  const font = new THREE.Font(fontData);
+//  // Bounding box around all data
+//  const box = new THREE.BoxHelper(pointGroup, 0xff0000);
+//  scene.add(box);
 
-  function addLabel(text, x, y, z, rx = 0, ry = 0, rz = 0) {
+  // Axis labels
+
+const loader = new THREE.FontLoader();
+const fileLoader = new THREE.FileLoader();
+
+fileLoader.load('helvetiker_regular.typeface.json', function (response) {
+  const font = loader.parse(JSON.parse(response));
+  console.log("✅ Font loaded manually via FileLoader");
+
+  function addLabel(text, x, y, z) {
     const textGeo = new THREE.TextGeometry(text, {
       font: font,
       size: 0.6,
@@ -118,17 +125,35 @@ try {
     const mat = new THREE.MeshBasicMaterial({ color: 0x000000 });
     const mesh = new THREE.Mesh(textGeo, mat);
     mesh.position.set(x, y, z);
-    mesh.rotation.set(rx, ry, rz);
     scene.add(mesh);
   }
 
-  const pi_d2 = Math.PI / 2;
+  addLabel("IPC",   10.5, 0.5, 0.5);
+  addLabel("Area",  0.5, 10.5, 0.5);
+  addLabel("Power", 0.5, 0.5, 10.5);
+});
 
-  // x, y, z, rx, ry, rz
-  addLabel("IPC",   10.5, 0.5,  0.0,  0,      0,     0);
-  addLabel("Area",   0.0, 10.5, 2.0,  0, pi_d2,     0);
-  addLabel("Power",  0.5, 0.5, 11.5, -pi_d2, pi_d2, pi_d2);
+//  const loader = new THREE.FontLoader();
+//  loader.load('helvetiker_regular.typeface.json', function (font) {
+//    function addLabel(text, x, y, z) {
+//      const textGeo = new THREE.TextGeometry(text, {
+//        font: font,
+//        size: 0.6,
+//        height: 0.05
+//      });
+//      const mat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+//      const mesh = new THREE.Mesh(textGeo, mat);
+//      mesh.position.set(x, y, z);
+//      scene.add(mesh);
+//    }
+//
+//    console.log("Font loaded for labels");
+//    addLabel("IPC",   11, 0, 0);
+//    addLabel("Area",  0, 11, 0);
+//    addLabel("Power", 0, 0, 11);
+//  });
 
+  // Main render loop
   function animate() {
     requestAnimationFrame(animate);
     controls.update();
@@ -151,15 +176,18 @@ try {
       }
       tooltip.style.left = mouseX + 10 + 'px';
       tooltip.style.top = mouseY + 10 + 'px';
+      document.body.style.cursor = 'pointer';
     } else {
       INTERSECTED = null;
       tooltip.style.display = 'none';
+      document.body.style.cursor = 'crosshair';
     }
 
     renderer.render(scene, camera);
   }
 
   animate();
+
 } catch (e) {
   console.error("ERROR: Could not parse or inject data:", e);
 }

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>3D Scatter Plot</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+    #tooltip {
+      position: absolute;
+      background: rgba(0,0,0,0.75);
+      color: white;
+      padding: 5px;
+      font-size: 12px;
+      pointer-events: none;
+      display: none;
+      border-radius: 4px;
+    }
+  </style>
+  <!-- ✅ Compatible Three.js + OrbitControls + D3 for Qt5 -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.145.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js"></script>
+</head>
+<body>
+<div id="tooltip"></div>
+<script>
+  console.log("==== JavaScript is executing ====");
+
+  try {
+    const data = %DATA%;
+    console.log("✅ Data injected successfully:", data);
+    console.log("Data nodes:", data.nodes);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf0f0f0);
+
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(10, 10, 10);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.update();
+
+    // Axes
+    const axesHelper = new THREE.AxesHelper(10);
+    scene.add(axesHelper);
+
+    // Tooltip div
+    const tooltip = document.getElementById('tooltip');
+    let mouseX = 0, mouseY = 0;
+
+    // Raycaster
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let INTERSECTED = null;
+
+    window.addEventListener('mousemove', function (event) {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+    });
+
+    // Normalize position scale
+    const maxIpc = Math.max(...data.nodes.map(d => d.ipc));
+    const maxArea = Math.max(...data.nodes.map(d => d.area));
+    const maxPower = Math.max(...data.nodes.map(d => d.power));
+    console.log("maxIpc:", maxIpc, "maxArea:", maxArea, "maxPower:", maxPower);
+
+    // Color scale
+    const scoreRange = d3.extent(data.nodes.map(d => d.score));
+    const colorScale = d3.scaleSequential(d3.interpolateViridis)
+                         .domain(scoreRange);
+
+    const geometry = new THREE.SphereGeometry(0.1, 16, 16);
+    const points = [];
+
+    data.nodes.forEach(node => {
+      const color = new THREE.Color(colorScale(node.score));
+      const material = new THREE.MeshBasicMaterial({ color });
+      const sphere = new THREE.Mesh(geometry, material);
+
+      sphere.position.set(
+        node.ipc / maxIpc * 10,
+        node.area / maxArea * 10,
+        node.power / maxPower * 10
+      );
+
+      sphere.userData = node;
+      scene.add(sphere);
+      points.push(sphere);
+    });
+
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(points);
+
+      if (intersects.length > 0) {
+        if (INTERSECTED !== intersects[0].object) {
+          INTERSECTED = intersects[0].object;
+          const d = INTERSECTED.userData;
+          tooltip.innerHTML =
+            `<b>${d.id}</b><br>` +
+            `IPC: ${d.ipc}<br>` +
+            `Area: ${d.area}<br>` +
+            `Power: ${d.power}<br>` +
+            `Score: ${d.score}`;
+          tooltip.style.display = 'block';
+        }
+        tooltip.style.left = mouseX + 10 + 'px';
+        tooltip.style.top = mouseY + 10 + 'px';
+      } else {
+        INTERSECTED = null;
+        tooltip.style.display = 'none';
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+  } catch (e) {
+    console.error("❌ ERROR: Could not parse or inject data:", e);
+  }
+</script>
+</body>
+</html>
+
