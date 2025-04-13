@@ -152,19 +152,23 @@ void Tapir::createDataActions()
 {
   ATR("+createDataActions");
 
-  ACT(aDataForceChart,"","Force",   this,sDataForceChart);
-  ACT(aDataTernaryChart,"","Ternary",   this,sDataTernaryChart);
-  ACT(aDataPlotChart, "","2D Plots",this,sDataPlotChart);
+  ACT(aDataForceChart,"","Force Chart",
+      this,sDataForceChart);
+  ACT(aDataTernaryChart,"","Ternary Chart",
+      this,sDataTernaryChart);
+  ACT(aDataScatter3dChart, "","3d Scatter Chart",
+      this,sDataScatter3dChart);
+  ACT(aDataBubbleChart, "","Bubble Chart",
+      this,sDataBubbleChart);
 
-//  actname = new QAction(QIcon(rpath+icon),str,this);
   ACT(aDataReloadForceData,  "","Reload Force Data",
       this,sDataReloadForceData);
-
   ACT(aDataReloadTernaryData,"","Reload Ternary Data",
       this,sDataReloadTernaryData);
-
-  ACT(aDataReloadPlotData,"","2D Plots",
-      this,sDataReloadPlotData);
+  ACT(aDataReloadScatter3dData,"","Reload 3d Scatter Data",
+      this,sDataReloadScatter3dData);
+  ACT(aDataReloadBubbleData,"","Reload Bubble Data",
+      this,sDataReloadBubbleData);
 
   ATR("-createDataActions");
 }

@@ -235,11 +235,13 @@ private slots:
 
   void sDataForceChart();
   void sDataTernaryChart();
-  void sDataPlotChart();
+  void sDataScatter3dChart();
+  void sDataBubbleChart();
 
   void sDataReloadForceData();
   void sDataReloadTernaryData();
-  void sDataReloadPlotData();
+  void sDataReloadScatter3dData();
+  void sDataReloadBubbleData();
 
   void sToolsGenerateRtl();
   void sToolsCompileRtl();
@@ -319,9 +321,11 @@ private:
 
   QAction *aViewHandleColState,*aViewHandleRowState;
 
-  QAction *aDataForceChart, *aDataTernaryChart, *aDataPlotChart;
+  QAction *aDataForceChart, *aDataTernaryChart, 
+          *aDataScatter3dChart, *aDataBubbleChart;
 
-  QAction *aDataReloadForceData,*aDataReloadTernaryData,*aDataReloadPlotData;
+  QAction *aDataReloadForceData,*aDataReloadTernaryData,
+          *aDataReloadScatter3dData,*aDataReloadBubbleData;
 
   QAction *aHelpHelp,*aHelpAbout,*aHelpDebug,*aDebug;
 
@@ -355,11 +359,13 @@ private:
 
   QWebEngineView *d3ForceChartView = nullptr,
                  *d3TernaryChartView = nullptr,
-                 *d3PlotChartView = nullptr;
+                 *d3Scatter3dChartView = nullptr,
+                 *d3BubbleChartView = nullptr;
 
   QWidget *d3ForceChartWindow = nullptr,
           *d3TernaryChartWindow = nullptr,
-          *d3PlotChartWindow = nullptr;
+          *d3Scatter3dChartWindow = nullptr,
+          *d3BubbleChartWindow = nullptr;
 
   QWebEngineView* devToolsView = nullptr;
   bool chartDebug{false};

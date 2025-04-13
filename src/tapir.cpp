@@ -56,8 +56,9 @@ Tapir::Tapir(int _ac,char **_av)
   //Debug
   QString fn = ":/data/dev.json";
   openJsonFile(fn);
+  sDataBubbleChart();
 //  sDataTernaryChart();
-  sDataPlotChart();
+//  sDataScatter3dChart();
 //  sDataForceChart();
  
   ATR("-ctor");

@@ -71,30 +71,89 @@ void Tapir::sDataTernaryChart()
 }
 // -------------------------------------------------------------------
 // -------------------------------------------------------------------
-void Tapir::sDataPlotChart()
+void Tapir::sDataScatter3dChart()
 {
-  if (!d3PlotChartWindow) {
-    d3PlotChartWindow = new QWidget;
-    d3PlotChartWindow->setWindowTitle("3D Plot Chart");
-    d3PlotChartWindow->setAttribute(Qt::WA_DeleteOnClose);
+  if (!d3Scatter3dChartWindow) {
+    d3Scatter3dChartWindow = new QWidget;
+    d3Scatter3dChartWindow->setWindowTitle("3d Scatter Chart");
+    d3Scatter3dChartWindow->setAttribute(Qt::WA_DeleteOnClose);
 
-    d3PlotChartView = new QWebEngineView;
-    QVBoxLayout* layout = new QVBoxLayout(d3PlotChartWindow);
-    layout->addWidget(d3PlotChartView);
+    d3Scatter3dChartView = new QWebEngineView;
+    QVBoxLayout* layout = new QVBoxLayout(d3Scatter3dChartWindow);
+    layout->addWidget(d3Scatter3dChartView);
 
-    d3PlotChartWindow->resize(1000, 700);
+    d3Scatter3dChartWindow->resize(1000, 700);
   }
 
-  QString _dir = "plot";
+  QString _dir = "scatter3d";
   reloadChartData(_dir);
 
   if(devToolsView) {
-    d3PlotChartView->page()->setDevToolsPage(devToolsView->page());
+    d3Scatter3dChartView->page()->setDevToolsPage(devToolsView->page());
   }
  
-  d3PlotChartWindow->show();
-  d3PlotChartWindow->raise();
-  d3PlotChartWindow->activateWindow();
+  d3Scatter3dChartWindow->show();
+  d3Scatter3dChartWindow->raise();
+  d3Scatter3dChartWindow->activateWindow();
+}
+// -------------------------------------------------------------------
+// -------------------------------------------------------------------
+// mainwindow.cpp or any slot file where you want to show the chart
+#include <QWebEngineView>
+#include <QWebChannel>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include "tapir.h"
+
+void Tapir::sDataBubbleChart() {
+  QWebEngineView* webView = new QWebEngineView;
+  webView->setMinimumSize(800, 600);
+
+  QString _dir = "bubble";
+  QString htmlPath = QCoreApplication::applicationDirPath()
+                   + "/../dynamic/" + _dir + "/index.html";
+  QString dataPath = QCoreApplication::applicationDirPath()
+                   + "/../dynamic/" + _dir + "/data.json";
+
+  // Load HTML template
+  QFile htmlFile(htmlPath);
+  if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning("Unable to open HTML file: %s", qPrintable(htmlPath));
+    return;
+  }
+  QString html = QString::fromUtf8(htmlFile.readAll());
+  htmlFile.close();
+
+  // Load JSON data
+  QFile jsonFile(dataPath);
+  if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning("Unable to open JSON data file: %s", qPrintable(dataPath));
+    return;
+  }
+  QByteArray jsonBytes = jsonFile.readAll();
+  jsonFile.close();
+
+  QJsonParseError parseError;
+  QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonBytes, &parseError);
+  if (parseError.error != QJsonParseError::NoError) {
+    qWarning("JSON parse error: %s", qPrintable(parseError.errorString()));
+    return;
+  }
+
+  QString json = QString::fromUtf8(jsonDoc.toJson(QJsonDocument::Compact));
+
+  // Replace placeholder
+  if (!html.contains("%DATA%")) {
+    qWarning("HTML does not contain DATA placeholder — no data will be injected.");
+  } else {
+    html.replace("%DATA%", json);
+    if (chartDebug) qDebug("Found DATA placeholder, injecting data.");
+  }
+
+  webView->setHtml(html, QUrl::fromLocalFile(htmlPath));
+  webView->show();
 }
 // -------------------------------------------------------------------
 // -------------------------------------------------------------------
@@ -112,9 +171,16 @@ void Tapir::sDataReloadTernaryData()
 }
 // -------------------------------------------------------------------
 // -------------------------------------------------------------------
-void Tapir::sDataReloadPlotData()
+void Tapir::sDataReloadScatter3dData()
 {
-  QString _dir = "plot";
+  QString _dir = "scatter3d";
+  reloadChartData(_dir);
+}
+// -------------------------------------------------------------------
+// -------------------------------------------------------------------
+void Tapir::sDataReloadBubbleData()
+{
+  QString _dir = "bubble";
   reloadChartData(_dir);
 }
 // -------------------------------------------------------------------
@@ -126,7 +192,7 @@ void Tapir::reloadChartData(QString &_dir)
   QString dataPath = QCoreApplication::applicationDirPath() 
                    + "/../dynamic/"+_dir+"/data.json";
   QString fontPath = QCoreApplication::applicationDirPath()
-                   + "/../dynamic/plot/helvetiker_regular.typeface.json";
+                   + "/../dynamic/scatter3d/helvetiker_regular.typeface.json";
 
   QFile htmlFile(htmlPath);
   QFile jsonFile(dataPath);
@@ -150,7 +216,7 @@ void Tapir::reloadChartData(QString &_dir)
 
   QString fontJson;
 
-  if(_dir == "plot") {
+  if(_dir == "scatter3d") {
     if (fontFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
       fontJson = QString::fromUtf8(fontFile.readAll());
       fontFile.close();
@@ -168,9 +234,9 @@ void Tapir::reloadChartData(QString &_dir)
     if(chartDebug) qDebug("Found DATA placeholder, injecting data.");
   }
 
-  QUrl baseUrl = (_dir == "plot")
+  QUrl baseUrl = (_dir == "scatter3d")
       ? QUrl::fromLocalFile(QCoreApplication::applicationDirPath()
-                            + "/../dynamic/plot/")
+                            + "/../dynamic/scatter3d/")
       : QUrl("file:///")
   ;
 
@@ -181,8 +247,10 @@ void Tapir::reloadChartData(QString &_dir)
     RLD(d3ForceChartView,d3ForceChartWindow);
   } else if(_dir == "ternary" && d3ForceChartView) {
     RLD(d3TernaryChartView,d3TernaryChartWindow);
-  } else if(_dir == "plot" && d3PlotChartView) {
-    RLD(d3PlotChartView,d3PlotChartWindow);
+  } else if(_dir == "scatter3d" && d3Scatter3dChartView) {
+    RLD(d3Scatter3dChartView,d3Scatter3dChartWindow);
+  } else if(_dir == "bubble" && d3BubbleChartView) {
+    RLD(d3BubbleChartView,d3BubbleChartWindow);
   } else {
     qDebug("Unknown or uninitialized chart view for _dir = %s", 
            qPrintable(_dir));
