@@ -124,18 +124,40 @@ void Tapir::insertCheckBox(Spreadsheet *sheet,int row,int col,
   cb->setEnabled(true);
   sheet->setCellWidget(row, col, cb);
 }
-// -------------------------------------------------------------------
-// -------------------------------------------------------------------
+//// -------------------------------------------------------------------
+//// -------------------------------------------------------------------
+//void Tapir::insertButtonGroup(Spreadsheet *sheet, int row, int col,
+//                              bool exclusive,
+//                              const QString &selectedValue,
+//                              const QString &csvOptions)
+//{
+//  QWidget *container = new QWidget(sheet);
+//  QHBoxLayout *layout = new QHBoxLayout(container);
+//  layout->setContentsMargins(0, 0, 0, 0);
+//
+//  QButtonGroup *buttonGroup = new QButtonGroup(container);
+//  buttonGroup->setExclusive(exclusive);
+//
+//  QStringList options = csvOptions.split(",", Qt::SkipEmptyParts);
+//
+//  for(const QString &option : options) {
+//    QString label = option.trimmed();
+//    QRadioButton *rb = new QRadioButton(label, container);
+//    if(label.compare(selectedValue.trimmed(), Qt::CaseInsensitive) == 0) {
+//      rb->setChecked(true);
+//    }
+//    layout->addWidget(rb);
+//    buttonGroup->addButton(rb);
+//  }
+//
+//  container->setLayout(layout);
+//  sheet->setCellWidget(row, col, container);
+//}
 void Tapir::insertButtonGroup(Spreadsheet *sheet, int row, int col,
                               bool exclusive,
                               const QString &selectedValue,
                               const QString &csvOptions)
 {
-
-//if(!exclusive) {
-//  cout<<"HERE "<<selectedValue.toStdString()<<endl;
-//}
-
   QWidget *container = new QWidget(sheet);
   QHBoxLayout *layout = new QHBoxLayout(container);
   layout->setContentsMargins(0, 0, 0, 0);
@@ -144,11 +166,32 @@ void Tapir::insertButtonGroup(Spreadsheet *sheet, int row, int col,
   buttonGroup->setExclusive(exclusive);
 
   QStringList options = csvOptions.split(",", Qt::SkipEmptyParts);
+  QVector<bool> selected(options.size(), false);
 
-  for(const QString &option : options) {
-    QString label = option.trimmed();
+  // Parse selectedValue for non-exclusive case
+  if (!exclusive && !selectedValue.trimmed().isEmpty()) {
+    QStringList entries = selectedValue.split(",", Qt::SkipEmptyParts);
+    for (const QString &entry : entries) {
+      QStringList parts = entry.split(":");
+      if (parts.size() == 2) {
+        bool ok1 = false, ok2 = false;
+        int index = parts[0].toInt(&ok1);
+        int checked = parts[1].toInt(&ok2);
+        if (ok1 && ok2 && index >= 0 && index < selected.size()) {
+          selected[index] = (checked != 0);
+        }
+      }
+    }
+  }
+
+  for (int i = 0; i < options.size(); ++i) {
+    QString label = options[i].trimmed();
     QRadioButton *rb = new QRadioButton(label, container);
-    if(label.compare(selectedValue.trimmed(), Qt::CaseInsensitive) == 0) {
+    if (!exclusive && selected[i]) {
+      rb->setChecked(true);
+    } else if (exclusive &&
+         label.compare(selectedValue.trimmed(), Qt::CaseInsensitive) == 0)
+    {
       rb->setChecked(true);
     }
     layout->addWidget(rb);
@@ -158,6 +201,7 @@ void Tapir::insertButtonGroup(Spreadsheet *sheet, int row, int col,
   container->setLayout(layout);
   sheet->setCellWidget(row, col, container);
 }
+
 // -------------------------------------------------------------------
 // -------------------------------------------------------------------
 void Tapir::assignRowData(QStringList &rowData,const QJsonObject &attr)
@@ -201,6 +245,7 @@ QJsonDocument Tapir::generateJson()
 {
   QJsonObject root;
   QJsonArray categories;
+  int widgetCol  = paramSheetColNames.indexOf("Widget");
 
   for (int i = 0; i < centralTabs->count(); ++i) {
     Spreadsheet *sheet = qobject_cast<Spreadsheet *>(centralTabs->widget(i));
@@ -235,13 +280,33 @@ QJsonDocument Tapir::generateJson()
 
         if (QCheckBox *cb = qobject_cast<QCheckBox *>(cellWidget)) {
           value = cb->isChecked() ? "yes" : "no";
-        } else if (QWidget *container = qobject_cast<QWidget *>(cellWidget)) {
-          QStringList selected;
-          for (QRadioButton *rb : container->findChildren<QRadioButton *>()) {
-            if (rb->isChecked()) selected << rb->text();
-          }
-          value = selected.join(", ");
-        } else {
+//        } else if (QWidget *container = qobject_cast<QWidget *>(cellWidget)) {
+//          QStringList selected;
+//          for (QRadioButton *rb : container->findChildren<QRadioButton *>()) {
+//            if (rb->isChecked()) selected << rb->text();
+//          }
+//          value = selected.join(", ");
+//        } else {
+} else if (QWidget *container = qobject_cast<QWidget *>(cellWidget)) {
+  QString widgetType = sheet->item(row, widgetCol)->text().trimmed().toLower();
+
+  if (widgetType == "nbg") {
+    QStringList encoded;
+    const auto buttons = container->findChildren<QRadioButton *>();
+    for (int i = 0; i < buttons.size(); ++i) {
+      const QRadioButton *rb = buttons[i];
+      encoded << QString::number(i) + ":" + (rb->isChecked() ? "1" : "0");
+    }
+    value = encoded.join(",");
+  } else { // treat as ebg or fallback
+    QStringList selected;
+    for (QRadioButton *rb : container->findChildren<QRadioButton *>()) {
+      if (rb->isChecked()) selected << rb->text();
+    }
+    value = selected.join(", ");
+  }
+} else {
+
           QTableWidgetItem *item = sheet->item(row, col);
           if (item) value = item->text();
         }

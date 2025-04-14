@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>D3 Bubble Chart with Micro Sliders</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0 20px;
+    }
+
+    svg {
+      width: 100%;
+      height: 600px;
+    }
+
+    .axis-label {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .tooltip {
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 8px;
+      pointer-events: none;
+      font-size: 13px;
+      border-radius: 4px;
+      box-shadow: 0px 0px 8px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 50px;
+      max-width: 600px;
+    }
+
+    .slider-row label {
+      width: 60px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .slider-round {
+      flex-grow: 1;
+      max-width: 480px;
+      margin-right: 10px;
+    }
+
+    /* Micro slider style */
+    .slider-round .noUi-target {
+      height: 4px;
+      border-radius: 2px;
+      background: #ddd;
+    }
+
+    .slider-round .noUi-connect {
+      background: #1976d2;
+      border-radius: 2px;
+    }
+
+    .slider-round .noUi-handle {
+      width: 12px;
+      height: 12px;
+      top: -4px;
+      background: white;
+      border: 1px solid #1976d2;
+      border-radius: 50%;
+      box-shadow: none;
+      cursor: pointer;
+    }
+
+    .slider-round .noUi-tooltip {
+      font-size: 11px;
+      padding: 1px 5px;
+      background: #333;
+      color: white;
+      border-radius: 3px;
+      bottom: 130%;
+    }
+
+    .slider-round .noUi-pips .noUi-value {
+      font-size: 10px;
+      color: #888;
+    }
+
+    .slider-round .noUi-marker {
+      height: 6px;
+    }
+  </style>
+</head>
+<body>
+  <!-- h3>Swarm Chart Filter</h3 -->
+
+  <div class="slider-row">
+    <label for="ipcSlider">IPC</label>
+    <div id="ipcSlider" class="slider-round"></div>
+  </div>
+  <div class="slider-row">
+    <label for="areaSlider">Area</label>
+    <div id="areaSlider" class="slider-round"></div>
+  </div>
+  <div class="slider-row">
+    <label for="powerSlider">Power</label>
+    <div id="powerSlider" class="slider-round"></div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <script>
+    const margin = { top: 40, right: 40, bottom: 60, left: 80 },
+          width = 960 - margin.left - margin.right,
+          height = 600 - margin.top - margin.bottom;
+
+    const svg = d3.select("body")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const tooltip = d3.select("#tooltip");
+
+    const data = %DATA%;
+    data.forEach(d => d.area_bucket = Math.floor(d.area));
+
+    const areaBuckets = Array.from(new Set(data.map(d => d.area_bucket))).sort((a, b) => a - b);
+    const xScale = d3.scalePoint()
+      .domain(areaBuckets)
+      .range([0, width])
+      .padding(0.5);
+
+    const yExtent = d3.extent(data, d => d.power);
+    const yScale = d3.scaleLinear().domain(yExtent).range([height, 0]);
+
+    const ipcExtent = d3.extent(data, d => d.ipc);
+    const areaExtent = d3.extent(data, d => d.area);
+    const powerExtent = d3.extent(data, d => d.power);
+
+    const rScale = d3.scaleSqrt().domain(ipcExtent).range([3, 40]);
+    const color = d3.scaleOrdinal().domain(areaBuckets).range(d3.schemeTableau10.concat(d3.schemeSet3));
+    const jitterAmount = xScale.step() * 0.4;
+
+    // Axes
+    svg.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(xScale).tickFormat(d => `${d}–${d + 1}`));
+
+    svg.append("g").call(d3.axisLeft(yScale));
+
+    svg.append("text")
+      .attr("class", "axis-label")
+      .attr("x", width / 2)
+      .attr("y", height + margin.bottom - 10)
+      .attr("text-anchor", "middle")
+      .text("relative area");
+
+    svg.append("text")
+      .attr("class", "axis-label")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -height / 2)
+      .attr("y", -margin.left + 20)
+      .attr("text-anchor", "middle")
+      .text("relative power");
+
+    const circles = svg.selectAll("circle")
+      .data(data)
+      .enter()
+      .append("circle")
+        .attr("cx", d => xScale(d.area_bucket))
+        .attr("cy", d => yScale(d.power))
+        .attr("r", d => rScale(d.ipc))
+        .attr("fill", d => color(d.area_bucket))
+        .attr("stroke", "black")
+        .attr("opacity", 0.85)
+        .on("mouseover", (event, d) => {
+          tooltip.transition().style("opacity", 1);
+          tooltip.html(`
+            <strong>${d.id}</strong><br/>
+            IPC: ${d.ipc}<br/>
+            Area: ${d.area}<br/>
+            Power: ${d.power}
+          `);
+        })
+        .on("mousemove", event => {
+          tooltip.style("left", (event.pageX + 10) + "px")
+                 .style("top", (event.pageY - 30) + "px");
+        })
+        .on("mouseout", () => {
+          tooltip.transition().style("opacity", 0);
+        });
+
+    // Animate into jittered positions
+    circles.transition()
+      .duration(1000)
+      .ease(d3.easeCubicOut)
+      .attr("cx", d => xScale(d.area_bucket) + (Math.random() - 0.5) * jitterAmount);
+
+    // Slider helper
+    function makeSlider(id, [min, max], start, step, callback) {
+      noUiSlider.create(document.getElementById(id), {
+        start: start,
+        connect: true,
+        step: step,
+        range: { min: min, max: max },
+        tooltips: [true, true],
+        behaviour: 'drag',
+        pips: { mode: 'range', density: 4 }
+      }).on('update', callback);
+    }
+
+    let filter = {
+      ipc: [...ipcExtent],
+      area: [...areaExtent],
+      power: [...powerExtent]
+    };
+
+    function updateFilterDisplay() {
+      circles.attr("fill", d => {
+        const inside =
+          d.ipc >= filter.ipc[0] && d.ipc <= filter.ipc[1] &&
+          d.area >= filter.area[0] && d.area <= filter.area[1] &&
+          d.power >= filter.power[0] && d.power <= filter.power[1];
+        return inside ? color(d.area_bucket) : "#ccc";
+      });
+    }
+
+    // Create sliders
+    makeSlider("ipcSlider", ipcExtent, ipcExtent, 0.01, values => {
+      filter.ipc = values.map(parseFloat);
+      updateFilterDisplay();
+    });
+    makeSlider("areaSlider", areaExtent, areaExtent, 0.01, values => {
+      filter.area = values.map(parseFloat);
+      updateFilterDisplay();
+    });
+    makeSlider("powerSlider", powerExtent, powerExtent, 0.01, values => {
+      filter.power = values.map(parseFloat);
+      updateFilterDisplay();
+    });
+  </script>
+</body>
+</html>
+

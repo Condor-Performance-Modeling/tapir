@@ -1,0 +1,2706 @@
+{
+  "nodes": [
+    {
+      "id": "N0",
+      "ipc": 2.117,
+      "area": 2.25,
+      "power": 2.19,
+      "score": 2.0759,
+      "ternary": {
+        "ipc": 0.3804,
+        "area": 0.3431,
+        "power": 0.2764
+      }
+    },
+    {
+      "id": "N1",
+      "ipc": 9.102,
+      "area": 9.93,
+      "power": 8.5,
+      "score": 8.3352,
+      "ternary": {
+        "ipc": 0.3888,
+        "area": 0.3567,
+        "power": 0.2545
+      }
+    },
+    {
+      "id": "N2",
+      "ipc": 0.835,
+      "area": 0.73,
+      "power": 0.89,
+      "score": 0.8306,
+      "ternary": {
+        "ipc": 0.4017,
+        "area": 0.2953,
+        "power": 0.303
+      }
+    },
+    {
+      "id": "N3",
+      "ipc": 3.851,
+      "area": 3.6,
+      "power": 2.96,
+      "score": 3.7589,
+      "ternary": {
+        "ipc": 0.4312,
+        "area": 0.3389,
+        "power": 0.23
+      }
+    },
+    {
+      "id": "N4",
+      "ipc": 5.838,
+      "area": 6.99,
+      "power": 6.82,
+      "score": 5.4086,
+      "ternary": {
+        "ipc": 0.3531,
+        "area": 0.3567,
+        "power": 0.2903
+      }
+    },
+    {
+      "id": "N5",
+      "ipc": 1.967,
+      "area": 1.67,
+      "power": 2.59,
+      "score": 1.9312,
+      "ternary": {
+        "ipc": 0.3774,
+        "area": 0.2684,
+        "power": 0.3542
+      }
+    },
+    {
+      "id": "N6",
+      "ipc": 5.841,
+      "area": 5.66,
+      "power": 8.37,
+      "score": 5.4143,
+      "ternary": {
+        "ipc": 0.3538,
+        "area": 0.2881,
+        "power": 0.3581
+      }
+    },
+    {
+      "id": "N7",
+      "ipc": 0.128,
+      "area": 0.11,
+      "power": 0.13,
+      "score": 0.128,
+      "ternary": {
+        "ipc": 0.0,
+        "area": 0.0,
+        "power": 0.0
+      }
+    },
+    {
+      "id": "N8",
+      "ipc": 9.766,
+      "area": 8.7,
+      "power": 12.73,
+      "score": 8.7562,
+      "ternary": {
+        "ipc": 0.3753,
+        "area": 0.2804,
+        "power": 0.3443
+      }
+    },
+    {
+      "id": "N9",
+      "ipc": 0.69,
+      "area": 0.71,
+      "power": 0.77,
+      "score": 0.6864,
+      "ternary": {
+        "ipc": 0.3712,
+        "area": 0.3322,
+        "power": 0.2966
+      }
+    },
+    {
+      "id": "N10",
+      "ipc": 3.2,
+      "area": 3.09,
+      "power": 4.75,
+      "score": 3.0716,
+      "ternary": {
+        "ipc": 0.3486,
+        "area": 0.2835,
+        "power": 0.3679
+      }
+    },
+    {
+      "id": "N11",
+      "ipc": 1.872,
+      "area": 1.56,
+      "power": 1.71,
+      "score": 1.8506,
+      "ternary": {
+        "ipc": 0.4287,
+        "area": 0.2988,
+        "power": 0.2725
+      }
+    },
+    {
+      "id": "N12",
+      "ipc": 9.853,
+      "area": 8.43,
+      "power": 13.99,
+      "score": 8.7771,
+      "ternary": {
+        "ipc": 0.368,
+        "area": 0.264,
+        "power": 0.368
+      }
+    },
+    {
+      "id": "N13",
+      "ipc": 0.201,
+      "area": 0.23,
+      "power": 0.27,
+      "score": 0.2008,
+      "ternary": {
+        "ipc": 0.2685,
+        "area": 0.3701,
+        "power": 0.3614
+      }
+    },
+    {
+      "id": "N14",
+      "ipc": 5.787,
+      "area": 6.74,
+      "power": 6.62,
+      "score": 5.3856,
+      "ternary": {
+        "ipc": 0.3588,
+        "area": 0.3524,
+        "power": 0.2887
+      }
+    },
+    {
+      "id": "N15",
+      "ipc": 6.214,
+      "area": 5.58,
+      "power": 8.06,
+      "score": 5.8093,
+      "ternary": {
+        "ipc": 0.3748,
+        "area": 0.2824,
+        "power": 0.3427
+      }
+    },
+    {
+      "id": "N16",
+      "ipc": 7.435,
+      "area": 6.3,
+      "power": 10.98,
+      "score": 6.8084,
+      "ternary": {
+        "ipc": 0.3634,
+        "area": 0.2581,
+        "power": 0.3786
+      }
+    },
+    {
+      "id": "N17",
+      "ipc": 5.457,
+      "area": 5.29,
+      "power": 5.97,
+      "score": 5.1748,
+      "ternary": {
+        "ipc": 0.387,
+        "area": 0.3154,
+        "power": 0.2976
+      }
+    },
+    {
+      "id": "N18",
+      "ipc": 9.794,
+      "area": 11.71,
+      "power": 12.8,
+      "score": 8.4228,
+      "ternary": {
+        "ipc": 0.3418,
+        "area": 0.3439,
+        "power": 0.3143
+      }
+    },
+    {
+      "id": "N19",
+      "ipc": 7.978,
+      "area": 7.76,
+      "power": 9.76,
+      "score": 7.2907,
+      "ternary": {
+        "ipc": 0.3734,
+        "area": 0.3051,
+        "power": 0.3214
+      }
+    },
+    {
+      "id": "N20",
+      "ipc": 2.538,
+      "area": 3.04,
+      "power": 2.75,
+      "score": 2.4664,
+      "ternary": {
+        "ipc": 0.3594,
+        "area": 0.3664,
+        "power": 0.2742
+      }
+    },
+    {
+      "id": "N21",
+      "ipc": 7.419,
+      "area": 6.93,
+      "power": 8.05,
+      "score": 6.9151,
+      "ternary": {
+        "ipc": 0.3927,
+        "area": 0.308,
+        "power": 0.2993
+      }
+    },
+    {
+      "id": "N22",
+      "ipc": 5.936,
+      "area": 5.47,
+      "power": 8.29,
+      "score": 5.5279,
+      "ternary": {
+        "ipc": 0.3624,
+        "area": 0.2804,
+        "power": 0.3572
+      }
+    },
+    {
+      "id": "N23",
+      "ipc": 2.512,
+      "area": 2.94,
+      "power": 3.05,
+      "score": 2.4349,
+      "ternary": {
+        "ipc": 0.3503,
+        "area": 0.3486,
+        "power": 0.3011
+      }
+    },
+    {
+      "id": "N24",
+      "ipc": 8.453,
+      "area": 7.3,
+      "power": 12.04,
+      "score": 7.6541,
+      "ternary": {
+        "ipc": 0.3666,
+        "area": 0.2654,
+        "power": 0.368
+      }
+    },
+    {
+      "id": "N25",
+      "ipc": 6.615,
+      "area": 5.6,
+      "power": 9.78,
+      "score": 6.1207,
+      "ternary": {
+        "ipc": 0.3632,
+        "area": 0.2577,
+        "power": 0.3791
+      }
+    },
+    {
+      "id": "N26",
+      "ipc": 0.921,
+      "area": 1.05,
+      "power": 1.23,
+      "score": 0.9114,
+      "ternary": {
+        "ipc": 0.337,
+        "area": 0.3349,
+        "power": 0.328
+      }
+    },
+    {
+      "id": "N27",
+      "ipc": 5.955,
+      "area": 5.37,
+      "power": 4.33,
+      "score": 5.7489,
+      "ternary": {
+        "ipc": 0.442,
+        "area": 0.3345,
+        "power": 0.2235
+      }
+    },
+    {
+      "id": "N28",
+      "ipc": 4.379,
+      "area": 4.07,
+      "power": 5.96,
+      "score": 4.1636,
+      "ternary": {
+        "ipc": 0.3645,
+        "area": 0.2847,
+        "power": 0.3508
+      }
+    },
+    {
+      "id": "N29",
+      "ipc": 9.522,
+      "area": 10.95,
+      "power": 9.87,
+      "score": 8.5369,
+      "ternary": {
+        "ipc": 0.3711,
+        "area": 0.359,
+        "power": 0.27
+      }
+    },
+    {
+      "id": "N30",
+      "ipc": 2.009,
+      "area": 1.83,
+      "power": 2.35,
+      "score": 1.9734,
+      "ternary": {
+        "ipc": 0.3854,
+        "area": 0.2954,
+        "power": 0.3192
+      }
+    },
+    {
+      "id": "N31",
+      "ipc": 8.711,
+      "area": 9.29,
+      "power": 11.45,
+      "score": 7.7415,
+      "ternary": {
+        "ipc": 0.3543,
+        "area": 0.3177,
+        "power": 0.3279
+      }
+    },
+    {
+      "id": "N32",
+      "ipc": 2.71,
+      "area": 3.04,
+      "power": 2.83,
+      "score": 2.6362,
+      "ternary": {
+        "ipc": 0.3724,
+        "area": 0.3543,
+        "power": 0.2733
+      }
+    },
+    {
+      "id": "N33",
+      "ipc": 2.544,
+      "area": 2.39,
+      "power": 2.95,
+      "score": 2.484,
+      "ternary": {
+        "ipc": 0.3831,
+        "area": 0.3031,
+        "power": 0.3138
+      }
+    },
+    {
+      "id": "N34",
+      "ipc": 6.486,
+      "area": 6.29,
+      "power": 6.62,
+      "score": 6.1118,
+      "ternary": {
+        "ipc": 0.3951,
+        "area": 0.3219,
+        "power": 0.283
+      }
+    },
+    {
+      "id": "N35",
+      "ipc": 3.518,
+      "area": 3.74,
+      "power": 4.14,
+      "score": 3.3822,
+      "ternary": {
+        "ipc": 0.3666,
+        "area": 0.3291,
+        "power": 0.3043
+      }
+    },
+    {
+      "id": "N36",
+      "ipc": 5.475,
+      "area": 5.98,
+      "power": 7.09,
+      "score": 5.0938,
+      "ternary": {
+        "ipc": 0.3529,
+        "area": 0.3248,
+        "power": 0.3223
+      }
+    },
+    {
+      "id": "N37",
+      "ipc": 2.683,
+      "area": 3.06,
+      "power": 3.29,
+      "score": 2.596,
+      "ternary": {
+        "ipc": 0.3526,
+        "area": 0.3413,
+        "power": 0.306
+      }
+    },
+    {
+      "id": "N38",
+      "ipc": 1.198,
+      "area": 1.02,
+      "power": 1.73,
+      "score": 1.1844,
+      "ternary": {
+        "ipc": 0.362,
+        "area": 0.2581,
+        "power": 0.3798
+      }
+    },
+    {
+      "id": "N39",
+      "ipc": 0.225,
+      "area": 0.22,
+      "power": 0.28,
+      "score": 0.2248,
+      "ternary": {
+        "ipc": 0.3294,
+        "area": 0.3132,
+        "power": 0.3574
+      }
+    },
+    {
+      "id": "N40",
+      "ipc": 2.173,
+      "area": 1.9,
+      "power": 2.72,
+      "score": 2.1297,
+      "ternary": {
+        "ipc": 0.3813,
+        "area": 0.2798,
+        "power": 0.3389
+      }
+    },
+    {
+      "id": "N41",
+      "ipc": 9.349,
+      "area": 9.88,
+      "power": 13.2,
+      "score": 8.1576,
+      "ternary": {
+        "ipc": 0.3469,
+        "area": 0.3081,
+        "power": 0.345
+      }
+    },
+    {
+      "id": "N42",
+      "ipc": 9.132,
+      "area": 9.68,
+      "power": 10.05,
+      "score": 8.2463,
+      "ternary": {
+        "ipc": 0.3754,
+        "area": 0.3345,
+        "power": 0.2902
+      }
+    },
+    {
+      "id": "N43",
+      "ipc": 6.808,
+      "area": 7.66,
+      "power": 5.04,
+      "score": 6.4621,
+      "ternary": {
+        "ipc": 0.406,
+        "area": 0.3847,
+        "power": 0.2094
+      }
+    },
+    {
+      "id": "N44",
+      "ipc": 7.476,
+      "area": 6.73,
+      "power": 9.61,
+      "score": 6.8905,
+      "ternary": {
+        "ipc": 0.3759,
+        "area": 0.2839,
+        "power": 0.3402
+      }
+    },
+    {
+      "id": "N45",
+      "ipc": 5.772,
+      "area": 5.6,
+      "power": 6.07,
+      "score": 5.4678,
+      "ternary": {
+        "ipc": 0.3916,
+        "area": 0.3193,
+        "power": 0.2891
+      }
+    },
+    {
+      "id": "N46",
+      "ipc": 9.163,
+      "area": 7.98,
+      "power": 9.1,
+      "score": 8.5044,
+      "ternary": {
+        "ipc": 0.4121,
+        "area": 0.3009,
+        "power": 0.287
+      }
+    },
+    {
+      "id": "N47",
+      "ipc": 0.73,
+      "area": 0.87,
+      "power": 0.83,
+      "score": 0.725,
+      "ternary": {
+        "ipc": 0.3479,
+        "area": 0.3682,
+        "power": 0.2839
+      }
+    },
+    {
+      "id": "N48",
+      "ipc": 2.003,
+      "area": 1.61,
+      "power": 2.99,
+      "score": 1.963,
+      "ternary": {
+        "ipc": 0.3648,
+        "area": 0.2447,
+        "power": 0.3905
+      }
+    },
+    {
+      "id": "N49",
+      "ipc": 9.817,
+      "area": 9.85,
+      "power": 10.47,
+      "score": 8.8774,
+      "ternary": {
+        "ipc": 0.3859,
+        "area": 0.3252,
+        "power": 0.2889
+      }
+    },
+    {
+      "id": "N50",
+      "ipc": 6.963,
+      "area": 6.85,
+      "power": 10.23,
+      "score": 6.3279,
+      "ternary": {
+        "ipc": 0.3492,
+        "area": 0.2887,
+        "power": 0.3621
+      }
+    },
+    {
+      "id": "N51",
+      "ipc": 8.6,
+      "area": 8.28,
+      "power": 12.01,
+      "score": 7.6945,
+      "ternary": {
+        "ipc": 0.3581,
+        "area": 0.2895,
+        "power": 0.3524
+      }
+    },
+    {
+      "id": "N52",
+      "ipc": 8.994,
+      "area": 8.83,
+      "power": 12.66,
+      "score": 7.9746,
+      "ternary": {
+        "ipc": 0.3551,
+        "area": 0.2928,
+        "power": 0.3521
+      }
+    },
+    {
+      "id": "N53",
+      "ipc": 8.287,
+      "area": 9.67,
+      "power": 11.66,
+      "score": 7.2586,
+      "ternary": {
+        "ipc": 0.3363,
+        "area": 0.3303,
+        "power": 0.3334
+      }
+    },
+    {
+      "id": "N54",
+      "ipc": 8.93,
+      "area": 10.08,
+      "power": 7.7,
+      "score": 8.2259,
+      "ternary": {
+        "ipc": 0.3917,
+        "area": 0.3719,
+        "power": 0.2364
+      }
+    },
+    {
+      "id": "N55",
+      "ipc": 2.064,
+      "area": 2.07,
+      "power": 3.05,
+      "score": 2.0106,
+      "ternary": {
+        "ipc": 0.344,
+        "area": 0.292,
+        "power": 0.364
+      }
+    },
+    {
+      "id": "N56",
+      "ipc": 9.335,
+      "area": 10.26,
+      "power": 7.36,
+      "score": 8.6503,
+      "ternary": {
+        "ipc": 0.404,
+        "area": 0.3734,
+        "power": 0.2226
+      }
+    },
+    {
+      "id": "N57",
+      "ipc": 2.335,
+      "area": 2.34,
+      "power": 3.21,
+      "score": 2.2709,
+      "ternary": {
+        "ipc": 0.3538,
+        "area": 0.2997,
+        "power": 0.3465
+      }
+    },
+    {
+      "id": "N58",
+      "ipc": 7.477,
+      "area": 7.35,
+      "power": 8.05,
+      "score": 6.942,
+      "ternary": {
+        "ipc": 0.3873,
+        "area": 0.3199,
+        "power": 0.2929
+      }
+    },
+    {
+      "id": "N59",
+      "ipc": 1.934,
+      "area": 1.99,
+      "power": 1.41,
+      "score": 1.9115,
+      "ternary": {
+        "ipc": 0.4219,
+        "area": 0.3682,
+        "power": 0.2098
+      }
+    },
+    {
+      "id": "N60",
+      "ipc": 9.529,
+      "area": 9.45,
+      "power": 6.81,
+      "score": 8.9469,
+      "ternary": {
+        "ipc": 0.4289,
+        "area": 0.3572,
+        "power": 0.2138
+      }
+    },
+    {
+      "id": "N61",
+      "ipc": 2.635,
+      "area": 2.62,
+      "power": 2.66,
+      "score": 2.5758,
+      "ternary": {
+        "ipc": 0.3925,
+        "area": 0.3295,
+        "power": 0.278
+      }
+    },
+    {
+      "id": "N62",
+      "ipc": 1.3,
+      "area": 1.1,
+      "power": 1.44,
+      "score": 1.2879,
+      "ternary": {
+        "ipc": 0.4012,
+        "area": 0.2841,
+        "power": 0.3147
+      }
+    },
+    {
+      "id": "N63",
+      "ipc": 5.052,
+      "area": 4.5,
+      "power": 6.93,
+      "score": 4.7735,
+      "ternary": {
+        "ipc": 0.3681,
+        "area": 0.2752,
+        "power": 0.3567
+      }
+    },
+    {
+      "id": "N64",
+      "ipc": 9.637,
+      "area": 10.29,
+      "power": 6.78,
+      "score": 9.0054,
+      "ternary": {
+        "ipc": 0.4187,
+        "area": 0.3758,
+        "power": 0.2055
+      }
+    },
+    {
+      "id": "N65",
+      "ipc": 7.797,
+      "area": 8.3,
+      "power": 7.78,
+      "score": 7.2125,
+      "ternary": {
+        "ipc": 0.3853,
+        "area": 0.345,
+        "power": 0.2697
+      }
+    },
+    {
+      "id": "N66",
+      "ipc": 3.653,
+      "area": 4.06,
+      "power": 3.84,
+      "score": 3.5163,
+      "ternary": {
+        "ipc": 0.3734,
+        "area": 0.3508,
+        "power": 0.2758
+      }
+    },
+    {
+      "id": "N67",
+      "ipc": 2.311,
+      "area": 1.9,
+      "power": 2.51,
+      "score": 2.2713,
+      "ternary": {
+        "ipc": 0.4078,
+        "area": 0.2803,
+        "power": 0.3119
+      }
+    },
+    {
+      "id": "N68",
+      "ipc": 9.663,
+      "area": 11.12,
+      "power": 13.72,
+      "score": 8.267,
+      "ternary": {
+        "ipc": 0.3369,
+        "area": 0.3262,
+        "power": 0.3369
+      }
+    },
+    {
+      "id": "N69",
+      "ipc": 4.861,
+      "area": 5.72,
+      "power": 5.54,
+      "score": 4.5778,
+      "ternary": {
+        "ipc": 0.3577,
+        "area": 0.3554,
+        "power": 0.2869
+      }
+    },
+    {
+      "id": "N70",
+      "ipc": 9.416,
+      "area": 8.4,
+      "power": 6.95,
+      "score": 8.8885,
+      "ternary": {
+        "ipc": 0.4418,
+        "area": 0.3306,
+        "power": 0.2276
+      }
+    },
+    {
+      "id": "N71",
+      "ipc": 6.723,
+      "area": 7.52,
+      "power": 7.46,
+      "score": 6.2163,
+      "ternary": {
+        "ipc": 0.3674,
+        "area": 0.3461,
+        "power": 0.2865
+      }
+    },
+    {
+      "id": "N72",
+      "ipc": 3.886,
+      "area": 3.87,
+      "power": 2.93,
+      "score": 3.7878,
+      "ternary": {
+        "ipc": 0.4234,
+        "area": 0.3552,
+        "power": 0.2214
+      }
+    },
+    {
+      "id": "N73",
+      "ipc": 9.505,
+      "area": 9.85,
+      "power": 12.44,
+      "score": 8.3864,
+      "ternary": {
+        "ipc": 0.3582,
+        "area": 0.3119,
+        "power": 0.3299
+      }
+    },
+    {
+      "id": "N74",
+      "ipc": 2.155,
+      "area": 1.8,
+      "power": 2.94,
+      "score": 2.1107,
+      "ternary": {
+        "ipc": 0.3743,
+        "area": 0.2616,
+        "power": 0.3641
+      }
+    },
+    {
+      "id": "N75",
+      "ipc": 6.756,
+      "area": 5.98,
+      "power": 5.41,
+      "score": 6.4668,
+      "ternary": {
+        "ipc": 0.4345,
+        "area": 0.3226,
+        "power": 0.2429
+      }
+    },
+    {
+      "id": "N76",
+      "ipc": 8.027,
+      "area": 6.53,
+      "power": 9.97,
+      "score": 7.4376,
+      "ternary": {
+        "ipc": 0.3913,
+        "area": 0.2666,
+        "power": 0.342
+      }
+    },
+    {
+      "id": "N77",
+      "ipc": 7.91,
+      "area": 8.6,
+      "power": 5.77,
+      "score": 7.4633,
+      "ternary": {
+        "ipc": 0.4127,
+        "area": 0.3775,
+        "power": 0.2099
+      }
+    },
+    {
+      "id": "N78",
+      "ipc": 4.408,
+      "area": 3.93,
+      "power": 3.81,
+      "score": 4.2768,
+      "ternary": {
+        "ipc": 0.4253,
+        "area": 0.3182,
+        "power": 0.2566
+      }
+    },
+    {
+      "id": "N79",
+      "ipc": 4.576,
+      "area": 4.91,
+      "power": 4.35,
+      "score": 4.387,
+      "ternary": {
+        "ipc": 0.389,
+        "area": 0.352,
+        "power": 0.259
+      }
+    },
+    {
+      "id": "N80",
+      "ipc": 2.912,
+      "area": 2.35,
+      "power": 3.04,
+      "score": 2.8512,
+      "ternary": {
+        "ipc": 0.4153,
+        "area": 0.2801,
+        "power": 0.3046
+      }
+    },
+    {
+      "id": "N81",
+      "ipc": 5.029,
+      "area": 4.13,
+      "power": 5.02,
+      "score": 4.8456,
+      "ternary": {
+        "ipc": 0.4188,
+        "area": 0.288,
+        "power": 0.2932
+      }
+    },
+    {
+      "id": "N82",
+      "ipc": 3.95,
+      "area": 3.4,
+      "power": 4.25,
+      "score": 3.8235,
+      "ternary": {
+        "ipc": 0.4035,
+        "area": 0.2912,
+        "power": 0.3052
+      }
+    },
+    {
+      "id": "N83",
+      "ipc": 0.219,
+      "area": 0.23,
+      "power": 0.3,
+      "score": 0.2188,
+      "ternary": {
+        "ipc": 0.2927,
+        "area": 0.3236,
+        "power": 0.3837
+      }
+    },
+    {
+      "id": "N84",
+      "ipc": 2.914,
+      "area": 2.76,
+      "power": 4.18,
+      "score": 2.8139,
+      "ternary": {
+        "ipc": 0.3549,
+        "area": 0.283,
+        "power": 0.362
+      }
+    },
+    {
+      "id": "N85",
+      "ipc": 7.638,
+      "area": 7.32,
+      "power": 5.77,
+      "score": 7.2586,
+      "ternary": {
+        "ipc": 0.4289,
+        "area": 0.3452,
+        "power": 0.226
+      }
+    },
+    {
+      "id": "N86",
+      "ipc": 4.729,
+      "area": 5.03,
+      "power": 6.0,
+      "score": 4.4596,
+      "ternary": {
+        "ipc": 0.3582,
+        "area": 0.3211,
+        "power": 0.3207
+      }
+    },
+    {
+      "id": "N87",
+      "ipc": 0.358,
+      "area": 0.41,
+      "power": 0.46,
+      "score": 0.3571,
+      "ternary": {
+        "ipc": 0.3226,
+        "area": 0.3527,
+        "power": 0.3247
+      }
+    },
+    {
+      "id": "N88",
+      "ipc": 9.318,
+      "area": 9.74,
+      "power": 12.21,
+      "score": 8.2327,
+      "ternary": {
+        "ipc": 0.357,
+        "area": 0.3137,
+        "power": 0.3293
+      }
+    },
+    {
+      "id": "N89",
+      "ipc": 5.466,
+      "area": 6.09,
+      "power": 6.72,
+      "score": 5.0983,
+      "ternary": {
+        "ipc": 0.3565,
+        "area": 0.3348,
+        "power": 0.3088
+      }
+    },
+    {
+      "id": "N90",
+      "ipc": 3.896,
+      "area": 3.73,
+      "power": 3.1,
+      "score": 3.7957,
+      "ternary": {
+        "ipc": 0.424,
+        "area": 0.3415,
+        "power": 0.2345
+      }
+    },
+    {
+      "id": "N91",
+      "ipc": 0.546,
+      "area": 0.53,
+      "power": 0.71,
+      "score": 0.5437,
+      "ternary": {
+        "ipc": 0.3551,
+        "area": 0.2991,
+        "power": 0.3457
+      }
+    },
+    {
+      "id": "N92",
+      "ipc": 8.884,
+      "area": 7.72,
+      "power": 9.69,
+      "score": 8.2052,
+      "ternary": {
+        "ipc": 0.4008,
+        "area": 0.2921,
+        "power": 0.3071
+      }
+    },
+    {
+      "id": "N93",
+      "ipc": 9.478,
+      "area": 11.01,
+      "power": 9.13,
+      "score": 8.5628,
+      "ternary": {
+        "ipc": 0.377,
+        "area": 0.3684,
+        "power": 0.2546
+      }
+    },
+    {
+      "id": "N94",
+      "ipc": 7.126,
+      "area": 6.9,
+      "power": 6.88,
+      "score": 6.6984,
+      "ternary": {
+        "ipc": 0.4016,
+        "area": 0.3267,
+        "power": 0.2718
+      }
+    },
+    {
+      "id": "N95",
+      "ipc": 7.952,
+      "area": 7.7,
+      "power": 5.64,
+      "score": 7.5618,
+      "ternary": {
+        "ipc": 0.4334,
+        "area": 0.3525,
+        "power": 0.2142
+      }
+    },
+    {
+      "id": "N96",
+      "ipc": 1.436,
+      "area": 1.4,
+      "power": 1.32,
+      "score": 1.4217,
+      "ternary": {
+        "ipc": 0.4056,
+        "area": 0.3354,
+        "power": 0.259
+      }
+    },
+    {
+      "id": "N97",
+      "ipc": 2.386,
+      "area": 2.65,
+      "power": 2.79,
+      "score": 2.323,
+      "ternary": {
+        "ipc": 0.3611,
+        "area": 0.3405,
+        "power": 0.2984
+      }
+    },
+    {
+      "id": "N98",
+      "ipc": 3.968,
+      "area": 4.73,
+      "power": 3.89,
+      "score": 3.8059,
+      "ternary": {
+        "ipc": 0.371,
+        "area": 0.3742,
+        "power": 0.2549
+      }
+    },
+    {
+      "id": "N99",
+      "ipc": 2.913,
+      "area": 2.95,
+      "power": 3.36,
+      "score": 2.8274,
+      "ternary": {
+        "ipc": 0.3747,
+        "area": 0.3204,
+        "power": 0.3049
+      }
+    }
+  ],
+  "links": [
+    {
+      "source": "N12",
+      "target": "N49",
+      "label": "ipc"
+    },
+    {
+      "source": "N49",
+      "target": "N18",
+      "label": "ipc"
+    },
+    {
+      "source": "N18",
+      "target": "N8",
+      "label": "ipc"
+    },
+    {
+      "source": "N8",
+      "target": "N68",
+      "label": "ipc"
+    },
+    {
+      "source": "N68",
+      "target": "N64",
+      "label": "ipc"
+    },
+    {
+      "source": "N64",
+      "target": "N60",
+      "label": "ipc"
+    },
+    {
+      "source": "N60",
+      "target": "N29",
+      "label": "ipc"
+    },
+    {
+      "source": "N29",
+      "target": "N73",
+      "label": "ipc"
+    },
+    {
+      "source": "N73",
+      "target": "N93",
+      "label": "ipc"
+    },
+    {
+      "source": "N93",
+      "target": "N70",
+      "label": "ipc"
+    },
+    {
+      "source": "N70",
+      "target": "N41",
+      "label": "ipc"
+    },
+    {
+      "source": "N41",
+      "target": "N56",
+      "label": "ipc"
+    },
+    {
+      "source": "N56",
+      "target": "N88",
+      "label": "ipc"
+    },
+    {
+      "source": "N88",
+      "target": "N46",
+      "label": "ipc"
+    },
+    {
+      "source": "N46",
+      "target": "N42",
+      "label": "ipc"
+    },
+    {
+      "source": "N42",
+      "target": "N1",
+      "label": "ipc"
+    },
+    {
+      "source": "N1",
+      "target": "N52",
+      "label": "ipc"
+    },
+    {
+      "source": "N52",
+      "target": "N54",
+      "label": "ipc"
+    },
+    {
+      "source": "N54",
+      "target": "N92",
+      "label": "ipc"
+    },
+    {
+      "source": "N92",
+      "target": "N31",
+      "label": "ipc"
+    },
+    {
+      "source": "N31",
+      "target": "N51",
+      "label": "ipc"
+    },
+    {
+      "source": "N51",
+      "target": "N24",
+      "label": "ipc"
+    },
+    {
+      "source": "N24",
+      "target": "N53",
+      "label": "ipc"
+    },
+    {
+      "source": "N53",
+      "target": "N76",
+      "label": "ipc"
+    },
+    {
+      "source": "N76",
+      "target": "N19",
+      "label": "ipc"
+    },
+    {
+      "source": "N19",
+      "target": "N95",
+      "label": "ipc"
+    },
+    {
+      "source": "N95",
+      "target": "N77",
+      "label": "ipc"
+    },
+    {
+      "source": "N77",
+      "target": "N65",
+      "label": "ipc"
+    },
+    {
+      "source": "N65",
+      "target": "N85",
+      "label": "ipc"
+    },
+    {
+      "source": "N85",
+      "target": "N58",
+      "label": "ipc"
+    },
+    {
+      "source": "N58",
+      "target": "N44",
+      "label": "ipc"
+    },
+    {
+      "source": "N44",
+      "target": "N16",
+      "label": "ipc"
+    },
+    {
+      "source": "N16",
+      "target": "N21",
+      "label": "ipc"
+    },
+    {
+      "source": "N21",
+      "target": "N94",
+      "label": "ipc"
+    },
+    {
+      "source": "N94",
+      "target": "N50",
+      "label": "ipc"
+    },
+    {
+      "source": "N50",
+      "target": "N43",
+      "label": "ipc"
+    },
+    {
+      "source": "N43",
+      "target": "N75",
+      "label": "ipc"
+    },
+    {
+      "source": "N75",
+      "target": "N71",
+      "label": "ipc"
+    },
+    {
+      "source": "N71",
+      "target": "N25",
+      "label": "ipc"
+    },
+    {
+      "source": "N25",
+      "target": "N34",
+      "label": "ipc"
+    },
+    {
+      "source": "N34",
+      "target": "N15",
+      "label": "ipc"
+    },
+    {
+      "source": "N15",
+      "target": "N27",
+      "label": "ipc"
+    },
+    {
+      "source": "N27",
+      "target": "N22",
+      "label": "ipc"
+    },
+    {
+      "source": "N22",
+      "target": "N6",
+      "label": "ipc"
+    },
+    {
+      "source": "N6",
+      "target": "N4",
+      "label": "ipc"
+    },
+    {
+      "source": "N4",
+      "target": "N14",
+      "label": "ipc"
+    },
+    {
+      "source": "N14",
+      "target": "N45",
+      "label": "ipc"
+    },
+    {
+      "source": "N45",
+      "target": "N36",
+      "label": "ipc"
+    },
+    {
+      "source": "N36",
+      "target": "N89",
+      "label": "ipc"
+    },
+    {
+      "source": "N89",
+      "target": "N17",
+      "label": "ipc"
+    },
+    {
+      "source": "N17",
+      "target": "N63",
+      "label": "ipc"
+    },
+    {
+      "source": "N63",
+      "target": "N81",
+      "label": "ipc"
+    },
+    {
+      "source": "N81",
+      "target": "N69",
+      "label": "ipc"
+    },
+    {
+      "source": "N69",
+      "target": "N86",
+      "label": "ipc"
+    },
+    {
+      "source": "N86",
+      "target": "N79",
+      "label": "ipc"
+    },
+    {
+      "source": "N79",
+      "target": "N78",
+      "label": "ipc"
+    },
+    {
+      "source": "N78",
+      "target": "N28",
+      "label": "ipc"
+    },
+    {
+      "source": "N28",
+      "target": "N98",
+      "label": "ipc"
+    },
+    {
+      "source": "N98",
+      "target": "N82",
+      "label": "ipc"
+    },
+    {
+      "source": "N82",
+      "target": "N90",
+      "label": "ipc"
+    },
+    {
+      "source": "N90",
+      "target": "N72",
+      "label": "ipc"
+    },
+    {
+      "source": "N72",
+      "target": "N3",
+      "label": "ipc"
+    },
+    {
+      "source": "N3",
+      "target": "N66",
+      "label": "ipc"
+    },
+    {
+      "source": "N66",
+      "target": "N35",
+      "label": "ipc"
+    },
+    {
+      "source": "N35",
+      "target": "N10",
+      "label": "ipc"
+    },
+    {
+      "source": "N10",
+      "target": "N84",
+      "label": "ipc"
+    },
+    {
+      "source": "N84",
+      "target": "N99",
+      "label": "ipc"
+    },
+    {
+      "source": "N99",
+      "target": "N80",
+      "label": "ipc"
+    },
+    {
+      "source": "N80",
+      "target": "N32",
+      "label": "ipc"
+    },
+    {
+      "source": "N32",
+      "target": "N37",
+      "label": "ipc"
+    },
+    {
+      "source": "N37",
+      "target": "N61",
+      "label": "ipc"
+    },
+    {
+      "source": "N61",
+      "target": "N33",
+      "label": "ipc"
+    },
+    {
+      "source": "N33",
+      "target": "N20",
+      "label": "ipc"
+    },
+    {
+      "source": "N20",
+      "target": "N23",
+      "label": "ipc"
+    },
+    {
+      "source": "N23",
+      "target": "N97",
+      "label": "ipc"
+    },
+    {
+      "source": "N97",
+      "target": "N57",
+      "label": "ipc"
+    },
+    {
+      "source": "N57",
+      "target": "N67",
+      "label": "ipc"
+    },
+    {
+      "source": "N67",
+      "target": "N40",
+      "label": "ipc"
+    },
+    {
+      "source": "N40",
+      "target": "N74",
+      "label": "ipc"
+    },
+    {
+      "source": "N74",
+      "target": "N0",
+      "label": "ipc"
+    },
+    {
+      "source": "N0",
+      "target": "N55",
+      "label": "ipc"
+    },
+    {
+      "source": "N55",
+      "target": "N30",
+      "label": "ipc"
+    },
+    {
+      "source": "N30",
+      "target": "N48",
+      "label": "ipc"
+    },
+    {
+      "source": "N48",
+      "target": "N5",
+      "label": "ipc"
+    },
+    {
+      "source": "N5",
+      "target": "N59",
+      "label": "ipc"
+    },
+    {
+      "source": "N59",
+      "target": "N11",
+      "label": "ipc"
+    },
+    {
+      "source": "N11",
+      "target": "N96",
+      "label": "ipc"
+    },
+    {
+      "source": "N96",
+      "target": "N62",
+      "label": "ipc"
+    },
+    {
+      "source": "N62",
+      "target": "N38",
+      "label": "ipc"
+    },
+    {
+      "source": "N38",
+      "target": "N26",
+      "label": "ipc"
+    },
+    {
+      "source": "N26",
+      "target": "N2",
+      "label": "ipc"
+    },
+    {
+      "source": "N2",
+      "target": "N47",
+      "label": "ipc"
+    },
+    {
+      "source": "N47",
+      "target": "N9",
+      "label": "ipc"
+    },
+    {
+      "source": "N9",
+      "target": "N91",
+      "label": "ipc"
+    },
+    {
+      "source": "N91",
+      "target": "N87",
+      "label": "ipc"
+    },
+    {
+      "source": "N87",
+      "target": "N39",
+      "label": "ipc"
+    },
+    {
+      "source": "N39",
+      "target": "N83",
+      "label": "ipc"
+    },
+    {
+      "source": "N83",
+      "target": "N13",
+      "label": "ipc"
+    },
+    {
+      "source": "N13",
+      "target": "N7",
+      "label": "ipc"
+    },
+    {
+      "source": "N7",
+      "target": "N12",
+      "label": "ipc"
+    },
+    {
+      "source": "N7",
+      "target": "N13",
+      "label": "power"
+    },
+    {
+      "source": "N13",
+      "target": "N39",
+      "label": "power"
+    },
+    {
+      "source": "N39",
+      "target": "N83",
+      "label": "power"
+    },
+    {
+      "source": "N83",
+      "target": "N87",
+      "label": "power"
+    },
+    {
+      "source": "N87",
+      "target": "N91",
+      "label": "power"
+    },
+    {
+      "source": "N91",
+      "target": "N9",
+      "label": "power"
+    },
+    {
+      "source": "N9",
+      "target": "N47",
+      "label": "power"
+    },
+    {
+      "source": "N47",
+      "target": "N2",
+      "label": "power"
+    },
+    {
+      "source": "N2",
+      "target": "N26",
+      "label": "power"
+    },
+    {
+      "source": "N26",
+      "target": "N96",
+      "label": "power"
+    },
+    {
+      "source": "N96",
+      "target": "N59",
+      "label": "power"
+    },
+    {
+      "source": "N59",
+      "target": "N62",
+      "label": "power"
+    },
+    {
+      "source": "N62",
+      "target": "N11",
+      "label": "power"
+    },
+    {
+      "source": "N11",
+      "target": "N38",
+      "label": "power"
+    },
+    {
+      "source": "N38",
+      "target": "N0",
+      "label": "power"
+    },
+    {
+      "source": "N0",
+      "target": "N30",
+      "label": "power"
+    },
+    {
+      "source": "N30",
+      "target": "N67",
+      "label": "power"
+    },
+    {
+      "source": "N67",
+      "target": "N5",
+      "label": "power"
+    },
+    {
+      "source": "N5",
+      "target": "N61",
+      "label": "power"
+    },
+    {
+      "source": "N61",
+      "target": "N40",
+      "label": "power"
+    },
+    {
+      "source": "N40",
+      "target": "N20",
+      "label": "power"
+    },
+    {
+      "source": "N20",
+      "target": "N97",
+      "label": "power"
+    },
+    {
+      "source": "N97",
+      "target": "N32",
+      "label": "power"
+    },
+    {
+      "source": "N32",
+      "target": "N72",
+      "label": "power"
+    },
+    {
+      "source": "N72",
+      "target": "N74",
+      "label": "power"
+    },
+    {
+      "source": "N74",
+      "target": "N33",
+      "label": "power"
+    },
+    {
+      "source": "N33",
+      "target": "N3",
+      "label": "power"
+    },
+    {
+      "source": "N3",
+      "target": "N48",
+      "label": "power"
+    },
+    {
+      "source": "N48",
+      "target": "N80",
+      "label": "power"
+    },
+    {
+      "source": "N80",
+      "target": "N23",
+      "label": "power"
+    },
+    {
+      "source": "N23",
+      "target": "N55",
+      "label": "power"
+    },
+    {
+      "source": "N55",
+      "target": "N90",
+      "label": "power"
+    },
+    {
+      "source": "N90",
+      "target": "N57",
+      "label": "power"
+    },
+    {
+      "source": "N57",
+      "target": "N37",
+      "label": "power"
+    },
+    {
+      "source": "N37",
+      "target": "N99",
+      "label": "power"
+    },
+    {
+      "source": "N99",
+      "target": "N78",
+      "label": "power"
+    },
+    {
+      "source": "N78",
+      "target": "N66",
+      "label": "power"
+    },
+    {
+      "source": "N66",
+      "target": "N98",
+      "label": "power"
+    },
+    {
+      "source": "N98",
+      "target": "N35",
+      "label": "power"
+    },
+    {
+      "source": "N35",
+      "target": "N84",
+      "label": "power"
+    },
+    {
+      "source": "N84",
+      "target": "N82",
+      "label": "power"
+    },
+    {
+      "source": "N82",
+      "target": "N27",
+      "label": "power"
+    },
+    {
+      "source": "N27",
+      "target": "N79",
+      "label": "power"
+    },
+    {
+      "source": "N79",
+      "target": "N10",
+      "label": "power"
+    },
+    {
+      "source": "N10",
+      "target": "N81",
+      "label": "power"
+    },
+    {
+      "source": "N81",
+      "target": "N43",
+      "label": "power"
+    },
+    {
+      "source": "N43",
+      "target": "N75",
+      "label": "power"
+    },
+    {
+      "source": "N75",
+      "target": "N69",
+      "label": "power"
+    },
+    {
+      "source": "N69",
+      "target": "N95",
+      "label": "power"
+    },
+    {
+      "source": "N95",
+      "target": "N77",
+      "label": "power"
+    },
+    {
+      "source": "N77",
+      "target": "N85",
+      "label": "power"
+    },
+    {
+      "source": "N85",
+      "target": "N28",
+      "label": "power"
+    },
+    {
+      "source": "N28",
+      "target": "N17",
+      "label": "power"
+    },
+    {
+      "source": "N17",
+      "target": "N86",
+      "label": "power"
+    },
+    {
+      "source": "N86",
+      "target": "N45",
+      "label": "power"
+    },
+    {
+      "source": "N45",
+      "target": "N14",
+      "label": "power"
+    },
+    {
+      "source": "N14",
+      "target": "N34",
+      "label": "power"
+    },
+    {
+      "source": "N34",
+      "target": "N89",
+      "label": "power"
+    },
+    {
+      "source": "N89",
+      "target": "N64",
+      "label": "power"
+    },
+    {
+      "source": "N64",
+      "target": "N60",
+      "label": "power"
+    },
+    {
+      "source": "N60",
+      "target": "N4",
+      "label": "power"
+    },
+    {
+      "source": "N4",
+      "target": "N94",
+      "label": "power"
+    },
+    {
+      "source": "N94",
+      "target": "N63",
+      "label": "power"
+    },
+    {
+      "source": "N63",
+      "target": "N70",
+      "label": "power"
+    },
+    {
+      "source": "N70",
+      "target": "N36",
+      "label": "power"
+    },
+    {
+      "source": "N36",
+      "target": "N56",
+      "label": "power"
+    },
+    {
+      "source": "N56",
+      "target": "N71",
+      "label": "power"
+    },
+    {
+      "source": "N71",
+      "target": "N54",
+      "label": "power"
+    },
+    {
+      "source": "N54",
+      "target": "N65",
+      "label": "power"
+    },
+    {
+      "source": "N65",
+      "target": "N21",
+      "label": "power"
+    },
+    {
+      "source": "N21",
+      "target": "N58",
+      "label": "power"
+    },
+    {
+      "source": "N58",
+      "target": "N15",
+      "label": "power"
+    },
+    {
+      "source": "N15",
+      "target": "N22",
+      "label": "power"
+    },
+    {
+      "source": "N22",
+      "target": "N6",
+      "label": "power"
+    },
+    {
+      "source": "N6",
+      "target": "N1",
+      "label": "power"
+    },
+    {
+      "source": "N1",
+      "target": "N46",
+      "label": "power"
+    },
+    {
+      "source": "N46",
+      "target": "N93",
+      "label": "power"
+    },
+    {
+      "source": "N93",
+      "target": "N44",
+      "label": "power"
+    },
+    {
+      "source": "N44",
+      "target": "N92",
+      "label": "power"
+    },
+    {
+      "source": "N92",
+      "target": "N19",
+      "label": "power"
+    },
+    {
+      "source": "N19",
+      "target": "N25",
+      "label": "power"
+    },
+    {
+      "source": "N25",
+      "target": "N29",
+      "label": "power"
+    },
+    {
+      "source": "N29",
+      "target": "N76",
+      "label": "power"
+    },
+    {
+      "source": "N76",
+      "target": "N42",
+      "label": "power"
+    },
+    {
+      "source": "N42",
+      "target": "N50",
+      "label": "power"
+    },
+    {
+      "source": "N50",
+      "target": "N49",
+      "label": "power"
+    },
+    {
+      "source": "N49",
+      "target": "N16",
+      "label": "power"
+    },
+    {
+      "source": "N16",
+      "target": "N31",
+      "label": "power"
+    },
+    {
+      "source": "N31",
+      "target": "N53",
+      "label": "power"
+    },
+    {
+      "source": "N53",
+      "target": "N51",
+      "label": "power"
+    },
+    {
+      "source": "N51",
+      "target": "N24",
+      "label": "power"
+    },
+    {
+      "source": "N24",
+      "target": "N88",
+      "label": "power"
+    },
+    {
+      "source": "N88",
+      "target": "N73",
+      "label": "power"
+    },
+    {
+      "source": "N73",
+      "target": "N52",
+      "label": "power"
+    },
+    {
+      "source": "N52",
+      "target": "N8",
+      "label": "power"
+    },
+    {
+      "source": "N8",
+      "target": "N18",
+      "label": "power"
+    },
+    {
+      "source": "N18",
+      "target": "N41",
+      "label": "power"
+    },
+    {
+      "source": "N41",
+      "target": "N68",
+      "label": "power"
+    },
+    {
+      "source": "N68",
+      "target": "N12",
+      "label": "power"
+    },
+    {
+      "source": "N12",
+      "target": "N7",
+      "label": "power"
+    },
+    {
+      "source": "N7",
+      "target": "N39",
+      "label": "area"
+    },
+    {
+      "source": "N39",
+      "target": "N13",
+      "label": "area"
+    },
+    {
+      "source": "N13",
+      "target": "N83",
+      "label": "area"
+    },
+    {
+      "source": "N83",
+      "target": "N87",
+      "label": "area"
+    },
+    {
+      "source": "N87",
+      "target": "N91",
+      "label": "area"
+    },
+    {
+      "source": "N91",
+      "target": "N9",
+      "label": "area"
+    },
+    {
+      "source": "N9",
+      "target": "N2",
+      "label": "area"
+    },
+    {
+      "source": "N2",
+      "target": "N47",
+      "label": "area"
+    },
+    {
+      "source": "N47",
+      "target": "N38",
+      "label": "area"
+    },
+    {
+      "source": "N38",
+      "target": "N26",
+      "label": "area"
+    },
+    {
+      "source": "N26",
+      "target": "N62",
+      "label": "area"
+    },
+    {
+      "source": "N62",
+      "target": "N96",
+      "label": "area"
+    },
+    {
+      "source": "N96",
+      "target": "N11",
+      "label": "area"
+    },
+    {
+      "source": "N11",
+      "target": "N48",
+      "label": "area"
+    },
+    {
+      "source": "N48",
+      "target": "N5",
+      "label": "area"
+    },
+    {
+      "source": "N5",
+      "target": "N74",
+      "label": "area"
+    },
+    {
+      "source": "N74",
+      "target": "N30",
+      "label": "area"
+    },
+    {
+      "source": "N30",
+      "target": "N40",
+      "label": "area"
+    },
+    {
+      "source": "N40",
+      "target": "N67",
+      "label": "area"
+    },
+    {
+      "source": "N67",
+      "target": "N59",
+      "label": "area"
+    },
+    {
+      "source": "N59",
+      "target": "N55",
+      "label": "area"
+    },
+    {
+      "source": "N55",
+      "target": "N0",
+      "label": "area"
+    },
+    {
+      "source": "N0",
+      "target": "N57",
+      "label": "area"
+    },
+    {
+      "source": "N57",
+      "target": "N80",
+      "label": "area"
+    },
+    {
+      "source": "N80",
+      "target": "N33",
+      "label": "area"
+    },
+    {
+      "source": "N33",
+      "target": "N61",
+      "label": "area"
+    },
+    {
+      "source": "N61",
+      "target": "N97",
+      "label": "area"
+    },
+    {
+      "source": "N97",
+      "target": "N84",
+      "label": "area"
+    },
+    {
+      "source": "N84",
+      "target": "N23",
+      "label": "area"
+    },
+    {
+      "source": "N23",
+      "target": "N99",
+      "label": "area"
+    },
+    {
+      "source": "N99",
+      "target": "N20",
+      "label": "area"
+    },
+    {
+      "source": "N20",
+      "target": "N32",
+      "label": "area"
+    },
+    {
+      "source": "N32",
+      "target": "N37",
+      "label": "area"
+    },
+    {
+      "source": "N37",
+      "target": "N10",
+      "label": "area"
+    },
+    {
+      "source": "N10",
+      "target": "N82",
+      "label": "area"
+    },
+    {
+      "source": "N82",
+      "target": "N3",
+      "label": "area"
+    },
+    {
+      "source": "N3",
+      "target": "N90",
+      "label": "area"
+    },
+    {
+      "source": "N90",
+      "target": "N35",
+      "label": "area"
+    },
+    {
+      "source": "N35",
+      "target": "N72",
+      "label": "area"
+    },
+    {
+      "source": "N72",
+      "target": "N78",
+      "label": "area"
+    },
+    {
+      "source": "N78",
+      "target": "N66",
+      "label": "area"
+    },
+    {
+      "source": "N66",
+      "target": "N28",
+      "label": "area"
+    },
+    {
+      "source": "N28",
+      "target": "N81",
+      "label": "area"
+    },
+    {
+      "source": "N81",
+      "target": "N63",
+      "label": "area"
+    },
+    {
+      "source": "N63",
+      "target": "N98",
+      "label": "area"
+    },
+    {
+      "source": "N98",
+      "target": "N79",
+      "label": "area"
+    },
+    {
+      "source": "N79",
+      "target": "N86",
+      "label": "area"
+    },
+    {
+      "source": "N86",
+      "target": "N17",
+      "label": "area"
+    },
+    {
+      "source": "N17",
+      "target": "N27",
+      "label": "area"
+    },
+    {
+      "source": "N27",
+      "target": "N22",
+      "label": "area"
+    },
+    {
+      "source": "N22",
+      "target": "N15",
+      "label": "area"
+    },
+    {
+      "source": "N15",
+      "target": "N25",
+      "label": "area"
+    },
+    {
+      "source": "N25",
+      "target": "N45",
+      "label": "area"
+    },
+    {
+      "source": "N45",
+      "target": "N6",
+      "label": "area"
+    },
+    {
+      "source": "N6",
+      "target": "N69",
+      "label": "area"
+    },
+    {
+      "source": "N69",
+      "target": "N36",
+      "label": "area"
+    },
+    {
+      "source": "N36",
+      "target": "N75",
+      "label": "area"
+    },
+    {
+      "source": "N75",
+      "target": "N89",
+      "label": "area"
+    },
+    {
+      "source": "N89",
+      "target": "N34",
+      "label": "area"
+    },
+    {
+      "source": "N34",
+      "target": "N16",
+      "label": "area"
+    },
+    {
+      "source": "N16",
+      "target": "N76",
+      "label": "area"
+    },
+    {
+      "source": "N76",
+      "target": "N44",
+      "label": "area"
+    },
+    {
+      "source": "N44",
+      "target": "N14",
+      "label": "area"
+    },
+    {
+      "source": "N14",
+      "target": "N50",
+      "label": "area"
+    },
+    {
+      "source": "N50",
+      "target": "N94",
+      "label": "area"
+    },
+    {
+      "source": "N94",
+      "target": "N21",
+      "label": "area"
+    },
+    {
+      "source": "N21",
+      "target": "N4",
+      "label": "area"
+    },
+    {
+      "source": "N4",
+      "target": "N24",
+      "label": "area"
+    },
+    {
+      "source": "N24",
+      "target": "N85",
+      "label": "area"
+    },
+    {
+      "source": "N85",
+      "target": "N58",
+      "label": "area"
+    },
+    {
+      "source": "N58",
+      "target": "N71",
+      "label": "area"
+    },
+    {
+      "source": "N71",
+      "target": "N43",
+      "label": "area"
+    },
+    {
+      "source": "N43",
+      "target": "N95",
+      "label": "area"
+    },
+    {
+      "source": "N95",
+      "target": "N92",
+      "label": "area"
+    },
+    {
+      "source": "N92",
+      "target": "N19",
+      "label": "area"
+    },
+    {
+      "source": "N19",
+      "target": "N46",
+      "label": "area"
+    },
+    {
+      "source": "N46",
+      "target": "N51",
+      "label": "area"
+    },
+    {
+      "source": "N51",
+      "target": "N65",
+      "label": "area"
+    },
+    {
+      "source": "N65",
+      "target": "N70",
+      "label": "area"
+    },
+    {
+      "source": "N70",
+      "target": "N12",
+      "label": "area"
+    },
+    {
+      "source": "N12",
+      "target": "N77",
+      "label": "area"
+    },
+    {
+      "source": "N77",
+      "target": "N8",
+      "label": "area"
+    },
+    {
+      "source": "N8",
+      "target": "N52",
+      "label": "area"
+    },
+    {
+      "source": "N52",
+      "target": "N31",
+      "label": "area"
+    },
+    {
+      "source": "N31",
+      "target": "N60",
+      "label": "area"
+    },
+    {
+      "source": "N60",
+      "target": "N53",
+      "label": "area"
+    },
+    {
+      "source": "N53",
+      "target": "N42",
+      "label": "area"
+    },
+    {
+      "source": "N42",
+      "target": "N88",
+      "label": "area"
+    },
+    {
+      "source": "N88",
+      "target": "N49",
+      "label": "area"
+    },
+    {
+      "source": "N49",
+      "target": "N73",
+      "label": "area"
+    },
+    {
+      "source": "N73",
+      "target": "N41",
+      "label": "area"
+    },
+    {
+      "source": "N41",
+      "target": "N1",
+      "label": "area"
+    },
+    {
+      "source": "N1",
+      "target": "N54",
+      "label": "area"
+    },
+    {
+      "source": "N54",
+      "target": "N56",
+      "label": "area"
+    },
+    {
+      "source": "N56",
+      "target": "N64",
+      "label": "area"
+    },
+    {
+      "source": "N64",
+      "target": "N29",
+      "label": "area"
+    },
+    {
+      "source": "N29",
+      "target": "N93",
+      "label": "area"
+    },
+    {
+      "source": "N93",
+      "target": "N68",
+      "label": "area"
+    },
+    {
+      "source": "N68",
+      "target": "N18",
+      "label": "area"
+    },
+    {
+      "source": "N18",
+      "target": "N7",
+      "label": "area"
+    }
+  ]
+}

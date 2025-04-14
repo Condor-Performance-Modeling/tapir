@@ -167,8 +167,10 @@ public:
                          const QString&,const QString&);
   void insertCheckBox(Spreadsheet *sheet,int,int,const QString&);
   QJsonDocument generateJson();
-  void reloadChartData(QString&);
+  void reloadChartData(QString);
   void enableDevTools();
+  void injectHtmlData(QString& html, const QString& json);
+  QWebEngineView* initChartWindow(QWidget*& window, QWebEngineView*& view, const QString& title);
 
 protected:
   void closeEvent(QCloseEvent *e);
@@ -235,13 +237,15 @@ private slots:
 
   void sDataForceChart();
   void sDataTernaryChart();
-  void sDataScatter3dChart();
+  void sDataScatterChart();
   void sDataBubbleChart();
+  void sDataBeeSwarmChart();
 
   void sDataReloadForceData();
   void sDataReloadTernaryData();
-  void sDataReloadScatter3dData();
+  void sDataReloadScatterData();
   void sDataReloadBubbleData();
+  void sDataReloadBeeSwarmData();
 
   void sToolsGenerateRtl();
   void sToolsCompileRtl();
@@ -322,10 +326,12 @@ private:
   QAction *aViewHandleColState,*aViewHandleRowState;
 
   QAction *aDataForceChart, *aDataTernaryChart, 
-          *aDataScatter3dChart, *aDataBubbleChart;
+          *aDataScatterChart, *aDataBubbleChart,
+          *aDataBeeSwarmChart;
 
   QAction *aDataReloadForceData,*aDataReloadTernaryData,
-          *aDataReloadScatter3dData,*aDataReloadBubbleData;
+          *aDataReloadScatterData,*aDataReloadBubbleData,
+          *aDataReloadBeeSwarmData;
 
   QAction *aHelpHelp,*aHelpAbout,*aHelpDebug,*aDebug;
 
@@ -359,13 +365,15 @@ private:
 
   QWebEngineView *d3ForceChartView = nullptr,
                  *d3TernaryChartView = nullptr,
-                 *d3Scatter3dChartView = nullptr,
-                 *d3BubbleChartView = nullptr;
+                 *d3ScatterChartView = nullptr,
+                 *d3BubbleChartView = nullptr,
+                 *d3BeeSwarmChartView = nullptr;
 
   QWidget *d3ForceChartWindow = nullptr,
           *d3TernaryChartWindow = nullptr,
-          *d3Scatter3dChartWindow = nullptr,
-          *d3BubbleChartWindow = nullptr;
+          *d3ScatterChartWindow = nullptr,
+          *d3BubbleChartWindow = nullptr,
+          *d3BeeSwarmChartWindow = nullptr;
 
   QWebEngineView* devToolsView = nullptr;
   bool chartDebug{false};

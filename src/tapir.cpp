@@ -48,17 +48,18 @@ Tapir::Tapir(int _ac,char **_av)
   disableElements();
 
   //FIXME: hook this to a signal/slot
-  chartDebug = true;
+  chartDebug = false;
   if(chartDebug) {
     enableDevTools();
   }
 
   //Debug
-  QString fn = ":/data/dev.json";
-  openJsonFile(fn);
-  sDataBubbleChart();
+//  QString fn = ":/data/dev.json";
+//  openJsonFile(fn);
 //  sDataTernaryChart();
-//  sDataScatter3dChart();
+//  sDataScatterChart();
+//  sDataBeeSwarmChart();
+//  sDataBubbleChart();
 //  sDataForceChart();
  
   ATR("-ctor");

@@ -111,15 +111,17 @@ void Tapir::createDataMenu()
 
   mData->addAction(aDataForceChart);
   mData->addAction(aDataTernaryChart);
-  mData->addAction(aDataScatter3dChart);
+  mData->addAction(aDataScatterChart);
   mData->addAction(aDataBubbleChart);
+  mData->addAction(aDataBeeSwarmChart);
 
   QMenu *mReload = mData->addMenu(tr("Reload Data"));
 
   mReload->addAction(aDataReloadForceData);
   mReload->addAction(aDataReloadTernaryData);
-  mReload->addAction(aDataReloadScatter3dData);
+  mReload->addAction(aDataReloadScatterData);
   mReload->addAction(aDataReloadBubbleData);
+  mReload->addAction(aDataReloadBeeSwarmData);
 }
 // ==============================================================
 // TOOLS

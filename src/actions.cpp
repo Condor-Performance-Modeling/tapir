@@ -156,19 +156,23 @@ void Tapir::createDataActions()
       this,sDataForceChart);
   ACT(aDataTernaryChart,"","Ternary Chart",
       this,sDataTernaryChart);
-  ACT(aDataScatter3dChart, "","3d Scatter Chart",
-      this,sDataScatter3dChart);
+  ACT(aDataScatterChart, "","Scatter Chart",
+      this,sDataScatterChart);
   ACT(aDataBubbleChart, "","Bubble Chart",
       this,sDataBubbleChart);
+  ACT(aDataBeeSwarmChart, "","BeeSwarm Chart",
+      this,sDataBeeSwarmChart);
 
   ACT(aDataReloadForceData,  "","Reload Force Data",
       this,sDataReloadForceData);
   ACT(aDataReloadTernaryData,"","Reload Ternary Data",
       this,sDataReloadTernaryData);
-  ACT(aDataReloadScatter3dData,"","Reload 3d Scatter Data",
-      this,sDataReloadScatter3dData);
+  ACT(aDataReloadScatterData,"","Reload Scatter Data",
+      this,sDataReloadScatterData);
   ACT(aDataReloadBubbleData,"","Reload Bubble Data",
       this,sDataReloadBubbleData);
+  ACT(aDataReloadBeeSwarmData,"","Reload BeeSwarm Data",
+      this,sDataReloadBeeSwarmData);
 
   ATR("-createDataActions");
 }
