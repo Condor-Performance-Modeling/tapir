@@ -1,6 +1,14 @@
 # tapir
 Transformer Assisted Parameter Inference and Refinement
 
+# To run
+
+clone the repo to tapir
+cd tapir
+qmake
+make -j$(nproc)
+
+
 # TODO
 
 This is a partial list as of 2025.04.14

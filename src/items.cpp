@@ -58,6 +58,7 @@ QTableWidgetItem *TableItem::clone() const { return new TableItem(*this); }
 // --------------------------------------------------------------
 void TableItem::setToolTip(int role,int idx)
 {
+  (void)idx;
   switch(role) {
     case Qt::EditRole: setDirty(); break;
     default:
@@ -68,6 +69,7 @@ void TableItem::setToolTip(int role,int idx)
 // --------------------------------------------------------------
 void TableItem::setRoleInfo(int role,int idx)
 {
+  (void)idx;
   setData(role,QVariant(1));
   switch(role) {
     case Qt::EditRole: setDirty(); break;
