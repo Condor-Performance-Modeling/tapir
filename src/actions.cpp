@@ -129,6 +129,12 @@ void Tapir::createFormatActions()
 }
 // ==============================================================
 // VIEW
+//  Hidden Fixed Disabled
+//    0      0      0      normal
+//    0      0      1      show dimmed  does not react to show hidden rows
+//    0      1      0      show dimmed  Reacts to show hidden rows
+//    1      -             hide unless aViewHandleRowState == checked
+//                         else dimmed
 // ==============================================================
 void Tapir::createViewActions()
 {
@@ -143,6 +149,7 @@ void Tapir::createViewActions()
   aViewHandleRowState->setCheckable(true);
   aViewHandleRowState->setChecked(defaultRowState == HideHidden);
   aViewHandleRowState->setIcon(QIcon::fromTheme("emblem-checked"));
+
   ATR("-createViewActions");
 }
 // ==============================================================
@@ -181,6 +188,30 @@ void Tapir::createDataActions()
 // ==============================================================
 void Tapir::createSortActions()
 {
+  aSpreadSortAlphaAsc  = new QAction(tr("Sort A→Z"), this);
+  aSpreadSortAlphaDesc = new QAction(tr("Sort Z→A"), this);
+  aSpreadSortNumAsc    = new QAction(tr("Sort 0→9"), this);
+  aSpreadSortNumDesc   = new QAction(tr("Sort 9→0"), this);
+
+  connect(aSpreadSortAlphaAsc, &QAction::triggered, this, [=]() {
+    Spreadsheet* s = qobject_cast<Spreadsheet*>(centralTabs->currentWidget());
+      if (s) s->sortByColumnAlphaAsc(s->currentColumn());
+  });
+
+  connect(aSpreadSortAlphaDesc, &QAction::triggered, this, [=]() {
+    Spreadsheet* s = qobject_cast<Spreadsheet*>(centralTabs->currentWidget());
+        if (s) s->sortByColumnAlphaDesc(s->currentColumn());
+  });
+
+  connect(aSpreadSortNumAsc, &QAction::triggered, this, [=]() {
+    Spreadsheet* s = qobject_cast<Spreadsheet*>(centralTabs->currentWidget());
+        if (s) s->sortByColumnNumericAsc(s->currentColumn());
+  });
+
+  connect(aSpreadSortNumDesc, &QAction::triggered, this, [=]() {
+    Spreadsheet* s = qobject_cast<Spreadsheet*>(centralTabs->currentWidget());
+        if (s) s->sortByColumnNumericDesc(s->currentColumn());
+  });
 }
 // ==============================================================
 // TOOLS
@@ -256,14 +287,15 @@ void Tapir::connectCntxActions(void)
 // ==============================================================
 void Tapir::connectTableSignals(Spreadsheet *tbl)
 {
-  connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
-         this,SLOT(sUpdateStatus(QTableWidgetItem*)));
-  connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
-         this,SLOT(sUpdatePanels(QTableWidgetItem*)));
-  connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
-         this,SLOT(sUpdateLineEdit(QTableWidgetItem*)));
-  connect(tbl,SIGNAL(itemChanged(QTableWidgetItem*)),
-         this,SLOT(sUpdateLineEdit(QTableWidgetItem*)));
+  (void)tbl;
+//connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
+//         this,SLOT(sUpdateStatus(QTableWidgetItem*)));
+//connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
+//         this,SLOT(sUpdatePanels(QTableWidgetItem*)));
+//connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
+//         this,SLOT(sUpdateLineEdit(QTableWidgetItem*)));
+//connect(tbl,SIGNAL(itemChanged(QTableWidgetItem*)),
+//         this,SLOT(sUpdateLineEdit(QTableWidgetItem*)));
 }
 // ==============================================================
 // MISC

@@ -4,10 +4,13 @@ Transformer Assisted Parameter Inference and Refinement
 # To run
 
 clone the repo to tapir
+```
 cd tapir
 qmake
 make -j$(nproc)
-
+bin/tapir
+File->Open json/dev.json
+```
 
 # TODO
 

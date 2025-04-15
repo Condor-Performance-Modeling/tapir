@@ -27,6 +27,29 @@ class Spreadsheet : public QTableWidget
   Q_OBJECT
 
 public:
+  template <typename Compare>
+  void sort(Compare comp) {
+    QList<QStringList> rows;
+    QTableWidgetSelectionRange range = this->selectedRange();
+
+    for (int i = 0; i < range.rowCount(); ++i) {
+      QStringList row;
+      for (int j = 0; j < range.columnCount(); ++j)
+        row.append(this->formula(range.topRow() + i, range.leftColumn() + j));
+      rows.append(row);
+    }
+
+    std::stable_sort(rows.begin(), rows.end(), comp);
+
+    for (int i = 0; i < range.rowCount(); ++i)
+      for (int j = 0; j < range.columnCount(); ++j)
+        this->setFormula(range.topRow()+i,range.leftColumn()+j,rows[i][j]);
+
+    this->clearSelection();
+    this->sSomethingChanged();
+}
+
+
   Spreadsheet(QWidget *parent = 0);
   Spreadsheet(int,int,const QStringList&,QWidget *parent = 0);
 
@@ -61,6 +84,9 @@ public:
 
   void commonInit(void);
 
+  void updateRowStates(int hiddenCol, int fixedCol,
+                       int disabledCol, int valueCol, bool showHiddenRows);
+
 public slots:
   void sCut();
   void sCopy();
@@ -75,6 +101,11 @@ public slots:
   void sFindPrevious(const QString &str, Qt::CaseSensitivity cs);
   void sDisableRecalc(void);
   void sRestoreRecalc(void);
+
+  void sortByColumnAlphaAsc(int col);
+  void sortByColumnAlphaDesc(int col);
+  void sortByColumnNumericAsc(int col);
+  void sortByColumnNumericDesc(int col);
 
 signals:
   void modified();

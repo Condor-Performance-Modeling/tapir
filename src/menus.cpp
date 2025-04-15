@@ -90,6 +90,12 @@ void Tapir::createFormatMenu()
 void Tapir::createViewMenu()
 {
   mView = menuBar()->addMenu(tr("View"));
+
+  mView->addAction(aSpreadSortAlphaAsc);
+  mView->addAction(aSpreadSortAlphaDesc);
+  mView->addAction(aSpreadSortNumAsc);
+  mView->addAction(aSpreadSortNumDesc);
+
   mView->addSeparator();
   mView->addAction(aViewHandleColState);
   mView->addAction(aViewHandleRowState);

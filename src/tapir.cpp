@@ -54,8 +54,8 @@ Tapir::Tapir(int _ac,char **_av)
   }
 
   //Debug
-//  QString fn = ":/data/dev.json";
-//  openJsonFile(fn);
+  QString fn = ":/data/dev.json";
+  openJsonFile(fn);
 //  sDataTernaryChart();
 //  sDataScatterChart();
 //  sDataBeeSwarmChart();

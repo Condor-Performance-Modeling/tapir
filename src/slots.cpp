@@ -250,6 +250,20 @@ void Tapir::sViewHandleColState()
 // -------------------------------------------------------------------
 void Tapir::sViewHandleRowState()
 {
+cout<<"HERE "<<endl;
+    bool showHidden = aViewHandleRowState->isChecked();
+
+    for (int i = 0; i < centralTabs->count(); ++i) {
+        Spreadsheet* s = qobject_cast<Spreadsheet*>(centralTabs->widget(i));
+        if (s) {
+            s->updateRowStates(
+                paramSheetColNames.indexOf("Hidden"),
+                paramSheetColNames.indexOf("Fixed"),
+                paramSheetColNames.indexOf("Disabled"),
+                paramSheetColNames.indexOf("Value"),
+                showHidden);
+        }
+    }
 }
 // ======================================================
 // TOOLS

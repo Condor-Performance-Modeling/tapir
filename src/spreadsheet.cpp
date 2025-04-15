@@ -2,6 +2,7 @@
 #include <iostream>
 #include "items.h"
 #include "spreadsheet.h"
+#include <iostream>
 using namespace std;
 
 #define CON(a,b) connect(this,SIGNAL(a),this,SLOT(b))
@@ -439,4 +440,100 @@ bool SheetCompare::operator()(const QStringList &row1,
   }
   return false;
 }
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Spreadsheet::sortByColumnAlphaAsc(int col)
+{
+  SheetCompare comp;
+  comp.keys[0] = col;
+  comp.ascending[0] = true;
+  comp.keys[1] = comp.keys[2] = -1;
+  sort(comp);
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Spreadsheet::sortByColumnAlphaDesc(int col) {
+  SheetCompare comp;
+  comp.keys[0] = col;
+  comp.ascending[0] = false;
+  comp.keys[1] = comp.keys[2] = -1;
+  sort(comp);
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Spreadsheet::sortByColumnNumericAsc(int col) {
+  SheetCompare comp;
+  comp.keys[0] = col;
+  comp.ascending[0] = true;
+  comp.keys[1] = comp.keys[2] = -1;
+
+  sort([=](const QStringList &a, const QStringList &b) {
+    bool ok1, ok2;
+    double d1 = a[col].toDouble(&ok1);
+    double d2 = b[col].toDouble(&ok2);
+    if (!ok1 && !ok2) return false;
+    if (!ok1) return false;
+    if (!ok2) return true;
+    return d1 < d2;
+  });
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Spreadsheet::sortByColumnNumericDesc(int col) {
+  SheetCompare comp;
+  comp.keys[0] = col;
+  comp.ascending[0] = false;
+  comp.keys[1] = comp.keys[2] = -1;
+
+  sort([=](const QStringList &a, const QStringList &b) {
+    bool ok1, ok2;
+    double d1 = a[col].toDouble(&ok1);
+    double d2 = b[col].toDouble(&ok2);
+    if (!ok1 && !ok2) return false;
+    if (!ok1) return false;
+    if (!ok2) return true;
+    return d1 > d2;
+  });
+}
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+void Spreadsheet::updateRowStates(int hiddenCol,  int fixedCol, 
+                                  int disabledCol,int valueCol,
+                                  bool showHiddenRows)
+{
+  for (int row = 0; row < rowCount(); ++row) {
+
+    bool hidden   = text(row, hiddenCol).trimmed().toLower() == "yes";
+    bool fixed    = text(row, fixedCol).trimmed().toLower() == "yes";
+    bool disabled = text(row, disabledCol).trimmed().toLower() == "yes";
+
+    bool shouldHide = false;
+    bool shouldDim  = false;
+
+    if (hidden) {
+     shouldHide = !showHiddenRows;
+     shouldDim  = showHiddenRows;
+    } else if (fixed && !disabled) {
+     shouldDim = true;
+    } else if (!fixed && disabled) {
+     shouldDim = true;
+    }
+
+    setRowHidden(row, shouldHide);     
+
+    for (int col = 0; col < columnCount(); ++col) {
+      QTableWidgetItem *item = this->item(row, col);
+      if (item) {
+        item->setForeground(shouldDim ? QBrush(Qt::gray) : QBrush(Qt::black));
+      }
+    }
+
+    // Disable widget in the value column if it exists
+    if (valueCol >= 0 && valueCol < columnCount()) {
+      QWidget* widget = cellWidget(row, valueCol);
+      if (widget) widget->setDisabled(shouldDim);
+    }
+  }
+}
+
 #undef CON

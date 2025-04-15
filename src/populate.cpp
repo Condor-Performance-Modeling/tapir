@@ -26,9 +26,12 @@ bool Tapir::populate(QJsonDocument &doc)
   QColor red(Qt::red);
   QColor lightGreen(200, 255, 200);
 
-  int widgetCol  = paramSheetColNames.indexOf("Widget");
-  int valueCol   = paramSheetColNames.indexOf("Value");
-  int rangeCol   = paramSheetColNames.indexOf("Range");
+  int widgetCol   = paramSheetColNames.indexOf("Widget");
+  int valueCol    = paramSheetColNames.indexOf("Value");
+  int rangeCol    = paramSheetColNames.indexOf("Range");
+  int fixedCol    = paramSheetColNames.indexOf("Fixed");
+  int hiddenCol   = paramSheetColNames.indexOf("Hidden");
+  int disabledCol = paramSheetColNames.indexOf("Disabled");
 
   for (const QJsonValue &catVal : categories) {
     QJsonObject catObj = catVal.toObject();
@@ -38,6 +41,8 @@ bool Tapir::populate(QJsonDocument &doc)
     Spreadsheet *sheet = new Spreadsheet(params.size(),
                                          paramSheetColNames.size(),
                                          paramSheetColNames, centralTabs);
+
+    connectTableSignals(sheet);
 
     QSet<QString> seenNames;
     int row = 0;
@@ -105,6 +110,9 @@ bool Tapir::populate(QJsonDocument &doc)
     }
 
     sheet->resizeColumnsToContents();
+    sheet->updateRowStates(hiddenCol,fixedCol,disabledCol,valueCol,
+           aViewHandleRowState && aViewHandleRowState->isChecked());
+
     centralTabs->addTab(sheet, catName);
   }
 
@@ -124,35 +132,8 @@ void Tapir::insertCheckBox(Spreadsheet *sheet,int row,int col,
   cb->setEnabled(true);
   sheet->setCellWidget(row, col, cb);
 }
-//// -------------------------------------------------------------------
-//// -------------------------------------------------------------------
-//void Tapir::insertButtonGroup(Spreadsheet *sheet, int row, int col,
-//                              bool exclusive,
-//                              const QString &selectedValue,
-//                              const QString &csvOptions)
-//{
-//  QWidget *container = new QWidget(sheet);
-//  QHBoxLayout *layout = new QHBoxLayout(container);
-//  layout->setContentsMargins(0, 0, 0, 0);
-//
-//  QButtonGroup *buttonGroup = new QButtonGroup(container);
-//  buttonGroup->setExclusive(exclusive);
-//
-//  QStringList options = csvOptions.split(",", Qt::SkipEmptyParts);
-//
-//  for(const QString &option : options) {
-//    QString label = option.trimmed();
-//    QRadioButton *rb = new QRadioButton(label, container);
-//    if(label.compare(selectedValue.trimmed(), Qt::CaseInsensitive) == 0) {
-//      rb->setChecked(true);
-//    }
-//    layout->addWidget(rb);
-//    buttonGroup->addButton(rb);
-//  }
-//
-//  container->setLayout(layout);
-//  sheet->setCellWidget(row, col, container);
-//}
+// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 void Tapir::insertButtonGroup(Spreadsheet *sheet, int row, int col,
                               bool exclusive,
                               const QString &selectedValue,

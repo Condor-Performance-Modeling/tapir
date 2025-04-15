@@ -333,6 +333,9 @@ private:
           *aDataReloadScatterData,*aDataReloadBubbleData,
           *aDataReloadBeeSwarmData;
 
+  QAction *aSpreadSortAlphaAsc,*aSpreadSortAlphaDesc,
+          *aSpreadSortNumAsc,  *aSpreadSortNumDesc;
+
   QAction *aHelpHelp,*aHelpAbout,*aHelpDebug,*aDebug;
 
   QMenu *mFile,*mEdit,*mFormat,*mView,*mData,*mTools,*mHelp;
