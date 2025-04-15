@@ -4,12 +4,38 @@
       "cat_name": "Caches",
       "parameters": [
         {
+          "CDR_L1D_SUPPORT": {
+            "equiv": "NDS_DCACHE_SUPPORT",
+            "desc": "L1D cache is present",
+            "value": "yes",
+            "range": ["yes", "no"],
+            "widget": "ebg",
+            "units": "",
+            "fixed": "yes",
+            "hidden": "no",
+            "disabled": "no",
+            "requires": [],
+            "define_vh": "",
+            "generate": "",
+            "dse_param": "yes",
+            "dse_name": "",
+            "dse_widget": "n/a",
+            "dse_enabled": "yes",
+            "dse_fixed": "yes",
+            "dse_hidden": "no",
+            "dse_formula": "fixed",
+            "dse_range": "[]",
+            "dse_pwr_weight": "1.0",
+            "dse_area_weight": "1.0",
+            "dse_cmplx_weight": "1.0"
+          }
+        },
+        {
           "CDR_L1D_SIZE": {
-            "_id": 0,
             "equiv": "NDS_DCACHE_SIZE",
             "desc": "L1D size, bytes",
             "value": "64KB",
-            "range": [ "0KB", "32KB", "64KB", "128KB" ],
+            "range": [ "32KB", "64KB", "128KB" ],
             "widget": "ebg",
             "units": "",
             "fixed": "no",
@@ -33,7 +59,6 @@
         },
         {
           "CDR_L1D_WAY": {
-            "_id": 1,
             "equiv": "NDS_DCACHE_WAY",
             "desc": "L1D associativity",
             "value": "4",
@@ -43,7 +68,7 @@
             "fixed": "no",
             "hidden": "no",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "DCACHE_WAY",
             "generate": "",
             "dse_param": "yes",
@@ -61,7 +86,6 @@
         },
         {
           "CDR_L1D_REPLACE_POLICY": {
-            "_id": 2,
             "equiv": "NDS_DCACHE_LRU",
             "desc": "L1D replacement protocol",
             "value": "PLRU",
@@ -71,7 +95,7 @@
             "fixed": "no",
             "hidden": "no",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "no parameter",
             "generate": "",
             "dse_param": "yes",
@@ -89,7 +113,6 @@
         },
         {
           "CDR_L1D_LINE_SIZE": {
-            "_id": 3,
             "equiv": "NDS_CACHE_LINE_SIZE",
             "desc": "L1D line size, bytes",
             "value": "64",
@@ -99,7 +122,7 @@
             "fixed": "no",
             "hidden": "no",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "DCACHE_LINE_SIZE",
             "generate": "",
             "dse_param": "yes",
@@ -117,7 +140,6 @@
         },
         {
           "CDR_L1D_BANKS": {
-            "_id": 4,
             "equiv": "no equiv",
             "desc": "L1D banks per cache line",
             "value": "8",
@@ -127,7 +149,7 @@
             "fixed": "no",
             "hidden": "yes",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "DDAT_BANKS",
             "generate": "",
             "dse_param": "yes",
@@ -145,7 +167,6 @@
         },
         {
           "CDR_L1D_CRITICAL_WORD": {
-            "_id": 5,
             "equiv": "NDS_DCACHE_FIRST_WORD_FIRST",
             "desc": "L1D line fill policy",
             "value": "CriticalWord",
@@ -155,7 +176,7 @@
             "fixed": "no",
             "hidden": "no",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "no parameter",
             "generate": "",
             "dse_param": "yes",
@@ -173,7 +194,6 @@
         },
         {
           "CDR_L1D_MSHR_DEPTH": {
-            "_id": 6,
             "equiv": "NDS_DCACHE_MSHR_DEPTH",
             "desc": "L1D max outstanding misses, mrq=aiq",
             "value": "64",
@@ -183,7 +203,7 @@
             "fixed": "no",
             "hidden": "no",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "???",
             "generate": "",
             "dse_param": "yes",
@@ -201,7 +221,6 @@
         },
         {
           "CDR_L1D_MSHR_FILL_FIFO_DEPTH": {
-            "_id": 7,
             "equiv": "NDS_MSHR_FILL_FIFO_DEPTH",
             "desc": "L1D DMQ size equals MRQ size to avoid deadlock",
             "value": "64",
@@ -211,7 +230,7 @@
             "fixed": "no",
             "hidden": "no",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "???",
             "generate": "",
             "dse_param": "yes",
@@ -229,7 +248,6 @@
         },
         {
           "CDR_MRQ_MAX_REQS": {
-            "_id": 8,
             "equiv": "no equiv",
             "desc": "L1D max mrq requests, mrq_size=aiq_size",
             "value": "64",
@@ -239,7 +257,7 @@
             "fixed": "no",
             "hidden": "no",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "???",
             "generate": "",
             "dse_param": "yes",
@@ -257,7 +275,6 @@
         },
         {
           "CDR_L1D_READ_MISS_POLICY": {
-            "_id": 9,
             "equiv": "no equiv",
             "desc": "L1D read miss policy",
             "value": "NoAllocate",
@@ -267,7 +284,7 @@
             "fixed": "no",
             "hidden": "no",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "no parameter",
             "generate": "",
             "dse_param": "yes",
@@ -285,7 +302,6 @@
         },
         {
           "CDR_L1D_WRITE_MISS_POLICY": {
-            "_id": 10,
             "equiv": "no equiv",
             "desc": "L1D write miss policy",
             "value": "NoAllocate",
@@ -295,7 +311,7 @@
             "fixed": "no",
             "hidden": "no",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "no parameter",
             "generate": "",
             "dse_param": "yes",
@@ -313,7 +329,6 @@
         },
         {
           "CDR_L1D_WRITE_HIT_POLICY": {
-            "_id": 11,
             "equiv": "no equiv",
             "desc": "L1D write hit policy",
             "value": "WriteBack",
@@ -323,7 +338,7 @@
             "fixed": "no",
             "hidden": "no",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "no parameter",
             "generate": "",
             "dse_param": "yes",
@@ -341,7 +356,6 @@
         },
         {
           "CDR_L1D_ECC_SCHEME": {
-            "_id": 12,
             "equiv": "NDS_DCACHE_ECC_TYPE",
             "desc": "L1D ECC implementation",
             "value": "SECDED",
@@ -351,7 +365,7 @@
             "fixed": "yes",
             "hidden": "yes",
             "disabled": "no",
-            "requires": ["neq(NDS_DCACHE_SIZE,pos(0))"],
+            "requires": [],
             "define_vh": "fixed",
             "generate": "",
             "dse_param": "yes",
@@ -369,7 +383,6 @@
         },
         {
           "CDR_L1I_SUPPORT": {
-            "_id": 13,
             "equiv": "NDS_ICACHE_SUPPORT",
             "desc": "L1I cache is present",
             "value": "yes",
@@ -397,7 +410,6 @@
         },
         {
           "CDR_L1I_SIZE": {
-            "_id": 14,
             "equiv": "NDS_ICACHE_SIZE",
             "desc": "L1I size, bytes",
             "value": "64KB",
@@ -425,7 +437,6 @@
         },
         {
           "CDR_L1I_WAY": {
-            "_id": 15,
             "equiv": "NDS_ICACHE_WAY",
             "desc": "L1I associativity",
             "value": "4",
@@ -453,7 +464,6 @@
         },
         {
           "CDR_L1I_REPLACE_POLICY": {
-            "_id": 16,
             "equiv": "NDS_ICACHE_LRU",
             "desc": "L1I replacement protocol",
             "value": "PLRU",
@@ -481,7 +491,6 @@
         },
         {
           "CDR_L1I_LINE_SIZE": {
-            "_id": 17,
             "equiv": "no equiv",
             "desc": "L1I line size, bytes",
             "value": "64",
@@ -509,7 +518,6 @@
         },
         {
           "CDR_L1I_BANKS": {
-            "_id": 18,
             "equiv": "no equiv",
             "desc": "L1I banks",
             "value": "4",
@@ -537,7 +545,6 @@
         },
         {
           "CDR_L1I_CRITICAL_WORD": {
-            "_id": 19,
             "equiv": "NDS_ICACHE_FIRST_WORD_FIRST",
             "desc": "L1I line fill policy",
             "value": "CriticalWord",
@@ -565,7 +572,6 @@
         },
         {
           "CDR_L1I_MSHR_DEPTH": {
-            "_id": 20,
             "equiv": "NDS_ICACHE_MSHR_DEPTH",
             "desc": "L1I max outstanding misses",
             "value": "8",
@@ -593,7 +599,6 @@
         },
         {
           "CDR_L1I_MSHR_FILL_FIFO_DEPTH": {
-            "_id": 21,
             "equiv": "NDS_MSHR_FILL_FIFO_DEPTH",
             "desc": "???",
             "value": "8",
@@ -621,7 +626,6 @@
         },
         {
           "CDR_L1I_READ_MISS_POLICY": {
-            "_id": 22,
             "equiv": "no equiv",
             "desc": "L1I read miss policy",
             "range": [ "Allocate", "NoAllocate" ],
@@ -649,7 +653,6 @@
         },
         {
           "CDR_L1I_ECC_SCHEME": {
-            "_id": 23,
             "equiv": "NDS_ICACHE_ECC_TYPE",
             "desc": "L1I ECC implementation",
             "range": [ "none","SECDED","SD-DAEC","DECTED" ],
@@ -677,7 +680,6 @@
         },
         {
           "CDR_L1I_QUEUE_SIZE_BYTES": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "I$ buffer size",
             "range": [
@@ -711,7 +713,6 @@
         },
         {
           "CDR_L2_SUPPORT": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2 cache is present",
             "value": "yes",
@@ -739,7 +740,6 @@
         },
         {
           "CDR_L2_SIZE": {
-            "_id": 23,
             "equiv": "NDS_L2C_CACHE_SIZE_KB",
             "desc": "L2 size, bytes",
             "value": "2M",
@@ -774,7 +774,6 @@
         },
         {
           "CDR_L2_WAY": {
-            "_id": 23,
             "equiv": "NDS_L2C_WAY",
             "desc": "L2 associativity",
             "range": [
@@ -808,7 +807,6 @@
         },
         {
           "CDR_L2_REPLACE_POLICY": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2 replacement protocol",
             "range": [
@@ -839,7 +837,6 @@
         },
         {
           "CDR_L2_LINE_SIZE": {
-            "_id": 23,
             "equiv": "NDS_L2_DATA_WIDTH",
             "desc": "L2 line size, bytes",
             "range": [
@@ -870,7 +867,6 @@
         },
         {
           "CDR_L2_BANKS": {
-            "_id": 23,
             "equiv": "NDS_L2C_BANKS",
             "desc": "L2 banks",
             "range": [
@@ -902,7 +898,6 @@
         },
         {
           "CDR_L2_ROWS_PER_BANK": {
-            "_id": 23,
             "equiv": "NDS_L2C_DATA_RAM_AW",
             "desc": "L2 data array rows per bank",
             "range": [
@@ -933,7 +928,6 @@
         },
         {
           "CDR_L2_CRITICAL_WORD": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2 line fill policy",
             "range": [
@@ -964,7 +958,6 @@
         },
         {
           "CDR_L2_MSHR_DEPTH": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2 max outstanding misses for all rows and banks",
             "range": [
@@ -996,7 +989,6 @@
         },
         {
           "CDR_L2_MSHR_FILL_FIFO_DEPTH": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "???",
             "range": [
@@ -1029,7 +1021,6 @@
         },
         {
           "CDR_L2_READ_MISS_POLICY": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2 read miss policy",
             "range": [
@@ -1060,7 +1051,6 @@
         },
         {
           "CDR_L2_WRITE_MISS_POLICY": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2 write miss policy",
             "range": [
@@ -1091,7 +1081,6 @@
         },
         {
           "CDR_L2_WRITE_HIT_POLICY": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2 write hit policy",
             "range": [
@@ -1122,7 +1111,6 @@
         },
         {
           "CDR_L2_ECC_SCHEME": {
-            "_id": 23,
             "equiv": "NDS_L2C_ECC_TYPE",
             "desc": "L2 ECC implementation",
             "range": [ "none","SECDED","SD-DAEC","DECTED" ],
@@ -1150,7 +1138,6 @@
         },
         {
           "CDR_L2_LSU_RD_REQ_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "lsu to l2 request buffer size, loads",
             "range": [
@@ -1183,7 +1170,6 @@
         },
         {
           "CDR_L2_LSU_WR_REQ_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "lsu to l2 request buffer size, stores",
             "range": [
@@ -1216,7 +1202,6 @@
         },
         {
           "CDR_L2_LSU_RD_RESP_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "l2 to lsu response queue size, loads",
             "range": [
@@ -1249,7 +1234,6 @@
         },
         {
           "CDR_L2_L1C_RD_REQ_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "I$ to l2 request buffer size",
             "range": [
@@ -1282,7 +1266,6 @@
         },
         {
           "CDR_L1C_LSU_RD_RESP_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "l2 to I$ response queue size",
             "range": [
@@ -1315,7 +1298,6 @@
         },
         {
           "CDR_L2_BIU_REQ_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "Is this snoop? Add snoop response",
             "range": [
@@ -1347,7 +1329,6 @@
         },
         {
           "CDR_L2_BIU_RESP_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "Response (Q in L2) back from L3",
             "range": [
@@ -1379,7 +1360,6 @@
         },
         {
           "CDR_L3_L2_RESP_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "Response (Q in L3) from L3 to L2",
             "range": [
@@ -1411,7 +1391,6 @@
         },
         {
           "CDR_L2_BIU_PIPE_REQ_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "Resp from BIU to banks in L2",
             "value": "8",
@@ -1439,7 +1418,6 @@
         },
         {
           "CDR_L2_MISS_PENDING_BUFFER_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2 MSHR per row per bank",
             "range": ["4","8","16","32"],
@@ -1467,7 +1445,6 @@
         },
         {
           "CDR_L1_PIPE_READ_REQ_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "Read req from I$ or D$",
             "range": [
@@ -1500,7 +1477,6 @@
         },
         {
           "CDR_L1_PIPE_WRITE_REQ_QUEUE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "Write req from D$",
             "range": [
@@ -1533,7 +1509,6 @@
         },
         {
           "CDR_L1D_TLB_ENTRIES": {
-            "_id": 23,
             "equiv": "NDS_DTLB_ENTRIES",
             "desc": "L1D TLB size, entries",
             "range": [ "8", "16", "32" ],
@@ -1561,7 +1536,6 @@
         },
         {
           "CDR_L1D_TLB_PAGE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L1D TLB page size, bytes",
             "value": "4K",
@@ -1589,7 +1563,6 @@
         },
         {
           "CDR_L1D_TLB_WAY": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L1D TLB associativity",
             "range": [ "1", "2", "4", "8","16","32" ],
@@ -1617,7 +1590,6 @@
         },
         {
           "CDR_L1D_TLB_ECC_SCHEME": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L1D TLB ECC implementation",
             "range": [ "none","SECDED","SD-DAEC","DECTED" ],
@@ -1645,7 +1617,6 @@
         },
         {
           "CDR_L1I_TLB_ENTRIES": {
-            "_id": 23,
             "equiv": "NDS_ITLB_ENTRIES",
             "desc": "L1I TLB size, entries",
             "range": [
@@ -1677,7 +1648,6 @@
         },
         {
           "CDR_L1I_TLB_PAGE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L1I TLB page size, bytes",
             "value": "4K",
@@ -1705,7 +1675,6 @@
         },
         {
           "CDR_L1I_TLB_WAY": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "??? L1I TLB associativity",
             "range": [ "1", "2", "4" ],
@@ -1733,7 +1702,6 @@
         },
         {
           "CDR_L1I_TLB_ECC_SCHEME": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L1I TLB ECC implementation",
             "range": [ "none","SECDED","SD-DAEC","DECTED" ],
@@ -1761,7 +1729,6 @@
         },
         {
           "CDR_L2D_TLB_ENTRIES": {
-            "_id": 23,
             "equiv": "NDS_L2TLB_DEPTH",
             "desc": "L2D TLB size, entries",
             "value": "1K",
@@ -1789,7 +1756,6 @@
         },
         {
           "CDR_L2D_TLB_PAGE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2D TLB page size, bytes",
             "value": "4K",
@@ -1817,7 +1783,6 @@
         },
         {
           "CDR_L2D_TLB_WAY": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2D TLB associativity",
             "value": "4",
@@ -1845,7 +1810,6 @@
         },
         {
           "CDR_L2D_TLB_ECC_SCHEME": {
-            "_id": 23,
             "equiv": "NDS_L2DTLB_ECC_TYPE",
             "desc": "L2D TLB ECC implementation",
             "range": [ "none","SECDED","SD-DAEC","DECTED" ],
@@ -1873,7 +1837,6 @@
         },
         {
           "CDR_L2I_TLB_ENTRIES": {
-            "_id": 23,
             "equiv": "NDS_L2TLB_DEPTH",
             "desc": "L2I TLB size, entries",
             "value": "1K",
@@ -1901,7 +1864,6 @@
         },
         {
           "CDR_L2I_TLB_PAGE_SIZE": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2I TLB page size, bytes",
             "value": "4K",
@@ -1929,7 +1891,6 @@
         },
         {
           "CDR_L2I_TLB_WAY": {
-            "_id": 23,
             "equiv": "no equiv",
             "desc": "L2I TLB associativity",
             "value": "4",
@@ -1957,7 +1918,6 @@
         },
         {
           "CDR_L2I_TLB_ECC_SCHEME": {
-            "_id": 23,
             "equiv": "NDS_L2ITLB_ECC_TYPE",
             "desc": "L2I TLB ECC implementation",
             "range": [ "none","SECDED","SD-DAEC","DECTED" ],
@@ -1985,7 +1945,6 @@
         },
         {
           "CDR_PMA_ENTRIES": {
-            "_id": 23,
             "equiv": "NDS_PMA_ENTRIES",
             "desc": "PMA registers",
             "value": "16",
@@ -2013,7 +1972,6 @@
         },
         {
           "CDR_PMA_GRANULARITY": {
-            "_id": 23,
             "equiv": "NDS_PMA_GRANULARITY",
             "desc": "PMA region size",
             "value": "16",
@@ -2041,7 +1999,6 @@
         },
         {
           "CDR_MMU_SCHEME": {
-            "_id": 23,
             "equiv": "NDS_MMU_SCHEME",
             "desc": "???",
             "range": [
@@ -2071,7 +2028,6 @@
         },
         {
           "CDR_NUM_PRIVILEGE_LEVELS": {
-            "_id": 23,
             "equiv": "NDS_NUM_PRIVILEGE_LEVELS",
             "desc": "Supported privilege levels",
             "value": "4",
@@ -2099,7 +2055,6 @@
         },
         {
           "CDR_PERFORMANCE_MONITOR": {
-            "_id": 23,
             "equiv": "NDS_PERFORMANCE_MONITOR",
             "desc": "Performance monitor extension",
             "value": "0:1,1:1,2:1,3:0,4:0,5:0",

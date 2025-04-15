@@ -1,6 +1,8 @@
 #include "tapir.h"
 #include <vector>
 
+const bool Tapir::preserveIds = false;
+
 const uint32_t Tapir::MaxRecentFiles = 8;
 const QString Tapir::rpath = ":icons/general/";
 const bool Tapir::DEFAULT_TABS = true;
@@ -11,6 +13,7 @@ const QTabWidget::TabPosition Tapir::defaultTabPos
 
 const QStringList Tapir::paramSheetColNames =
 {
+  "Id",
   "Name",
   "Equiv",
   "Description",

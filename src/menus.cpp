@@ -97,8 +97,9 @@ void Tapir::createViewMenu()
   mView->addAction(aSpreadSortNumDesc);
 
   mView->addSeparator();
-  mView->addAction(aViewHandleColState);
-  mView->addAction(aViewHandleRowState);
+  mView->addAction(aViewShowHiddenRows);
+  mView->addAction(aViewShowHiddenCols);
+  mView->addAction(aViewShowIdCols);
 
   mView->addSeparator();
   mView->addAction(aFormatColHide);

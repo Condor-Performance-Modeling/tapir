@@ -232,8 +232,9 @@ private slots:
   void sFormatSheetHide() {}
   void sFormatSheetUnhide() {}
 
-  void sViewHandleColState();
-  void sViewHandleRowState();
+  void sViewShowHiddenCols();
+  void sViewShowHiddenRows();
+  void sViewShowIdCols();
 
   void sDataForceChart();
   void sDataTernaryChart();
@@ -323,7 +324,7 @@ private:
           *aFormatSheetRename,*aFormatSheetHide,
           *aFormatSheetUnhide;
 
-  QAction *aViewHandleColState,*aViewHandleRowState;
+  QAction *aViewShowHiddenCols,*aViewShowHiddenRows,*aViewShowIdCols;
 
   QAction *aDataForceChart, *aDataTernaryChart, 
           *aDataScatterChart, *aDataBubbleChart,
@@ -398,11 +399,12 @@ private:
 
   QStringList recentFiles;
 
-  bool showAllCols{false};
-  bool showHiddenRows{false};
-  bool showHiddenRowsAsDisabled{false};
-  bool showFixedRows{false};
-  bool showFixedRowsAsDisabled{false};
+//  bool showAllCols{false};
+//  bool showHiddenRows{false};
+//  bool showHiddenRowsAsDisabled{false};
+//  bool showFixedRows{false};
+//  bool showFixedRowsAsDisabled{false};
+//  bool showIdCols{false};
 
 private:
   static const uint32_t MaxRecentFiles;
@@ -423,4 +425,5 @@ private:
   static const QString unitComboStyle;
   static const uint32_t defaultColState;
   static const uint32_t defaultRowState;
+  static const bool preserveIds;
 };

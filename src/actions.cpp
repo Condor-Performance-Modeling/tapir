@@ -140,15 +140,20 @@ void Tapir::createViewActions()
 {
   ATR("+createViewActions");
 
-  ACT(aViewHandleColState,"","Show Hidden Cols",this,sViewHandleColState);
-  aViewHandleColState->setCheckable(true);
-  aViewHandleColState->setChecked(defaultColState == HideHidden);
-  aViewHandleColState->setIcon(QIcon::fromTheme("emblem-checked"));
+  ACT(aViewShowHiddenCols,"","Show Hidden Cols",this,sViewShowHiddenCols);
+  aViewShowHiddenCols->setCheckable(true);
+  aViewShowHiddenCols->setChecked(defaultColState == HideHidden);
+  aViewShowHiddenCols->setIcon(QIcon::fromTheme("emblem-checked"));
 
-  ACT(aViewHandleRowState,"","Show Hidden Rows",this,sViewHandleRowState);
-  aViewHandleRowState->setCheckable(true);
-  aViewHandleRowState->setChecked(defaultRowState == HideHidden);
-  aViewHandleRowState->setIcon(QIcon::fromTheme("emblem-checked"));
+  ACT(aViewShowHiddenRows,"","Show Hidden Rows",this,sViewShowHiddenRowb);
+  aViewShowHiddenRows->setCheckable(true);
+  aViewShowHiddenRows->setChecked(defaultRowState == HideHidden);
+  aViewShowHiddenRows->setIcon(QIcon::fromTheme("emblem-checked"));
+
+  ACT(aViewShowIdCols,"","Show ID Cols",this,sViewShowIdCols);
+  aViewShowIdCols->setCheckable(true);
+  aViewShowIdCols->setChecked(false);
+  aViewShowIdCols->setIcon(QIcon::fromTheme("emblem-checked"));
 
   ATR("-createViewActions");
 }
@@ -285,9 +290,13 @@ void Tapir::connectCntxActions(void)
 // ==============================================================
 // SPREADSHEET
 // ==============================================================
-void Tapir::connectTableSignals(Spreadsheet *tbl)
+void Tapir::connectTableSignals(Spreadsheet *sheet)
 {
-  (void)tbl;
+  int idCol = paramSheetColNames.indexOf("Id");
+  if (idCol != -1 && aViewShowIdCols) {
+    sheet->setColumnHidden(idCol, !aViewShowIdCols->isChecked());
+  }
+//
 //connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
 //         this,SLOT(sUpdateStatus(QTableWidgetItem*)));
 //connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),

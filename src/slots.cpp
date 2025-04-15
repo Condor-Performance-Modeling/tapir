@@ -225,9 +225,9 @@ bool Tapir::saveJsonFile(const QString &fn)
 // =============================================================
 // VIEW
 // =============================================================
-void Tapir::sViewHandleColState()
+void Tapir::sViewShowHiddenCols()
 {
-  bool show = aViewHandleColState->isChecked();
+  bool show = aViewShowHiddenCols->isChecked();
 
   for (int i = 0; i < centralTabs->count(); ++i) {
     Spreadsheet *sheet = qobject_cast<Spreadsheet *>(centralTabs->widget(i));
@@ -248,10 +248,9 @@ void Tapir::sViewHandleColState()
 }
 // -------------------------------------------------------------------
 // -------------------------------------------------------------------
-void Tapir::sViewHandleRowState()
+void Tapir::sViewShowHiddenRows()
 {
-cout<<"HERE "<<endl;
-    bool showHidden = aViewHandleRowState->isChecked();
+    bool showHidden = aViewShowHiddenRows->isChecked();
 
     for (int i = 0; i < centralTabs->count(); ++i) {
         Spreadsheet* s = qobject_cast<Spreadsheet*>(centralTabs->widget(i));
@@ -264,6 +263,23 @@ cout<<"HERE "<<endl;
                 showHidden);
         }
     }
+}
+// -------------------------------------------------------------------
+// -------------------------------------------------------------------
+void Tapir::sViewShowIdCols()
+{
+  int idCol = paramSheetColNames.indexOf("Id");
+  if (idCol == -1) return;
+
+  bool show = aViewShowIdCols->isChecked();
+
+  for (int i = 0; i < centralTabs->count(); ++i) {
+    if (Spreadsheet *sheet
+            = qobject_cast<Spreadsheet *>(centralTabs->widget(i)))
+    {
+      sheet->setColumnHidden(idCol, !show);
+    }
+  }
 }
 // ======================================================
 // TOOLS
