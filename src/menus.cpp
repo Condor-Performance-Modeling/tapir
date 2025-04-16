@@ -154,6 +154,7 @@ void Tapir::createHelpMenu()
   mHelp->addAction(aHelpAbout);
   mHelp->addAction(aHelpDebug);
   mHelp->addAction(aDebug);
+  mHelp->addAction(aViewReassignIds);
 }
 // ==============================================================
 // MISC

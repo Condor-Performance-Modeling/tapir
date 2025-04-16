@@ -235,6 +235,7 @@ private slots:
   void sViewShowHiddenCols();
   void sViewShowHiddenRows();
   void sViewShowIdCols();
+  void sViewReassignIds();
 
   void sDataForceChart();
   void sDataTernaryChart();
@@ -324,7 +325,8 @@ private:
           *aFormatSheetRename,*aFormatSheetHide,
           *aFormatSheetUnhide;
 
-  QAction *aViewShowHiddenCols,*aViewShowHiddenRows,*aViewShowIdCols;
+  QAction *aViewShowHiddenCols,*aViewShowHiddenRows,
+          *aViewShowIdCols,*aViewReassignIds;
 
   QAction *aDataForceChart, *aDataTernaryChart, 
           *aDataScatterChart, *aDataBubbleChart,
@@ -399,17 +401,12 @@ private:
 
   QStringList recentFiles;
 
-//  bool showAllCols{false};
-//  bool showHiddenRows{false};
-//  bool showHiddenRowsAsDisabled{false};
-//  bool showFixedRows{false};
-//  bool showFixedRowsAsDisabled{false};
-//  bool showIdCols{false};
-
 private:
   static const uint32_t MaxRecentFiles;
 
   static const QString rpath;
+  static const QString unitComboStyle;
+
   static const bool DEFAULT_TABS;
   static const bool NO_DEFAULT_TABS;
 
@@ -418,12 +415,13 @@ private:
   static const QStringList paramSheetColNames;
   static const QStringList badCellValues;
   static const QStringList hiddenCols;
+  static const QStringList dslEntries;
 
   static const QColor headingBgClr;
   static const QColor headingFgClr;
 
-  static const QString unitComboStyle;
   static const uint32_t defaultColState;
   static const uint32_t defaultRowState;
-  static const bool preserveIds;
+  static const bool     preserveIds;
+  static const uint32_t reassignStartId;
 };

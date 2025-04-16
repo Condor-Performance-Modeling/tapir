@@ -203,7 +203,7 @@ bool Tapir::saveJsonFile(const QString &fn)
     return false;
   }
 
-  QJsonDocument doc = generateJson();  // <-- Replace with your actual generator
+  QJsonDocument doc = generateJson();
   file.write(doc.toJson(QJsonDocument::Indented));
   file.close();
 
@@ -280,6 +280,36 @@ void Tapir::sViewShowIdCols()
       sheet->setColumnHidden(idCol, !show);
     }
   }
+}
+// -------------------------------------------------------------------
+// -------------------------------------------------------------------
+void Tapir::sViewReassignIds()
+{
+  ATR("+sViewReassignIds()");
+  int idCol = paramSheetColNames.indexOf("Id");
+  if (idCol == -1) {
+    qWarning("Column 'Id' not found.");
+    return;
+  }
+
+  int nextId = static_cast<int>(reassignStartId);
+
+  for (int i = 0; i < centralTabs->count(); ++i) {
+    Spreadsheet *sheet = qobject_cast<Spreadsheet *>(centralTabs->widget(i));
+    if (!sheet) continue;
+
+    for (int row = 0; row < sheet->rowCount(); ++row) {
+      QTableWidgetItem *item = sheet->item(row, idCol);
+      if (!item) {
+        item = new QTableWidgetItem();
+        sheet->setItem(row, idCol, item);
+      }
+      item->setText(QString::number(nextId++));
+    }
+  }
+
+  //qDebug("Reassigned IDs starting from %d", reassignStartId);
+  ATR("-sViewReassignIds()");
 }
 // ======================================================
 // TOOLS

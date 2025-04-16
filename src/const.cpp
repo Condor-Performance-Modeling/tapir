@@ -2,6 +2,7 @@
 #include <vector>
 
 const bool Tapir::preserveIds = false;
+const uint32_t Tapir::reassignStartId = 0;
 
 const uint32_t Tapir::MaxRecentFiles = 8;
 const QString Tapir::rpath = ":icons/general/";
@@ -61,6 +62,12 @@ const QStringList Tapir::hiddenCols =
   "Hidden",
   "Disabled",
   "Generate"
+};
+
+const QStringList Tapir::dslEntries =
+{
+  "requires",
+  "dse_requires"
 };
 
 const QColor Tapir::headingFgClr(255,255,255);

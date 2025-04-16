@@ -4,6 +4,40 @@
             "cat_name": "Caches",
             "parameters": [
                 {
+                    "CDR_L1D_SUPPORT": {
+                        "_id": 0,
+                        "define_vh": "",
+                        "desc": "L1D cache is present",
+                        "disabled": "no",
+                        "dse_area_weight": "1.0",
+                        "dse_cmplx_weight": "1.0",
+                        "dse_enabled": "yes",
+                        "dse_fixed": "yes",
+                        "dse_formula": "fixed",
+                        "dse_hidden": "no",
+                        "dse_name": "",
+                        "dse_param": "yes",
+                        "dse_pwr_weight": "1.0",
+                        "dse_range": [
+                        ],
+                        "dse_widget": "n/a",
+                        "equiv": "NDS_DCACHE_SUPPORT",
+                        "fixed": "yes",
+                        "generate": "",
+                        "hidden": "no",
+                        "name": "CDR_L1D_SUPPORT",
+                        "range": [
+                            "yes",
+                            "no"
+                        ],
+                        "requires": [
+                        ],
+                        "units": "",
+                        "value": "",
+                        "widget": "ebg"
+                    }
+                },
+                {
                     "CDR_L1D_SIZE": {
                         "_id": 1,
                         "define_vh": "DCACHE_SIZE",
@@ -25,6 +59,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_SIZE",
                         "range": [
                             "0KB",
                             "32KB",
@@ -32,6 +67,7 @@
                             "128KB"
                         ],
                         "requires": [
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "64KB",
@@ -60,6 +96,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_WAY",
                         "range": [
                             "1",
                             "2",
@@ -67,8 +104,7 @@
                             "8"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "4",
@@ -97,16 +133,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_REPLACE_POLICY",
                         "range": [
                             "PLRU",
                             "Random"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "PLRU",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -132,16 +168,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_LINE_SIZE",
                         "range": [
                             "32",
                             "64"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "64",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -167,16 +203,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L1D_BANKS",
                         "range": [
                             "8",
                             "16"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "8",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -202,16 +238,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_CRITICAL_WORD",
                         "range": [
                             "CriticalWord",
                             "Flat"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "CriticalWord",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -237,6 +273,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_MSHR_DEPTH",
                         "range": [
                             "8",
                             "16",
@@ -246,11 +283,10 @@
                             "64"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "64",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -276,6 +312,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_MSHR_FILL_FIFO_DEPTH",
                         "range": [
                             "8",
                             "16",
@@ -285,11 +322,10 @@
                             "64"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "64",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -315,6 +351,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_MRQ_MAX_REQS",
                         "range": [
                             "8",
                             "16",
@@ -324,11 +361,10 @@
                             "64"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "64",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -354,16 +390,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_READ_MISS_POLICY",
                         "range": [
                             "Allocate",
                             "NoAllocate"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "NoAllocate",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -389,16 +425,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_WRITE_MISS_POLICY",
                         "range": [
                             "Allocate",
                             "NoAllocate"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "NoAllocate",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -424,16 +460,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_WRITE_HIT_POLICY",
                         "range": [
                             "WriteBack",
                             "WriteThrough"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "WriteBack",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -459,6 +495,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L1D_ECC_SCHEME",
                         "range": [
                             "none",
                             "SECDED",
@@ -466,8 +503,7 @@
                             "DECTED"
                         ],
                         "requires": [
-                            "neq(NDS_DCACHE_SIZE",
-                            "pos(0))"
+                            "eq(CDR_L1D_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "SECDED",
@@ -496,6 +532,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -503,7 +540,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "yes",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -529,12 +566,15 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_SIZE",
                         "range": [
+                            "0KB",
                             "32KB",
                             "64KB",
                             "128KB"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "64KB",
@@ -563,6 +603,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_WAY",
                         "range": [
                             "1",
                             "2",
@@ -570,6 +611,7 @@
                             "8"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "4",
@@ -598,6 +640,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_REPLACE_POLICY",
                         "range": [
                             "PLRU",
                             "LRU",
@@ -606,9 +649,10 @@
                             "FIFO"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "PLRU",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -634,14 +678,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_LINE_SIZE",
                         "range": [
                             "32",
                             "64"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "64",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -667,14 +713,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L1I_BANKS",
                         "range": [
                             "4",
                             "8"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "4",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -700,14 +748,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_CRITICAL_WORD",
                         "range": [
                             "CriticalWord",
                             "Flat"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "CriticalWord",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -733,14 +783,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_MSHR_DEPTH",
                         "range": [
                             "8",
                             "16"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "8",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -766,14 +818,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_MSHR_FILL_FIFO_DEPTH",
                         "range": [
                             "8",
                             "16"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "8",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -799,14 +853,16 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_READ_MISS_POLICY",
                         "range": [
                             "Allocate",
                             "NoAllocate"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "NoAllocate",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -832,6 +888,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L1I_ECC_SCHEME",
                         "range": [
                             "none",
                             "SECDED",
@@ -839,6 +896,7 @@
                             "DECTED"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "SECDED",
@@ -867,6 +925,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L1I_QUEUE_SIZE_BYTES",
                         "range": [
                             "64",
                             "128",
@@ -875,6 +934,7 @@
                             "1024"
                         ],
                         "requires": [
+                            "eq(CDR_L1I_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "256",
@@ -903,6 +963,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -910,7 +971,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "yes",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -936,6 +997,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_SIZE",
                         "range": [
                             "256K",
                             "512K",
@@ -945,6 +1007,7 @@
                             "8M"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "2M",
@@ -973,6 +1036,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_WAY",
                         "range": [
                             "1",
                             "2",
@@ -981,9 +1045,10 @@
                             "16"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "16",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1009,14 +1074,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_REPLACE_POLICY",
                         "range": [
                             "PLRU",
                             "Random"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "PLRU",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1042,14 +1109,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_LINE_SIZE",
                         "range": [
                             "32",
                             "64"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "64",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1075,15 +1144,17 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_BANKS",
                         "range": [
                             "8",
                             "16",
                             "32"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "8",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1109,14 +1180,16 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L2_ROWS_PER_BANK",
                         "range": [
                             "1",
                             "2"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "1",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1142,14 +1215,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_CRITICAL_WORD",
                         "range": [
                             "CriticalWord",
                             "Flat"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "CriticalWord",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1175,12 +1250,14 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_L2_MSHR_DEPTH",
                         "range": [
                             "32",
                             "64",
                             "128"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "64",
@@ -1209,6 +1286,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_L2_MSHR_FILL_FIFO_DEPTH",
                         "range": [
                             "4",
                             "8",
@@ -1216,9 +1294,10 @@
                             "32"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "32",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1244,14 +1323,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_READ_MISS_POLICY",
                         "range": [
                             "Allocate",
                             "NoAllocate"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "NoAllocate",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1277,14 +1358,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_WRITE_MISS_POLICY",
                         "range": [
                             "Allocate",
                             "NoAllocate"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "NoAllocate",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1310,14 +1393,16 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_WRITE_HIT_POLICY",
                         "range": [
                             "WriteBack",
                             "WriteThrough"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "WriteBack",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1343,6 +1428,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L2_ECC_SCHEME",
                         "range": [
                             "none",
                             "SECDED",
@@ -1350,6 +1436,7 @@
                             "DECTED"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "SECDED",
@@ -1378,6 +1465,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no?",
+                        "name": "CDR_L2_LSU_RD_REQ_QUEUE_SIZE",
                         "range": [
                             "8",
                             "16",
@@ -1385,9 +1473,10 @@
                             "64"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "8",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1413,6 +1502,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no?",
+                        "name": "CDR_L2_LSU_WR_REQ_QUEUE_SIZE",
                         "range": [
                             "8",
                             "16",
@@ -1420,9 +1510,10 @@
                             "64"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "8",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1448,6 +1539,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no?",
+                        "name": "CDR_L2_LSU_RD_RESP_QUEUE_SIZE",
                         "range": [
                             "8",
                             "16",
@@ -1455,9 +1547,10 @@
                             "64"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "64",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1483,6 +1576,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no?",
+                        "name": "CDR_L2_L1C_RD_REQ_QUEUE_SIZE",
                         "range": [
                             "8",
                             "16",
@@ -1490,9 +1584,10 @@
                             "64"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "8",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1518,6 +1613,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no?",
+                        "name": "CDR_L1C_LSU_RD_RESP_QUEUE_SIZE",
                         "range": [
                             "8",
                             "16",
@@ -1553,6 +1649,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no?",
+                        "name": "CDR_L2_BIU_REQ_QUEUE_SIZE",
                         "range": [
                             "32",
                             "64",
@@ -1587,15 +1684,17 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_BIU_RESP_QUEUE_SIZE",
                         "range": [
                             "32",
                             "64",
                             "128"
                         ],
                         "requires": [
+                            "eq(CDR_L2_SUPPORT,pos(0));"
                         ],
                         "units": "",
-                        "value": "32",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1621,6 +1720,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L3_L2_RESP_QUEUE_SIZE",
                         "range": [
                             "32",
                             "64",
@@ -1629,7 +1729,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "32",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1655,13 +1755,14 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L2_BIU_PIPE_REQ_QUEUE_SIZE",
                         "range": [
                             "8"
                         ],
                         "requires": [
                         ],
                         "units": "",
-                        "value": "8",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1687,6 +1788,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L2_MISS_PENDING_BUFFER_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -1722,6 +1824,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L1_PIPE_READ_REQ_QUEUE_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -1757,6 +1860,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_L1_PIPE_WRITE_REQ_QUEUE_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -1792,6 +1896,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_TLB_ENTRIES",
                         "range": [
                             "8",
                             "16",
@@ -1800,7 +1905,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "32",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1826,6 +1931,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_TLB_PAGE_SIZE",
                         "range": [
                             "4K",
                             "8K",
@@ -1834,7 +1940,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "4K",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1860,6 +1966,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_TLB_WAY",
                         "range": [
                             "1",
                             "2",
@@ -1871,7 +1978,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "32",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1897,6 +2004,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_TLB_ECC_SCHEME",
                         "range": [
                             "none",
                             "SECDED",
@@ -1932,6 +2040,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_TLB_ENTRIES",
                         "range": [
                             "8",
                             "16",
@@ -1940,7 +2049,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "32",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -1966,6 +2075,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_TLB_PAGE_SIZE",
                         "range": [
                             "4K",
                             "8K",
@@ -1974,7 +2084,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "4K",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -2000,6 +2110,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_TLB_WAY",
                         "range": [
                             "1",
                             "2",
@@ -2034,6 +2145,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_TLB_ECC_SCHEME",
                         "range": [
                             "none",
                             "SECDED",
@@ -2069,6 +2181,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2D_TLB_ENTRIES",
                         "range": [
                             "1K",
                             "2K",
@@ -2077,7 +2190,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "1K",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -2103,6 +2216,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2D_TLB_PAGE_SIZE",
                         "range": [
                             "1K",
                             "2K",
@@ -2138,6 +2252,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2D_TLB_WAY",
                         "range": [
                             "2",
                             "4",
@@ -2172,6 +2287,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2D_TLB_ECC_SCHEME",
                         "range": [
                             "none",
                             "SECDED",
@@ -2207,6 +2323,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2I_TLB_ENTRIES",
                         "range": [
                             "1K",
                             "2K",
@@ -2215,7 +2332,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "1K",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -2241,6 +2358,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2I_TLB_PAGE_SIZE",
                         "range": [
                             "1K",
                             "2K",
@@ -2276,6 +2394,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2I_TLB_WAY",
                         "range": [
                             "2",
                             "4",
@@ -2310,6 +2429,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2I_TLB_ECC_SCHEME",
                         "range": [
                             "none",
                             "SECDED",
@@ -2345,6 +2465,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_PMA_ENTRIES",
                         "range": [
                             "16",
                             "32"
@@ -2352,7 +2473,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "16",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -2378,6 +2499,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_PMA_GRANULARITY",
                         "range": [
                             "4",
                             "8",
@@ -2414,6 +2536,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_MMU_SCHEME",
                         "range": [
                             "SV32",
                             "SV39",
@@ -2450,13 +2573,14 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NUM_PRIVILEGE_LEVELS",
                         "range": [
                             "4"
                         ],
                         "requires": [
                         ],
                         "units": "",
-                        "value": "4",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -2482,6 +2606,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_PERFORMANCE_MONITOR",
                         "range": [
                             "RVA23",
                             "zicntr",
@@ -2491,7 +2616,7 @@
                             "sscofpmf"
                         ],
                         "requires": [
-                            "CDR_RVA23_FULL_SUPPORT=1"
+                            "eq(CDR_RVA23_FULL_SUPPORT,pos(0));"
                         ],
                         "units": "",
                         "value": "0:1,1:1,2:1,3:1,4:0,5:0",
@@ -2525,6 +2650,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_BPU_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -2532,7 +2658,7 @@
                         "requires": [
                         ],
                         "units": "",
-                        "value": "yes",
+                        "value": "",
                         "widget": "ebg"
                     }
                 },
@@ -2558,6 +2684,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_BPU_TYPE",
                         "range": [
                             "BTB+GHT",
                             "TAGE",
@@ -2595,6 +2722,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_BTB_SIZE",
                         "range": [
                             "4K",
                             "8K",
@@ -2629,6 +2757,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_BTB_WAY",
                         "range": [
                             "2",
                             "4",
@@ -2663,6 +2792,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_BTB_INDEXING_GRANULARITY",
                         "range": [
                         ],
                         "requires": [
@@ -2694,6 +2824,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_BTB_REPL_POLICY",
                         "range": [
                         ],
                         "requires": [
@@ -2725,6 +2856,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_BTB_PAGE_SIZE",
                         "range": [
                             "64",
                             "128",
@@ -2759,6 +2891,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_GHT_SIZE",
                         "range": [
                             "4K",
                             "8K",
@@ -2795,6 +2928,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_GHT_GHR_WIDTH",
                         "range": [
                             "4",
                             "8",
@@ -2831,6 +2965,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_GHT_DATA_WIDTH",
                         "range": [
                             "32",
                             "64",
@@ -2865,6 +3000,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_GHT_BANKS",
                         "range": [
                             "2",
                             "4",
@@ -2899,6 +3035,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_GHT_SUB_BANKS_ENABLE",
                         "range": [
                             "yes",
                             "no"
@@ -2932,6 +3069,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RET_STACK_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -2969,6 +3107,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RET_STACK_RECURSION_BITS",
                         "range": [
                             "4",
                             "8",
@@ -3003,6 +3142,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "TBD-2",
                         "range": [
                             "???"
                         ],
@@ -3035,6 +3175,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_PRED_ENABLE              ",
                         "range": [
                             "???"
                         ],
@@ -3067,6 +3208,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_INSTSHIFTAMT             ",
                         "range": [
                             "???"
                         ],
@@ -3099,6 +3241,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_NHISTORYTABLES           ",
                         "range": [
                             "???"
                         ],
@@ -3131,6 +3274,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_ENABLE_GLOBAL_HIST       ",
                         "range": [
                             "???"
                         ],
@@ -3163,6 +3307,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_MINHIST                  ",
                         "range": [
                             "???"
                         ],
@@ -3195,13 +3340,32 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_TAGTABLETAGWIDTHS        ",
                         "range": [
                             "???"
                         ],
                         "requires": [
                         ],
                         "units": "",
-                        "value": "[0, 7, 7, 8, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16, 16, 17, 17]",
+                        "value": [
+                            "0",
+                            "7",
+                            "7",
+                            "8",
+                            "8",
+                            "9",
+                            "10",
+                            "11",
+                            "12",
+                            "12",
+                            "13",
+                            "14",
+                            "15",
+                            "16",
+                            "16",
+                            "17",
+                            "17"
+                        ],
                         "widget": "n/a"
                     }
                 },
@@ -3227,13 +3391,32 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_LOGTAGTABLESIZES         ",
                         "range": [
                             "???"
                         ],
                         "requires": [
                         ],
                         "units": "",
-                        "value": "[14, 10, 10, 11, 11, 11, 12, 12, 13, 13, 12, 12, 11, 11, 10, 10, 9]",
+                        "value": [
+                            "14",
+                            "10",
+                            "10",
+                            "11",
+                            "11",
+                            "11",
+                            "12",
+                            "12",
+                            "13",
+                            "13",
+                            "12",
+                            "12",
+                            "11",
+                            "11",
+                            "10",
+                            "10",
+                            "9"
+                        ],
                         "widget": "n/a"
                     }
                 },
@@ -3259,6 +3442,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_BIMODALTABLECOUNTERBITS  ",
                         "range": [
                             "???"
                         ],
@@ -3291,6 +3475,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_TAGTABLECOUNTERBITS      ",
                         "range": [
                             "???"
                         ],
@@ -3323,6 +3508,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_TAGTABLEUBITS            ",
                         "range": [
                             "???"
                         ],
@@ -3355,6 +3541,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_HISTBUFFERSIZE           ",
                         "range": [
                             "???"
                         ],
@@ -3387,6 +3574,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_ENABLE_PATH_HIST         ",
                         "range": [
                             "???"
                         ],
@@ -3419,6 +3607,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_PATHHISTBITS             ",
                         "range": [
                             "???"
                         ],
@@ -3451,6 +3640,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_NUMUSEALTONNA            ",
                         "range": [
                             "???"
                         ],
@@ -3483,6 +3673,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_INITIALURESETTIMERVALUE  ",
                         "range": [
                             "???"
                         ],
@@ -3515,6 +3706,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_USEALTONNABITS           ",
                         "range": [
                             "???"
                         ],
@@ -3547,6 +3739,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TAGE_MAXNUMALLOC              ",
                         "range": [
                             "???"
                         ],
@@ -3579,6 +3772,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_LPRED_PRED_ENABLE                  ",
                         "range": [
                             "???"
                         ],
@@ -3611,6 +3805,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_LPRED_INDEXING_GRANULARITY         ",
                         "range": [
                             "???"
                         ],
@@ -3643,6 +3838,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_LPRED_ASSOCIATIVITY                ",
                         "range": [
                             "???"
                         ],
@@ -3675,6 +3871,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_LPRED_NUM_ENTRIES                  ",
                         "range": [
                             "???"
                         ],
@@ -3707,6 +3904,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_LPRED_REPL_POLICY                  ",
                         "range": [
                             "???"
                         ],
@@ -3739,6 +3937,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_LPRED_NUM_ITERATION_LOOPS_IGNORED  ",
                         "range": [
                             "???"
                         ],
@@ -3771,6 +3970,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_LPRED_MAX_AGE                      ",
                         "range": [
                             "???"
                         ],
@@ -3803,6 +4003,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_LPRED_CONFIDENCE_THRESHOLD         ",
                         "range": [
                             "???"
                         ],
@@ -3840,6 +4041,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1D_PREFETCH_SCHEME",
                         "range": [
                             "none",
                             "stride",
@@ -3874,6 +4076,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L1I_PREFETCH_SCHEME",
                         "range": [
                             "none",
                             "stride",
@@ -3909,6 +4112,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_L2_PREFETCH_SCHEME",
                         "range": [
                             "none",
                             "stride",
@@ -3948,6 +4152,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_ISA_BASE",
                         "range": [
                             "yes",
                             "no"
@@ -3981,6 +4186,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23_FULL_SUPPORT",
                         "range": [
                         ],
                         "requires": [
@@ -4012,6 +4218,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23_SUPERVISOR_PROFILE_SUPPORT",
                         "range": [
                         ],
                         "requires": [
@@ -4043,6 +4250,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23S_TOP_SV48",
                         "range": [
                             "yes",
                             "no"
@@ -4076,6 +4284,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23S_TOP_SV57",
                         "range": [
                             "yes",
                             "no"
@@ -4109,6 +4318,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23S_TOP_Zkr",
                         "range": [
                             "yes",
                             "no"
@@ -4142,6 +4352,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23S_TOP_Svadu",
                         "range": [
                             "yes",
                             "no"
@@ -4175,6 +4386,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23S_TOP_Sdext",
                         "range": [
                             "yes",
                             "no"
@@ -4208,6 +4420,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23S_TOP_Ssstrict",
                         "range": [
                             "yes",
                             "no"
@@ -4241,6 +4454,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23S_TOP_Svvptc",
                         "range": [
                             "yes",
                             "no"
@@ -4274,6 +4488,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23S_TOP_Sspm",
                         "range": [
                             "yes",
                             "no"
@@ -4307,6 +4522,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23US_OPT_Zvkng",
                         "range": [
                             "yes",
                             "no"
@@ -4340,6 +4556,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23US_OPT_Zvksg",
                         "range": [
                             "yes",
                             "no"
@@ -4373,6 +4590,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23US_OPT_Zacas",
                         "range": [
                             "yes",
                             "no"
@@ -4406,6 +4624,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23US_OPT_Zvbc",
                         "range": [
                             "yes",
                             "no"
@@ -4439,6 +4658,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23US_OPT_Zfh",
                         "range": [
                             "yes",
                             "no"
@@ -4472,6 +4692,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23US_OPT_Zbc",
                         "range": [
                             "yes",
                             "no"
@@ -4505,6 +4726,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23US_OPT_Zvfh",
                         "range": [
                             "yes",
                             "no"
@@ -4538,6 +4760,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23US_OPT_Zfbfmin",
                         "range": [
                             "yes",
                             "no"
@@ -4571,6 +4794,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23US_OPT_Zvfbfmin",
                         "range": [
                             "yes",
                             "no"
@@ -4604,6 +4828,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23US_OPT_Zvfbfwma",
                         "range": [
                             "yes",
                             "no"
@@ -4637,6 +4862,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23_USER_PROFILE_SUPPORT",
                         "range": [
                         ],
                         "requires": [
@@ -4668,6 +4894,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23U_OPT_VEC_CRYPTO",
                         "range": [
                         ],
                         "requires": [
@@ -4699,6 +4926,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23U_OPT_ZABHA",
                         "range": [
                         ],
                         "requires": [
@@ -4730,6 +4958,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23U_OPT_ZACAS",
                         "range": [
                         ],
                         "requires": [
@@ -4761,6 +4990,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23U_OPT_ZICCAMOC",
                         "range": [
                         ],
                         "requires": [
@@ -4792,6 +5022,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23U_OPT_ZVBC",
                         "range": [
                         ],
                         "requires": [
@@ -4823,6 +5054,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RVA23U_OPT_ZAMA16B",
                         "range": [
                         ],
                         "requires": [
@@ -4854,6 +5086,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "TBD-3",
                         "range": [
                         ],
                         "requires": [
@@ -4885,6 +5118,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_CMO_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -4918,6 +5152,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_RVN_SUPPORT",
                         "range": [
                             "???"
                         ],
@@ -4955,6 +5190,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NDS_ACE_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -4988,6 +5224,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NDS_ACE_STREAM_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -5021,6 +5258,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NDS_FLOAT16_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -5054,6 +5292,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NDS_CODENSE2_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -5087,6 +5326,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "TBD-4",
                         "range": [
                             "yes",
                             "no"
@@ -5120,6 +5360,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "TBD-5",
                         "range": [
                             "yes",
                             "no"
@@ -5153,6 +5394,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "TBD-6",
                         "range": [
                             "yes",
                             "no"
@@ -5186,6 +5428,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "TBD-7",
                         "range": [
                             "yes",
                             "no"
@@ -5219,6 +5462,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NDS_POWERBRAKE_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -5252,6 +5496,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NDS_STACKSAFE_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -5285,6 +5530,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NDS_VECTOR_PLIC_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -5318,6 +5564,7 @@
                         "fixed": "no?",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NDS_PC_GPR_PROBING_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -5356,6 +5603,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_BIU_ADDRESS_WIDTH",
                         "range": [
                         ],
                         "requires": [
@@ -5387,6 +5635,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_BIU_DATA_WIDTH",
                         "range": [
                             "256",
                             "512",
@@ -5426,6 +5675,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_FETCH_SIZE",
                         "range": [
                             "2xSlice",
                             "4xSlice",
@@ -5461,6 +5711,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_DECODE_WIDTH",
                         "range": [
                             "2xSlice",
                             "4xSlice",
@@ -5496,6 +5747,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_RENAME_WIDTH",
                         "range": [
                             "4",
                             "8",
@@ -5531,6 +5783,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_D0Q_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -5567,6 +5820,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_D1Q_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -5602,6 +5856,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_TRM_TIME_SIZE",
                         "range": [
                         ],
                         "requires": [
@@ -5633,6 +5888,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_NUM_TO_DISPATCH",
                         "range": [
                             "2xSlice",
                             "4xSlice",
@@ -5668,6 +5924,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_DISPATCH_QUEUE_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -5704,6 +5961,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_IQ_SCHEDULER_SIZE",
                         "range": [
                         ],
                         "requires": [
@@ -5735,6 +5993,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "TBD-8",
                         "range": [
                         ],
                         "requires": [
@@ -5766,6 +6025,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "TBD-9",
                         "range": [
                         ],
                         "requires": [
@@ -5797,6 +6057,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "TBD-10",
                         "range": [
                         ],
                         "requires": [
@@ -5828,6 +6089,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "TBD-11",
                         "range": [
                         ],
                         "requires": [
@@ -5859,6 +6121,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "TBD-12",
                         "range": [
                         ],
                         "requires": [
@@ -5890,6 +6153,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_HW_MULTIPLIER_SUPPORT",
                         "range": [
                         ],
                         "requires": [
@@ -5921,6 +6185,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NON_BLOCKING_SUPPORT",
                         "range": [
                         ],
                         "requires": [
@@ -5952,6 +6217,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NUM_SLICES",
                         "range": [
                             "1",
                             "2",
@@ -5986,6 +6252,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_INSTRS_PER_SLICE",
                         "range": [
                         ],
                         "requires": [
@@ -6017,6 +6284,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_XRF_ENTRIES",
                         "range": [
                             "48",
                             "64",
@@ -6051,6 +6319,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CSR_ADDR_WIDTH",
                         "range": [
                         ],
                         "requires": [
@@ -6082,6 +6351,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_PRF_WRITE_PORTS",
                         "range": [
                             "8",
                             "12",
@@ -6116,6 +6386,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_PRF_READ_PORTS",
                         "range": [
                             "16",
                             "20",
@@ -6152,6 +6423,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_PRF_SIZE",
                         "range": [
                             "128",
                             "160",
@@ -6188,6 +6460,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_RFL_SIZE",
                         "range": [
                             "64",
                             "96",
@@ -6222,6 +6495,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_ROB_SIZE",
                         "range": [
                             "128",
                             "192",
@@ -6256,6 +6530,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_ROB_SINGLE_CYCLE_RETIRE",
                         "range": [
                             "8 to ROB_ENTRY modulo 4"
                         ],
@@ -6288,6 +6563,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_ALU_XEQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6324,6 +6600,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_MUL_XEQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6360,6 +6637,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_FALU_XEQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6396,6 +6674,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_FMIS_XEQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6432,6 +6711,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_FDIV_XEQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6468,6 +6748,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_DIV_XEQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6504,6 +6785,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_BRN_XEQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6540,6 +6822,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_LS_XEQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6576,6 +6859,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_CSR_XEQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6612,6 +6896,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_ICQ_SIZE",
                         "range": [
                             "32",
                             "64",
@@ -6646,6 +6931,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_IMQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6682,6 +6968,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_BPQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6718,6 +7005,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_MRQ_SIZE",
                         "range": [
                             "32",
                             "64",
@@ -6752,6 +7040,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_DMQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6788,6 +7077,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_DEQ_SIZE",
                         "range": [
                             "2",
                             "4",
@@ -6823,6 +7113,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_DBQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6859,6 +7150,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_STB_SIZE",
                         "range": [
                             "32",
                             "64",
@@ -6893,6 +7185,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_LDB_SIZE",
                         "range": [
                             "32",
                             "64",
@@ -6927,6 +7220,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_XIQ_SIZE",
                         "range": [
                             "8",
                             "16",
@@ -6963,6 +7257,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_TMQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -6997,6 +7292,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_ITQ_SIZE",
                         "range": [
                             "4",
                             "8",
@@ -7038,6 +7334,7 @@
                         "fixed": "",
                         "generate": "",
                         "hidden": "",
+                        "name": "TBD-13",
                         "range": [
                         ],
                         "requires": [
@@ -7069,6 +7366,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_DEBUG_SUPPORT",
                         "range": [
                             "yes",
                             "no"
@@ -7102,6 +7400,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_DEBUG_VEC",
                         "range": [
                             "???"
                         ],
@@ -7134,6 +7433,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_NUM_TRIGGERS",
                         "range": [
                             "???"
                         ],
@@ -7166,6 +7466,7 @@
                         "fixed": "???",
                         "generate": "",
                         "hidden": "???",
+                        "name": "CDR_TRACE_INTERFACE",
                         "range": [
                             "???"
                         ],
@@ -7203,6 +7504,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "no",
+                        "name": "CDR_NUM_HART",
                         "range": [
                         ],
                         "requires": [
@@ -7234,6 +7536,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_VIRT_ADDRESS_WIDTH",
                         "range": [
                             "48",
                             "57",
@@ -7268,6 +7571,7 @@
                         "fixed": "no",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_PHYS_ADDRESS_WIDTH",
                         "range": [
                             "47",
                             "57",
@@ -7302,6 +7606,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_ASID_WIDTH",
                         "range": [
                         ],
                         "requires": [
@@ -7333,6 +7638,7 @@
                         "fixed": "",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_INITIAL_PC",
                         "range": [
                         ],
                         "requires": [
@@ -7364,6 +7670,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_MIN_RESET_ASSERT_CYCLES",
                         "range": [
                         ],
                         "requires": [
@@ -7395,6 +7702,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_AXI_ID_SIZE_WIDTH",
                         "range": [
                         ],
                         "requires": [
@@ -7426,6 +7734,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_DFS_SUPPORT",
                         "range": [
                         ],
                         "requires": [
@@ -7462,6 +7771,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_CUZCO_CPUID",
                         "range": [
                         ],
                         "requires": [
@@ -7493,6 +7803,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_CUZCO_MIMPID",
                         "range": [
                         ],
                         "requires": [
@@ -7524,6 +7835,7 @@
                         "fixed": "yes",
                         "generate": "",
                         "hidden": "yes",
+                        "name": "CDR_CUZCO_PLATFORM",
                         "range": [
                         ],
                         "requires": [

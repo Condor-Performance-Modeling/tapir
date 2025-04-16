@@ -1,6 +1,7 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/data">
   <file alias="dev.json">../json/dev.json</file>
+  <file alias="cuzco_cfg.json">../json/cuzco_cfg.json</file>
   <file>icons/aspenicon.png</file>
   <file>icons/aspensplash.jpg</file>
   <file>icons/aspennarrow.jpg</file>

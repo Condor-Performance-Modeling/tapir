@@ -125,7 +125,6 @@ void Tapir::createFormatActions()
   ACT(aFormatSheetRename,"","Sheet: rename",this,sFormatSheetRename);
   ACT(aFormatSheetHide,  "","Sheet: hide",this,sFormatSheetHide);
   ACT(aFormatSheetUnhide,"","Sheet: show hidden",this,sFormatSheetUnhide);
-
 }
 // ==============================================================
 // VIEW
@@ -145,7 +144,7 @@ void Tapir::createViewActions()
   aViewShowHiddenCols->setChecked(defaultColState == HideHidden);
   aViewShowHiddenCols->setIcon(QIcon::fromTheme("emblem-checked"));
 
-  ACT(aViewShowHiddenRows,"","Show Hidden Rows",this,sViewShowHiddenRowb);
+  ACT(aViewShowHiddenRows,"","Show Hidden Rows",this,sViewShowHiddenRows);
   aViewShowHiddenRows->setCheckable(true);
   aViewShowHiddenRows->setChecked(defaultRowState == HideHidden);
   aViewShowHiddenRows->setIcon(QIcon::fromTheme("emblem-checked"));
@@ -154,6 +153,8 @@ void Tapir::createViewActions()
   aViewShowIdCols->setCheckable(true);
   aViewShowIdCols->setChecked(false);
   aViewShowIdCols->setIcon(QIcon::fromTheme("emblem-checked"));
+
+  ACT(aViewReassignIds,"","Reassign IDs",this,sViewReassignIds);
 
   ATR("-createViewActions");
 }
@@ -290,12 +291,12 @@ void Tapir::connectCntxActions(void)
 // ==============================================================
 // SPREADSHEET
 // ==============================================================
-void Tapir::connectTableSignals(Spreadsheet *sheet)
+void Tapir::connectTableSignals(Spreadsheet*)
 {
-  int idCol = paramSheetColNames.indexOf("Id");
-  if (idCol != -1 && aViewShowIdCols) {
-    sheet->setColumnHidden(idCol, !aViewShowIdCols->isChecked());
-  }
+//  int idCol = paramSheetColNames.indexOf("Id");
+//  if (idCol != -1 && aViewShowIdCols) {
+//    sheet->setColumnHidden(idCol, !aViewShowIdCols->isChecked());
+//  }
 //
 //connect(tbl,SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
 //         this,SLOT(sUpdateStatus(QTableWidgetItem*)));
