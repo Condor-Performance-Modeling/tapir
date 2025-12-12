@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>D3 Force Graph — Score by Color & Size</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { margin: 0; font-family: sans-serif; }
+  svg { width: 100%; height: 100vh; display: block; }
+  .tooltip {
+    position: absolute;
+    background: #eee;
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid #aaa;
+    pointer-events: none;
+    opacity: 0;
+  }
+</style>
+<body>
+<svg></svg>
+<div class="tooltip"></div>
+<script>
+  const graph = %DATA%;
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  const svg = d3.select("svg")
+    .attr("viewBox", [0, 0, width, height])
+    .call(d3.zoom().on("zoom", (event) => {
+      g.attr("transform", event.transform);
+    }));
+
+  const g = svg.append("g");
+  const tooltip = d3.select(".tooltip");
+
+  const nodes = graph.nodes;
+  const links = graph.links;
+
+  const scoreExtent = d3.extent(nodes, d => d.score);
+
+  const colorScale = d3.scaleSequential(d3.interpolateTurbo)
+    .domain(scoreExtent);
+
+  const sizeScale = d3.scaleSqrt()
+    .domain(scoreExtent)
+    .range([4, 16]);
+
+  const simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).id(d => d.id).distance(100))
+    .force("charge", d3.forceManyBody().strength(-150))
+    .force("center", d3.forceCenter(width / 2, height / 2));
+
+  const link = g.append("g")
+    .attr("stroke", "#999")
+    .selectAll("line")
+    .data(links)
+    .join("line")
+    .attr("stroke-width", 1.5)
+    .attr("stroke-opacity", 0.6);
+
+  const node = g.append("g")
+    .attr("class", "nodes")
+    .selectAll("circle")
+    .data(nodes)
+    .join("circle")
+    .attr("r", d => sizeScale(d.score))
+    .attr("fill", d => colorScale(d.score))
+    .on("mouseover", (event, d) => {
+      tooltip.style("opacity", 1)
+             .html(`ID: ${d.id}<br>IPC: ${d.ipc}<br>Area: ${d.area}<br>Power: ${d.power}<br>Score: ${d.score.toFixed(4)}`)
+             .style("left", (event.pageX + 10) + "px")
+             .style("top", (event.pageY - 20) + "px");
+    })
+    .on("mouseout", () => {
+      tooltip.style("opacity", 0);
+    })
+    .call(d3.drag()
+      .on("start", (event, d) => {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      })
+      .on("drag", (event, d) => {
+        d.fx = event.x;
+        d.fy = event.y;
+      })
+      .on("end", (event, d) => {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      })
+    );
+
+  const label = g.append("g")
+    .attr("pointer-events", "none")
+    .selectAll("text")
+    .data(nodes)
+    .join("text")
+    .attr("text-anchor", "middle")
+    .attr("dy", -10)
+    .attr("font-size", 10)
+    .attr("fill", "#444")
+    .text(d => d.id);
+
+  simulation.on("tick", () => {
+    link
+      .attr("x1", d => d.source.x)
+      .attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x)
+      .attr("y2", d => d.target.y);
+
+    node
+      .attr("cx", d => d.x)
+      .attr("cy", d => d.y);
+
+    label
+      .attr("x", d => d.x)
+      .attr("y", d => d.y);
+  });
+
+  // --- Color Legend (Turbo scale)
+  const legendHeight = 150;
+  const legendWidth = 12;
+
+  const legendSvg = svg.append("g")
+    .attr("transform", `translate(${width - 60}, 30)`);
+
+  const legendScale = d3.scaleLinear()
+    .domain([scoreExtent[1], scoreExtent[0]])
+    .range([0, legendHeight]);
+
+  const legendAxis = d3.axisRight(legendScale)
+    .ticks(5)
+    .tickFormat(d3.format(".2"));
+
+  const legendGradient = legendSvg.append("defs")
+    .append("linearGradient")
+    .attr("id", "legend-gradient")
+    .attr("x1", "0%").attr("y1", "0%")
+    .attr("x2", "0%").attr("y2", "100%");
+
+  for (let i = 0; i <= 100; i++) {
+    legendGradient.append("stop")
+      .attr("offset", i + "%")
+      .attr("stop-color", colorScale(scoreExtent[0] + (scoreExtent[1] - scoreExtent[0]) * (i / 100)));
+  }
+
+  legendSvg.append("rect")
+    .attr("width", legendWidth)
+    .attr("height", legendHeight)
+    .style("fill", "url(#legend-gradient)");
+
+  legendSvg.append("g")
+    .attr("transform", `translate(${legendWidth}, 0)`)
+    .call(legendAxis);
+
+  legendSvg.append("text")
+    .attr("x", -10)
+    .attr("y", -10)
+    .attr("text-anchor", "end")
+    .attr("font-size", 12)
+    .text("Score");
+</script>
+</body>
+

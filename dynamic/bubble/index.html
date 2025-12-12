@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bubble Chart — Quantile Buckets</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+    svg {
+      width: 100%;
+      height: 100vh;
+    }
+    .tooltip {
+      position: absolute;
+      background: white;
+      border: 1px solid #333;
+      padding: 4px;
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <svg></svg>
+  <script>
+    const data = %DATA%;  // Qt replaces this with actual JSON
+
+    const svg = d3.select("svg");
+    const width = parseInt(svg.style("width"));
+    const height = parseInt(svg.style("height"));
+    const margin = 50;
+
+    const x = d3.scaleLinear()
+      .domain(d3.extent(data.nodes, d => d.area)).nice()
+      .range([margin, width - margin]);
+
+    const y = d3.scaleLinear()
+      .domain(d3.extent(data.nodes, d => d.power)).nice()
+      .range([height - margin, margin]);
+
+    const r = d3.scaleSqrt()
+      .domain(d3.extent(data.nodes, d => d.ipc))
+      .range([5, 40]);
+
+    // Quantile color scale based on ipc values
+    const ipcValues = data.nodes.map(d => d.ipc);
+    const color = d3.scaleQuantile()
+      .domain(ipcValues)
+      .range(d3.schemeOranges[5]);
+
+    // Tooltip setup
+    const tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    // Circles
+    svg.selectAll("circle")
+      .data(data.nodes)
+      .join("circle")
+      .attr("cx", d => x(d.area))
+      .attr("cy", d => y(d.power))
+      .attr("r", d => r(d.ipc))
+      .attr("fill", d => color(d.ipc))
+      .attr("stroke", "black")
+      .on("mouseover", (event, d) => {
+        tooltip.html(`ID: ${d.id}<br>IPC: ${d.ipc}<br>Area: ${d.area}<br>Power: ${d.power}`)
+          .style("left", (event.pageX + 5) + "px")
+          .style("top", (event.pageY - 28) + "px")
+          .style("opacity", 1);
+      })
+      .on("mouseout", () => tooltip.style("opacity", 0));
+
+    // X axis
+    svg.append("g")
+      .attr("transform", `translate(0,${height - margin})`)
+      .call(d3.axisBottom(x));
+
+    // Y axis
+    svg.append("g")
+      .attr("transform", `translate(${margin},0)`)
+      .call(d3.axisLeft(y));
+
+    // X axis label
+    svg.append("text")
+      .attr("text-anchor", "middle")
+      .attr("x", width / 2)
+      .attr("y", height - 10)
+      .text("relative area");
+
+    // Y axis label (rotated)
+    svg.append("text")
+      .attr("text-anchor", "middle")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -height / 2)
+      .attr("y", 20)
+      .text("relative power");
+  </script>
+</body>
+</html>
+

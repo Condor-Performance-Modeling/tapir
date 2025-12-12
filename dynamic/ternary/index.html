@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ternary Chart</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <style>
+    body {
+      font: 12px sans-serif;
+    }
+    .axis line,
+    .axis path {
+      stroke: #000;
+    }
+    circle {
+      fill: steelblue;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+<svg id="ternary" width="700" height="600"></svg>
+
+<script>
+  const width = 700, height = 600, r = 5;
+
+  const svg = d3.select("#ternary")
+    .call(d3.zoom().on("zoom", (e) => svg.attr("transform", e.transform)))
+    .append("g");
+
+  const triangle = [
+    [width / 2, 30],              // IPC (top)
+    [width - 60, height - 60],    // Area (right)
+    [60, height - 60]             // Power (left)
+  ];
+
+  function barycentricToXY({ ipc, area, power }) {
+    return [
+      ipc * triangle[0][0] + area * triangle[1][0] + power * triangle[2][0],
+      ipc * triangle[0][1] + area * triangle[1][1] + power * triangle[2][1]
+    ];
+  }
+
+  function draw(data) {
+    svg.append("polygon")
+      .attr("points", triangle.map(d => d.join(",")).join(" "))
+      .attr("stroke", "black")
+      .attr("fill", "none");
+
+    svg.selectAll("circle")
+      .data(data.nodes)
+      .enter()
+      .append("circle")
+      .attr("r", r)
+      .attr("cx", d => barycentricToXY(d.ternary)[0])
+      .attr("cy", d => barycentricToXY(d.ternary)[1])
+      .append("title")
+      .text(d => 
+        `ID: ${d.id}\n` +
+        `IPC: ${d.ipc}\nArea: ${d.area}\nPower: ${d.power}\nScore: ${d.score}`
+      );
+
+    svg.selectAll("text.axis")
+      .data(["IPC", "Area", "Power"])
+      .enter()
+      .append("text")
+      .attr("class", "axis")
+      .attr("x", (d, i) => triangle[i][0])
+      .attr("y", (d, i) => triangle[i][1] - 10)
+      .attr("text-anchor", "middle")
+      .text(d => d);
+  }
+
+  // This will be replaced by Qt:
+  const data = %DATA%;
+  draw(data);
+</script>
+</body>
+</html>
+

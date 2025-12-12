@@ -1,0 +1,5 @@
+
+# FIXME: this is a partial list needs verified on a fresh machine and
+# added to ansible
+
+sudo apt install qtwebengine5-dev

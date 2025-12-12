@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>D3 IPC/Area/Power Scatter Plot</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <style>
+    body { font-family: sans-serif; }
+    .tooltip {
+      position: absolute;
+      background: #eee;
+      padding: 4px;
+      border: 1px solid #ccc;
+      pointer-events: none;
+      font-size: 12px;
+    }
+    svg {
+      width: 960px;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="chart"></div>
+<div class="tooltip" style="opacity:0;"></div>
+
+<script>
+const data = [
+  { "ipc": 4.091, "area": 4.41, "power": 5.61 },
+  { "ipc": 3.563, "area": 3.03, "power": 4.4 },
+  { "ipc": 7.915, "area": 6.36, "power": 7.72 },
+  { "ipc": 3.922, "area": 3.91, "power": 4.09 },
+  { "ipc": 2.846, "area": 3.39, "power": 2.65 },
+  { "ipc": 2.961, "area": 3.53, "power": 2.77 },
+  { "ipc": 7.978, "area": 8.5, "power": 10.0 },
+  { "ipc": 5.77,  "area": 4.86, "power": 5.16 },
+  { "ipc": 4.059, "area": 3.34, "power": 6.03 },
+  { "ipc": 7.404, "area": 6.18, "power": 5.47 },
+  { "ipc": 4.248, "area": 3.65, "power": 5.58 },
+  { "ipc": 3.554, "area": 3.17, "power": 5.15 }
+];
+
+const margin = {top: 30, right: 40, bottom: 40, left: 50},
+      width = 960 - margin.left - margin.right,
+      height = 600 - margin.top - margin.bottom;
+
+const svg = d3.select("#chart")
+  .append("svg")
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+const x = d3.scaleLinear()
+  .domain(d3.extent(data, d => d.ipc)).nice()
+  .range([0, width]);
+
+const y = d3.scaleLinear()
+  .domain(d3.extent(data, d => d.area)).nice()
+  .range([height, 0]);
+
+const r = d3.scaleSqrt()
+  .domain(d3.extent(data, d => d.power))
+  .range([4, 15]);
+
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x))
+  .append("text")
+  .attr("x", width)
+  .attr("y", -6)
+  .attr("fill", "#000")
+  .style("text-anchor", "end")
+  .text("IPC");
+
+svg.append("g")
+  .call(d3.axisLeft(y))
+  .append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("x", -margin.top)
+  .attr("y", 12)
+  .attr("fill", "#000")
+  .style("text-anchor", "end")
+  .text("Area");
+
+const tooltip = d3.select(".tooltip");
+
+svg.selectAll("circle")
+  .data(data)
+  .enter().append("circle")
+    .attr("cx", d => x(d.ipc))
+    .attr("cy", d => y(d.area))
+    .attr("r", d => r(d.power))
+    .attr("fill", "steelblue")
+    .attr("opacity", 0.7)
+    .on("mouseover", function(event, d) {
+      tooltip.transition().duration(200).style("opacity", 1);
+      tooltip.html("IPC: " + d.ipc + "<br>Area: " + d.area + "<br>Power: " + d.power)
+             .style("left", (event.pageX + 5) + "px")
+             .style("top", (event.pageY - 28) + "px");
+    })
+    .on("mouseout", function() {
+      tooltip.transition().duration(500).style("opacity", 0);
+    });
+</script>
+</body>
+</html>
+
