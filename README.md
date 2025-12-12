@@ -1,31 +1,56 @@
 # tapir
 Transformer Assisted Parameter Inference and Refinement
 
-TAPIR is a tool for emitting configured RTL which meets constrained PPA goals
-and analyzing the simulation results.
+TAPIR serves as a central coordinator for the generation of power, performance,
+and area (PPA) estimates for large-scale RISC-V processor designs and the
+generation of RTL source fitting PPA goals.
 
-TAPIR also provides input to a performance model and an evaluation platform.
-The example data set provides is the output of a Transformer/LLM based
-design space exploration (DSE) flow on a configuration out-of-order RISC-V
-processor model and RTL set.
+In this role, TAPIR interacts with cloud-hosted large language models executing
+design space exploration (DSE) tasks that produce evaluation datasets. TAPIR
+assists in the specification, selection, and constraint of processor
+parameters, which are used as inputs to the DSE flow. The DSE flow returns
+datasets characterizing PPA behavior across the explored parameter space. TAPIR
+then facilitates visualization of these results and enables user-driven
+selection of design points, from which corresponding RTL configurations are
+generated.
 
-The main interface to TAPIR uses tabbed table semantics to allow customization
-of the parameter set through the GUI. The primary input/output for 
-configurations is JSON.
+TAPIR is independent of any specific DSE implementation, processor model, RTL
+dataset, or LLM hosting environment. It does not perform design space
+exploration directly, but instead orchestrates and interprets the outputs of
+external exploration and evaluation flows.
 
-TAPIR provides visualization tools to assist final configuration of an RTL
-code base against constraints on power performance and area. 
+TAPIR is currently under development. The example dataset provided reflects a
+simplified DSE execution on a public out-of-order RISC-V processor model. The
+current interface supports visualization of this dataset. A future development
+phase will add support for automated RTL and performance model configuration
+generation.
 
-In the example data set the PPA factors are expressed as weigthed estimates. 
+As part of the DSE workflow, TAPIR also provides structured inputs to a
+performance model and an evaluation platform. The example dataset represents
+the output of a Transformer-based design space exploration flow applied to a
+configurable out-of-order RISC-V processor model and RTL set. PPA values in the
+dataset are expressed as weighted estimates.
 
-The visualization tools include:
+TAPIR currently provides visualization tools to support final RTL configuration
+selection under power, performance, and area constraints.
 
-- A force directed graph of the parameter combinations
-- A bubble chart plotting parameter sets againt relative power and area
-- An interactive constraints selection chart which shows parameter sets 
-  that meet the constraints set in the PPA selection sliders
-- The scatter chart is a 3d visualization of PPA again parameters
-- A ternary chart showing IPC, Power and Area against parameter distribution
+The configuration and visualization tools include:
+
+- A tabbed parameter configuration and selection table with JSON-defined,
+software-instantiated cell widgets
+
+- A force-directed graph representing parameter combinations
+
+- A bubble chart plotting parameter sets against relative power and area
+
+- An interactive constraint selection chart highlighting parameter sets that satisfy PPA slider constraints
+
+- A three-dimensional scatter plot visualizing PPA relationships across parameter space
+
+- A ternary chart showing IPC, power, and area distributions across parameter sets
+
+<b>Configuration Selection with JSON-specified controls</b>
+  ![ForceChart](images/configtable.png "Parameter Configuration Selection")
 
 <b>Force Directed Representation</b>
   ![ForceChart](images/forcechart.png "Force Directed Representation")
